@@ -1,8 +1,8 @@
-# Contexto para continuidade em nuvem — Conselho de IAs
+# Contexto para continuidade em nuvem — Escritório de Projetos
 
 ## Objetivo deste projeto
 
-O Conselho de IAs e a base operacional para organizar, acompanhar e preservar a memoria de projetos. Ele apoia a gestao, mas nao substitui as decisoes e validacoes humanas.
+O Escritório de Projetos e a base operacional para organizar, acompanhar e preservar a memoria do portfólio. Ele atua como um PMO assistido por IA: estrutura novos projetos, acompanha sua evolucao, identifica riscos e prepara comunicacoes executivas. Ele apoia a gestao, mas nao substitui as decisoes e validacoes humanas.
 
 ## Como a memoria funciona
 
@@ -61,4 +61,4 @@ Ao receber uma solicitacao:
 
 ## Retomada do trabalho
 
-Ao continuar este projeto em outro computador, leia este arquivo, `README.md` e os arquivos de `conselho/`. Em seguida, pergunte qual projeto ou demanda deve ser tratado. O Git e a referencia para sincronizar os arquivos entre computadores.
+Ao continuar este projeto em outro computador, leia este arquivo, `README.md`, `portfolio.md` e os arquivos de `conselho/`. Em seguida, pergunte qual projeto ou demanda deve ser tratado. O Git e a referencia para sincronizar os arquivos entre computadores.

@@ -1,6 +1,6 @@
-# Conselho de IAs — Gestão de Projetos
+# Escritório de Projetos
 
-Base operacional do Conselho de IAs para organizar, acompanhar e preservar a memória dos projetos.
+Base operacional de gestão de portfólio e projetos assistida por IA.
 
 ## Princípios
 
@@ -14,7 +14,8 @@ Base operacional do Conselho de IAs para organizar, acompanhar e preservar a mem
 ```text
 conselho/  papéis, protocolo e regras de governança
 modelos/   modelos reutilizáveis dos registros de cada projeto
-projetos/  uma pasta por projeto, usando os modelos
+projetos/  memória de gestão de cada projeto
+portfolio.md  visão executiva consolidada do portfólio
 ```
 
 ## Como iniciar um projeto
@@ -25,3 +26,9 @@ projetos/  uma pasta por projeto, usando os modelos
 4. Registre somente decisões, tarefas e acontecimentos que alterem ou expliquem o projeto.
 
 Consulte [papéis do Conselho](conselho/papeis.md), [protocolo](conselho/protocolo.md) e [regras](conselho/regras.md) antes de operar um projeto.
+
+## Limites de responsabilidade
+
+Este repositório é a fonte oficial de gestão: portfólio, estado executivo, riscos, decisões, tarefas, marcos e notificações.
+
+O repositório de cada iniciativa continua sendo a fonte de suas entregas técnicas e funcionais. Cada pasta em `projetos/` deve apontar claramente para esse repositório e para suas evidências.
