@@ -1,5 +1,7 @@
 # Relatório de Atividade — Projeto SAC
 
+**Navegação:** [Projeto](../projeto.md) · [Matriz de comunicação](../comunicacao.md) · [Histórico](../historico.md)
+
 **Data de referência:** 10/09/2026  
 **Fase:** Pré-desenvolvimento  
 **Período coberto:** registros disponíveis até 10/09/2026

@@ -1,5 +1,7 @@
 # Histórico — SAC — Supermarket
 
+**Navegação:** [Projeto](projeto.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Comunicação](comunicacao.md) · [Portfólio](../../portfolio.md)
+
 | Data | Evento | Tipo | Impacto | Referência |
 |---|---|---|---|---|
 | 28/04/2026 | TAP do Projeto SAC, versão 1.0, mantido como referência histórica. | Marco | Patrocínio e justificativa originais registrados. | Repositório SAC. |

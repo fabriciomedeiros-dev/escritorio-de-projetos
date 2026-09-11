@@ -1,5 +1,7 @@
 # Projeto: SAC — Supermarket
 
+**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Comunicação](comunicacao.md) · [Dependências](dependencias.md)
+
 ## 1. Identificação
 
 **Status geral:** 🟡 Atenção  
@@ -46,6 +48,7 @@ Reduzir a dependência de e-mail e de controles dispersos, mantendo as tratativa
 ### Premissas e dependências
 
 - Data Lake, API Reclame Aqui, e-mail, formulários de site/app e ambiente de hospedagem precisam ser mapeados;
+- gestão de usuários e autenticação utilizarão o SuperSync, com interface, perfis e contingência ainda a validar;
 - Reclame Aqui começa cedo, mas não bloqueia o núcleo manual do chamado;
 - custos, fornecedores, responsáveis e datas precisam estar consolidados antes do desenvolvimento.
 

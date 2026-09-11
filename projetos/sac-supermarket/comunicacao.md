@@ -1,5 +1,7 @@
 # Matriz de Comunicação — SAC — Supermarket
 
+**Navegação:** [Projeto](projeto.md) · [Relatório enviado](comunicacoes/2026-09-10-relatorio-atividade.md) · [Tarefas](tarefas.md) · [Histórico](historico.md)
+
 ## Diretrizes
 
 - Este arquivo é a fonte oficial dos eventos e públicos de comunicação gerencial do SAC.
@@ -8,9 +10,11 @@
 
 ## Matriz
 
-| ID | Comunicação | Objetivo | Destinatários | Canal | Frequência / gatilho | Responsável | Aprovação | Evidência |
-|---|---|---|---|---|---|---|---|---|
+| ID          | Comunicação                 | Objetivo                                                                           | Destinatários                                                                      | Canal  | Frequência / gatilho                                                                                       | Responsável       | Aprovação   | Evidência                                                                                                              |
+| ----------- | --------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------- | ----------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------- |
 | SAC-COM-001 | Status executivo do projeto | Informar saúde, avanço, riscos, pendências, decisões requeridas e próximos marcos. | Para: Danielle Moitas. Cc: Alexandro Nascimento, Filipe Fachetti e Marcelo Rebelo. | E-mail | Frequência a confirmar; adicionalmente quando houver risco relevante, desvio de marco ou decisão requerida | Fabrício Medeiros | A confirmar | Relatório no novo padrão enviado em teste a Fabrício Medeiros em 10/09/2026; ZeptoMail `EM_104`, solicitação recebida. |
+
+^b729fd
 
 ## Conteúdo mínimo
 
@@ -23,7 +27,7 @@
 7. próximas ações recomendadas;
 8. fontes consultadas.
 
-O relatório deve seguir `modelos/relatorio-status.md` e ser exibido integralmente para aprovação antes do envio.
+O relatório deve seguir o [modelo de relatório de status](../../modelos/relatorio-status.md) e ser exibido integralmente para aprovação antes do envio.
 
 ## Pendências de configuração
 

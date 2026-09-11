@@ -1,5 +1,7 @@
 # Camada de Desenvolvimento — SuperSync
 
+**Navegação:** [Projeto](projeto.md) · [Módulos](modulos.md) · [Governança](governanca.md) · [Tarefas](tarefas.md) · [Validação de sprint](../../modelos/validacao-sprint.md)
+
 ## Identificação
 
 **Repositório:** https://github.com/Liencourt/supersync.git  

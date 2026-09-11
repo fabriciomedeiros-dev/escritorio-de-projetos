@@ -1,5 +1,7 @@
 # Tarefas — SAC — Supermarket
 
+**Navegação:** [Projeto](projeto.md) · [Decisões](decisoes.md) · [Histórico](historico.md) · [Dependências](dependencias.md) · [Portfólio](../../portfolio.md)
+
 | ID | Tarefa | Responsável | Prazo | Prioridade | Status | Dependência / evidência |
 |---|---|---|---|---|---|---|
 | SAC-001 | Mapear dependências de Data Lake, Reclame Aqui, e-mail, formulários de site/app e ambiente. | Alexandro e Filipe | 16/09/2026 | Alta | Em andamento | Quadro de dependências. |
@@ -8,6 +10,7 @@
 | SAC-004 | Definir datas e critérios da homologação. | Fabrício, Alexandro e Filipe | 16/09/2026 | Alta | Não iniciada | Plano de homologação. |
 | SAC-005 | Iniciar desenvolvimento formal. | Alexandro | 17/09/2026 | Alta | Não iniciada | Conclusão dos itens SAC-001 a SAC-004. |
 | SAC-006 | Confirmar frequência, destinatários e aprovação do status; configurar a API do ZeptoMail no Windows e realizar envio de teste. | Fabrício | A confirmar | Média | Em andamento | API configurada; relatório no novo padrão enviado em teste em 10/09/2026, ZeptoMail `EM_104`. Frequência e aprovação regular pendentes. |
+| SAC-007 | Validar integração de usuários com o SuperSync, incluindo interface, perfis, permissões e contingência. | Fabrício e Alexandro | A confirmar | Alta | Não iniciada | `dependencias.md`; definição técnica e critérios de aceite. |
 
 ## Regra de acompanhamento
 

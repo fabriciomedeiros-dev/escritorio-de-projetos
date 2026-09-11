@@ -22,6 +22,14 @@
 - Uma implementação adicional ou divergente não altera automaticamente requisito, escopo ou decisão. Seu impacto deve ser analisado e submetido à validação humana quando relevante.
 - A ausência de instruções suficientes para executar localmente o código deve ser registrada como lacuna da camada de desenvolvimento.
 
+### Relações entre projetos
+
+- Um projeto pode consumir serviços compartilhados de outro sem se tornar subordinado a ele na gestão.
+- O projeto consumidor mantém objetivo, escopo, cronograma, aceite e decisões próprios.
+- O projeto provedor responde pela capacidade compartilhada, sua segurança, compatibilidade e disponibilidade.
+- A dependência deve indicar donos nos dois projetos, situação, critério de aceite e risco de indisponibilidade.
+- Mudanças em serviço compartilhado com impacto em consumidores exigem análise conjunta antes da liberação.
+
 ## Classificação da informação
 
 Sempre diferenciar:
@@ -51,3 +59,5 @@ Não pode aprovar autonomamente mudança estratégica, prioridade relevante, or�
 - Não usar campos fictícios para aparentar completude; utilizar `Não definido` ou `A confirmar`.
 - Não transformar `projeto.md` em diário: ele representa o estado atual.
 - Decisões completas ficam em `decisoes.md`; tarefas em `tarefas.md`; evolução relevante em `historico.md`.
+
+**Navegação:** [Conselho](README.md) · [Papéis](papeis.md) · [Protocolo](protocolo.md) · [Início](../README.md)

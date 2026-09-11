@@ -1,14 +1,16 @@
 # Projeto: SuperSync — Intranet Rede Supermarket
 
+**Navegação:** [Portfólio](../../portfolio.md) · [Governança](governanca.md) · [Módulos](modulos.md) · [Desenvolvimento](desenvolvimento.md) · [Serviços compartilhados](servicos-compartilhados.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md)
+
 ## 1. Identificação
 
 **Status geral:** 🔴 Intervenção  
-**Responsável:** A confirmar  
-**Sponsor:** A confirmar  
+**Responsável:** Fabrício Medeiros  
+**Sponsor:** Diretoria da Rede Supermarket, representada por Marcelo Rebelo  
 **Fase:** Operação e evolução contínua  
 **Início:** A confirmar  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 10/09/2026
+**Última atualização:** 11/09/2026
 
 ### Fontes canônicas relacionadas
 
@@ -53,7 +55,6 @@ A confirmar durante a consolidação da linha de base gerencial, incluindo benef
 
 ### Pontos ainda desconhecidos
 
-- sponsor, responsável gerencial e decisores;
 - catálogo oficial de módulos e respectivos estados em produção;
 - repositório canônico da documentação funcional;
 - cadência, linha de base e critérios de aceite das sprints;
@@ -69,7 +70,7 @@ A confirmar durante a consolidação da linha de base gerencial, incluindo benef
 | Prazo | 🟡 Atenção | Desenvolvimento contínuo sem roadmap ou sprint gerencial consolidada no Escritório. | Identificar sprint atual, marcos e cadência. |
 | Escopo | 🟡 Atenção | Há muitos módulos e mudanças recentes, mas o catálogo e a linha de base não estão consolidados. | Inventariar módulos, responsáveis e estado operacional. |
 | Qualidade | 🟡 Atenção | Existem arquivos de teste e migrações, mas ainda não há evidência consolidada de execução e cobertura. | Executar e registrar diagnóstico da suíte de testes. |
-| Recursos | 🟡 Atenção | Responsáveis, capacidade e modelo de suporte ainda não foram confirmados. | Mapear equipe e responsabilidades. |
+| Recursos | 🟡 Atenção | Papéis centrais foram definidos; capacidade e responsáveis por módulo ainda precisam ser confirmados. | Mapear donos funcionais e capacidade por módulo. |
 | Impedimentos & Riscos | 🔴 Intervenção | Há artefato de credencial versionado e documentação que relata práticas inseguras; a validade e a exposição precisam ser avaliadas. | Fazer triagem de segredos, revogar se necessário e retirar artefatos do histórico conforme plano aprovado. |
 | Resultado | 🟡 Atenção | O uso em produção foi confirmado, mas benefícios e indicadores não estão registrados. | Definir resultados e métricas por módulo. |
 

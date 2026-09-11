@@ -1,5 +1,7 @@
 # Decisões — SAC — Supermarket
 
+**Navegação:** [Projeto](projeto.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Dependências](dependencias.md) · [Portfólio](../../portfolio.md)
+
 ## 03/09/2026 — Governança e início formal
 
 **Status:** Aprovada  

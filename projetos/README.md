@@ -1,5 +1,12 @@
 # Projetos
 
+**Navegação:** [Início](../README.md) · [Portfólio](../portfolio.md) · [Modelos](../modelos/README.md) · [Conselho](../conselho/README.md)
+
+## Projetos ativos
+
+- [SAC — Supermarket](sac-supermarket/projeto.md)
+- [SuperSync — Intranet Rede Supermarket](supersync/projeto.md)
+
 Crie uma pasta por projeto usando um identificador claro, por exemplo `integracao-crm`.
 
 Estrutura mínima de cada projeto:

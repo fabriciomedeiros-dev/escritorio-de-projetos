@@ -1,5 +1,7 @@
 # Protocolo Operacional
 
+**Navegação:** [Conselho](README.md) · [Papéis](papeis.md) · [Regras](regras.md) · [Modelos](../modelos/README.md)
+
 ## Ciclo de trabalho
 
 1. **Entrada** — receber uma demanda, atualização, dúvida ou projeto existente.
@@ -20,7 +22,7 @@
 4. Classificar cada item como `Atendido`, `Parcial`, `Divergente`, `Não implementado` ou `Adicional`.
 5. Avaliar impactos das diferenças em prazo, escopo, qualidade, recursos, riscos e resultado.
 6. Corrigir defeitos dentro do escopo ou submeter mudanças relevantes à decisão humana.
-7. Registrar a validação usando `modelos/validacao-sprint.md`, preservando referências verificáveis.
+7. Registrar a validação usando o [modelo de validação de sprint](../modelos/validacao-sprint.md), preservando referências verificáveis.
 
 A revisão do código descreve o estado implementado, mas não substitui a aprovação funcional nem redefine a linha de base.
 

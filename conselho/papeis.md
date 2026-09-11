@@ -1,5 +1,7 @@
 # Papéis do Conselho
 
+**Navegação:** [Conselho](README.md) · [Protocolo](protocolo.md) · [Regras](regras.md) · [Início](../README.md)
+
 ## Princípio de funcionamento
 
 O Conselho conduz análise e acompanhamento; não substitui o responsável humano nem a equipe executora. Cada contribuição deve separar claramente fato, hipótese, recomendação, decisão e ação.

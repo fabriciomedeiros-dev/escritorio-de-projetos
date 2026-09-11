@@ -1,11 +1,13 @@
 # Portfólio de Projetos
 
+**Navegação:** [Início](README.md) · [Projetos](projetos/README.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md)
+
 ## Visão executiva
 
 | Projeto | Patrocinador | Responsável | Fase | Saúde | Próximo marco |
 |---|---|---|---|---|---|
-| SAC — Supermarket | Marketing | Fabrício Medeiros | Pré-desenvolvimento | 🟡 Atenção | Fechar dependências, custos e MVP até 16/09/2026 |
-| SuperSync — Intranet Rede Supermarket | A confirmar | A confirmar | Operação e evolução contínua | 🔴 Intervenção | Estabelecer linha de base, segurança e reprodução local — data a confirmar |
+| [SAC — Supermarket](projetos/sac-supermarket/projeto.md) | Marketing | Fabrício Medeiros | Pré-desenvolvimento | 🟡 Atenção | Fechar dependências, custos e MVP até 16/09/2026 |
+| [SuperSync — Intranet Rede Supermarket](projetos/supersync/projeto.md) | Diretoria — Marcelo Rebelo | Fabrício Medeiros | Operação e evolução contínua | 🔴 Intervenção | Estabelecer linha de base, segurança e reprodução local — data a confirmar |
 
 ## Alertas do portfólio
 
