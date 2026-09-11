@@ -10,6 +10,11 @@ O Escritório de Projetos e a base operacional para organizar, acompanhar e pres
 - Chats servem para analise e trabalho; fatos relevantes devem ser registrados nos arquivos.
 - Cada projeto fica em `projetos/<nome-do-projeto>/` e usa os modelos existentes em `modelos/`.
 - A pasta `conselho/` contem as regras de governanca, papeis e protocolo de trabalho.
+- Este repositorio e a fonte canonica das decisoes gerenciais; o repositorio de cada iniciativa e a fonte das decisoes tecnicas e funcionais de implementacao e de suas evidencias.
+- Cada decisao deve ter uma unica fonte canonica. Se uma decisao de implementacao afetar a linha de base gerencial, registrar aqui o impacto e a aprovacao correspondente.
+- Cada iniciativa pode possuir tres camadas: gestao neste Escritorio, documentacao do comportamento esperado e desenvolvimento do que foi efetivamente implementado.
+- O repositorio de desenvolvimento deve permitir reproduzir a aplicacao localmente e preservar stack, codigo, modelo de dados, migracoes, testes e evidencias de entrega.
+- Divergencias entre sprint, documentacao e codigo devem ser classificadas como atendido, parcial, divergente, nao implementado ou adicional. Codigo adicional nao altera o escopo sem validacao humana.
 
 ## Estrutura do repositorio
 

@@ -7,3 +7,4 @@
 | 01/09/2026 | Reunião de alinhamento do piloto com Danielle Moitas. | Decisão | Reorientou as prioridades do MVP e do fluxo operacional. | Notas da reunião. |
 | 03/09/2026 | Definidas governança, escopo do MVP, fases e início formal do desenvolvimento. | Decisão | Desenvolvimento previsto para 17/09; Go-Live permanece a definir. | `SAC/gestao/decisoes.md`. |
 | 09/09/2026 | SAC cadastrado como primeiro projeto do Escritório de Projetos. | Marco | Inicia gestão centralizada do portfólio. | Este repositório. |
+| 10/09/2026 | Definida a autoridade entre o Escritório de Projetos e o repositório SAC. | Decisão | O Escritório passa a ser a fonte canônica das decisões gerenciais; o repositório SAC permanece como fonte das decisões técnicas e funcionais de implementação e de suas evidências. | `conselho/regras.md`; `decisoes.md`. |

@@ -7,6 +7,7 @@
 | SAC-003 | Consolidar MVP e plano de execução. | Fabrício; Danielle valida escopo | 16/09/2026 | Alta | Em andamento | Decisão de escopo registrada. |
 | SAC-004 | Definir datas e critérios da homologação. | Fabrício, Alexandro e Filipe | 16/09/2026 | Alta | Não iniciada | Plano de homologação. |
 | SAC-005 | Iniciar desenvolvimento formal. | Alexandro | 17/09/2026 | Alta | Não iniciada | Conclusão dos itens SAC-001 a SAC-004. |
+| SAC-006 | Confirmar frequência, destinatários e aprovação do status; configurar a API do ZeptoMail no Windows e realizar envio de teste. | Fabrício | A confirmar | Média | Em andamento | API configurada; relatório no novo padrão enviado em teste em 10/09/2026, ZeptoMail `EM_104`. Frequência e aprovação regular pendentes. |
 
 ## Regra de acompanhamento
 

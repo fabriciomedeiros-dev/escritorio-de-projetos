@@ -18,6 +18,16 @@ projetos/  memória de gestão de cada projeto
 portfolio.md  visão executiva consolidada do portfólio
 ```
 
+## Camadas de informação
+
+O Escritório opera três camadas complementares, cada uma com sua própria autoridade:
+
+1. **Gestão:** este repositório é a fonte canônica de objetivo, escopo gerencial, prioridade, orçamento, riscos, marcos, decisões e acompanhamento.
+2. **Documentação do projeto:** o repositório indicado por cada iniciativa é a fonte do comportamento esperado, requisitos, regras e critérios de aceite.
+3. **Desenvolvimento:** o repositório de código é a fonte do que foi efetivamente implementado, incluindo stack, modelos de dados, migrações, testes e instruções de execução local.
+
+O código não altera automaticamente o escopo aprovado. Diferenças entre o planejado e o implementado devem ser classificadas, avaliadas e, quando relevantes, submetidas à decisão humana antes de atualizar a linha de base.
+
 ## Como iniciar um projeto
 
 1. Crie `projetos/<nome-do-projeto>/`.
@@ -27,8 +37,14 @@ portfolio.md  visão executiva consolidada do portfólio
 
 Consulte [papéis do Conselho](conselho/papeis.md), [protocolo](conselho/protocolo.md) e [regras](conselho/regras.md) antes de operar um projeto.
 
+## Comunicação de status
+
+Cada projeto pode manter uma `comunicacao.md` com sua matriz oficial de públicos, eventos, canais, frequência, responsáveis e aprovações. O modelo está em `modelos/comunicacao.md`.
+
+No Windows, `scripts/Enviar-StatusProjeto.ps1` gera uma prévia ou envia o status pela API do ZeptoMail. Endereços e tokens não devem ser registrados nos arquivos do projeto; configure-os somente por parâmetros locais ou variáveis de ambiente. Consulte `scripts/README.md`.
+
 ## Limites de responsabilidade
 
-Este repositório é a fonte oficial de gestão: portfólio, estado executivo, riscos, decisões, tarefas, marcos e notificações.
+Este repositório é a fonte canônica de gestão: portfólio, estado executivo, objetivo, escopo, prioridade, orçamento, riscos relevantes, governança, decisões gerenciais, tarefas, marcos e autorizações executivas.
 
-O repositório de cada iniciativa continua sendo a fonte de suas entregas técnicas e funcionais. Cada pasta em `projetos/` deve apontar claramente para esse repositório e para suas evidências.
+Os repositórios de documentação e desenvolvimento de cada iniciativa continuam sendo as fontes de suas definições e entregas. Cada pasta em `projetos/` deve apontar claramente para esses repositórios e para suas evidências. Cada decisão deve ter uma única fonte canônica; quando uma decisão de implementação afetar a linha de base gerencial, o impacto e a aprovação devem ser registrados neste repositório.

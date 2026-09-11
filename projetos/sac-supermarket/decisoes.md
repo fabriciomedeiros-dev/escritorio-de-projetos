@@ -30,4 +30,4 @@
 
 ## Referência
 
-As decisões completas e a documentação funcional permanecem no repositório SAC em `gestao/decisoes.md`.
+Este arquivo é a fonte canônica das decisões gerenciais do projeto. As decisões técnicas e funcionais de implementação e suas evidências permanecem no repositório SAC, incluindo `gestao/decisoes.md`. Quando uma decisão de implementação afetar a linha de base gerencial, seu impacto e sua aprovação devem ser registrados aqui.

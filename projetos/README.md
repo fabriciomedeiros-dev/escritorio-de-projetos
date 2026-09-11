@@ -9,7 +9,8 @@ projetos/<nome-do-projeto>/
 ├── projeto.md
 ├── decisoes.md
 ├── tarefas.md
-└── historico.md
+├── historico.md
+└── desenvolvimento.md  # quando houver repositório de código
 ```
 
 Copie os arquivos correspondentes de `../modelos/` antes de iniciar o registro.
@@ -23,5 +24,8 @@ Ela deve conter, no mínimo:
 - `decisoes.md`: decisões relevantes e sua justificativa;
 - `tarefas.md`: plano de ação e acompanhamento;
 - `historico.md`: fatos que explicam a evolução.
+- `desenvolvimento.md`: revisão observada, stack, estrutura implementada, reprodução local e evidências técnicas.
 
 Não copie documentação técnica ou funcional para esta pasta. Registre links e referências ao repositório de origem.
+
+Quando houver validação de sprint, use `modelos/validacao-sprint.md` e identifique a linha de base planejada e o commit, tag ou branch exatos que foram inspecionados.

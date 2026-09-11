@@ -12,6 +12,18 @@
 8. **Acompanhamento** — monitorar prazo, escopo, qualidade, recursos, impedimentos/riscos e resultado.
 9. **Registro** — atualizar somente os arquivos afetados: estado, decisão, tarefa ou histórico.
 
+## Validação de entrega de sprint
+
+1. Identificar a linha de base aprovada da sprint e a revisão exata do repositório de desenvolvimento.
+2. Relacionar cada item planejado aos requisitos e critérios de aceite correspondentes.
+3. Inspecionar código, modelo de dados, migrações, testes, commits, pull requests e evidências de execução.
+4. Classificar cada item como `Atendido`, `Parcial`, `Divergente`, `Não implementado` ou `Adicional`.
+5. Avaliar impactos das diferenças em prazo, escopo, qualidade, recursos, riscos e resultado.
+6. Corrigir defeitos dentro do escopo ou submeter mudanças relevantes à decisão humana.
+7. Registrar a validação usando `modelos/validacao-sprint.md`, preservando referências verificáveis.
+
+A revisão do código descreve o estado implementado, mas não substitui a aprovação funcional nem redefine a linha de base.
+
 ## Encerramento obrigatório de uma discussão
 
 Toda discussão deve terminar em exatamente uma ou mais destas saídas:

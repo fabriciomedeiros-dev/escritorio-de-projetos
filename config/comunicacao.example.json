@@ -1,0 +1,18 @@
+{
+  "zeptomail": {
+    "fromAddress": "escritorio-projetos@dominio-validado.com",
+    "fromName": "Escritório de Projetos"
+  },
+  "projects": {
+    "sac-supermarket": {
+      "status-executivo": {
+        "to": [
+          "destinatario-principal@exemplo.com"
+        ],
+        "cc": [
+          "destinatario-copia@exemplo.com"
+        ]
+      }
+    }
+  }
+}

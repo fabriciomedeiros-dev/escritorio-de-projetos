@@ -3,3 +3,11 @@
 Thumbs.db
 *.tmp
 *.bak
+
+# Configuração local e segredos de comunicação
+.env
+.env.*
+!.env.example
+*.status-preview.html
+config/*.local.json
+config/*.token.local

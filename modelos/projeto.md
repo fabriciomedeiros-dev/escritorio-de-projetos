@@ -9,6 +9,14 @@
 **Previsão de conclusão:** [DD/MM/AAAA]  
 **Última atualização:** [DD/MM/AAAA]
 
+### Fontes canônicas relacionadas
+
+**Repositório de documentação:** [URL / caminho / A confirmar]
+
+**Repositório de desenvolvimento:** [URL / caminho / A confirmar]
+
+**Revisão de desenvolvimento observada:** [Branch, tag ou commit / A confirmar]
+
 ---
 
 ## 2. Objetivo
