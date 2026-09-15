@@ -33,14 +33,14 @@ O modelo é distribuído entre apps Django e possui migrations versionadas. Fora
 
 ## Replicação local
 
-| Critério | Status | Evidência / lacuna |
-|---|---|---|
-| Dependências versionadas | 🟡 Atenção | `requirements.txt` existe, mas contém dependências sem versão fixa e combina conectores alternativos. |
-| Configuração não secreta de exemplo | 🔴 Intervenção | Não foi localizado `.env.example`; o README relata valores sensíveis hardcoded. |
-| Banco, migrations e seed | 🟡 Atenção | Migrations existem; processo seguro e mínimo de seed não está documentado de forma conclusiva. |
-| Execução documentada | 🟡 Atenção | README e AGENTS possuem comandos, mas o README está desatualizado em relação aos módulos e ao Dockerfile existente. |
-| Testes reproduzíveis | 🟡 Atenção | Há arquivos de teste e comando documentado, sem evidência consolidada de execução nesta inspeção. |
-| Segredos fora do Git | 🔴 Intervenção | `gcp_credencials.json` está versionado; validade e exposição não foram verificadas. |
+| Critério                            | Status         | Evidência / lacuna                                                                                                  |
+| ----------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Dependências versionadas            | 🟡 Atenção     | `requirements.txt` existe, mas contém dependências sem versão fixa e combina conectores alternativos.               |
+| Configuração não secreta de exemplo | 🔴 Intervenção | Não foi localizado `.env.example`; o README relata valores sensíveis hardcoded.                                     |
+| Banco, migrations e seed            | 🟡 Atenção     | Migrations existem; processo seguro e mínimo de seed não está documentado de forma conclusiva.                      |
+| Execução documentada                | 🟡 Atenção     | README e AGENTS possuem comandos, mas o README está desatualizado em relação aos módulos e ao Dockerfile existente. |
+| Testes reproduzíveis                | 🟡 Atenção     | Há arquivos de teste e comando documentado, sem evidência consolidada de execução nesta inspeção.                   |
+| Segredos fora do Git                | 🔴 Intervenção | `gcp_credencials.json` está versionado; validade e exposição não foram verificadas.                                 |
 
 ## Riscos e lacunas
 

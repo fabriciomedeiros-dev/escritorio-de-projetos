@@ -6,6 +6,7 @@
 
 - [SAC — Supermarket](sac-supermarket/projeto.md)
 - [SuperSync — Intranet Rede Supermarket](supersync/projeto.md)
+- [CRM Rock (antiga BNEX)](crm-rock/projeto.md)
 
 Crie uma pasta por projeto usando um identificador claro, por exemplo `integracao-crm`.
 
