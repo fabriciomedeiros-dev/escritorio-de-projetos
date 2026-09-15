@@ -1,6 +1,6 @@
 # Projeto: SAC — Supermarket
 
-**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Comunicação](comunicacao.md) · [Dependências](dependencias.md)
+**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Comunicação](comunicacao.md) · [Dependências](dependencias.md) · [Protótipo](artefatos/prototipo/README.md)
 
 ## 1. Identificação
 
@@ -11,10 +11,11 @@
 **Orçamento e prioridade:** Marcelo Rebelo, CEO interino  
 **Início formal do desenvolvimento:** 17/09/2026  
 **Go-Live:** A definir após cronograma detalhado  
-**Última atualização:** 09/09/2026
+**Última atualização:** 15/09/2026
 
 **Repositório de entrega:** https://github.com/fabriciomedeiros-dev/SAC  
 **Fonte técnica e funcional:** repositório SAC, pasta `gestao/` e documentação Docusaurus.
+**Local canônico do protótipo:** [artefatos/prototipo](artefatos/prototipo/README.md); quando hospedado externamente, registrar ali o link e a versão apresentada.
 
 ---
 
@@ -58,10 +59,10 @@ Reduzir a dependência de e-mail e de controles dispersos, mantendo as tratativa
 
 | Dimensão | Status | Resumo objetivo | Próxima ação |
 |---|---|---|---|
-| Prazo | 🟡 Atenção | Pré-desenvolvimento deve encerrar até 16/09; desenvolvimento inicia em 17/09. | Consolidar datas, dependências e critérios de homologação. |
-| Escopo | 🟡 Atenção | Definições do MVP registradas, pendente consolidação formal. | Danielle validar MVP consolidado. |
+| Prazo | 🟡 Atenção | Reunião final de preparação prevista para 15/09; pré-desenvolvimento deve encerrar até 16/09 e desenvolvimento inicia em 17/09. | Apresentar e validar o plano de ação e o cronograma. |
+| Escopo | 🟡 Atenção | Alterações solicitadas no protótipo serão apresentadas para validação final com Danielle. | Registrar o aceite ou as pendências remanescentes do protótipo e do MVP. |
 | Qualidade | 🟢 Controlado | Critérios de homologação foram identificados. | Formalizar cenários e aceite. |
-| Recursos | 🟡 Atenção | Custos, fornecedor e capacidade ainda precisam ser mapeados. | Alexandro, Filipe e Fabrício consolidarem levantamento. |
+| Recursos | 🟡 Atenção | Custos serão validados na reunião de 15/09 e há um possível novo integrante a ser apresentado e avaliado para o projeto. | Confirmar custos, participação, papel e disponibilidade do novo integrante. |
 | Impedimentos & Riscos | 🟡 Atenção | Dependências externas podem comprometer o início. | Registrar responsável, custo e data de cada dependência. |
 | Resultado | 🟢 Controlado | Objetivo do MVP e benefício operacional estão definidos. | Manter foco no núcleo manual do chamado. |
 
@@ -72,6 +73,16 @@ Reduzir a dependência de e-mail e de controles dispersos, mantendo as tratativa
 **Marco:** Prontidão para início do desenvolvimento  
 **Data:** 16/09/2026  
 **Condição de conclusão:** MVP aprovado, dependências e custos registrados, plano de execução e critérios de homologação definidos.
+
+### Checkpoint imediato — 15/09/2026
+
+Reunião com Danielle Moitas e um possível novo integrante do projeto para:
+
+- apresentar e validar as alterações solicitadas no protótipo;
+- validar os custos do projeto;
+- apresentar e validar o plano de ação e o cronograma;
+- avaliar a entrada, o papel e a disponibilidade do possível novo integrante;
+- concluir as atividades preparatórias ou registrar explicitamente qualquer pendência antes do início formal do desenvolvimento.
 
 ## 6. Observação do Escritório de Projetos
 
