@@ -23,5 +23,4 @@ cp -R "$ROOT_DIR/modelos" "$BUILD_DIR/content/modelos"
 cp -R "$ROOT_DIR/projetos" "$BUILD_DIR/content/projetos"
 
 npm ci --prefix "$BUILD_DIR"
-node "$BUILD_DIR/quartz/bootstrap-cli.mjs" build
-
+(cd "$BUILD_DIR" && node quartz/bootstrap-cli.mjs build)
