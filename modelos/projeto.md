@@ -61,7 +61,34 @@
 
 ---
 
-## 4. Estado atual
+## 4. Mensuração de valor
+
+> O detalhamento e a memória de cálculo devem seguir [Mensuração de valor](mensuracao-valor.md).
+
+**Problema ou oportunidade:** [Descrição]
+
+**Objetivo:** [Resultado qualitativo]
+
+**Resultado-chave:** [Indicador verificável]
+
+**Linha de base:** [Valor, data e fonte]
+
+**Meta:** [Valor-alvo e prazo]
+
+| Dimensão | Síntese | Evidência | Confiança |
+|---|---|---|---|
+| Custo interno | [Valor / A confirmar] | [Fonte] | Confirmado / Estimado / Hipótese |
+| Referência de mercado | [Valor / A confirmar] | [Fonte] | Confirmado / Estimado / Hipótese |
+| Custo evitado | [Valor / A confirmar] | [Fonte] | Confirmado / Estimado / Hipótese |
+| Ganho financeiro | [Valor / A confirmar] | [Fonte] | Confirmado / Estimado / Hipótese |
+| Ganho operacional | [Indicador / descrição] | [Fonte] | Confirmado / Estimado / Hipótese |
+| Produtividade / capacidade liberada | [Indicador / descrição] | [Fonte] | Confirmado / Estimado / Hipótese |
+| Risco mitigado | [Risco / redução] | [Fonte] | Confirmado / Estimado / Hipótese |
+| Público beneficiado | [Público / quantidade] | [Fonte] | Confirmado / Estimado / Hipótese |
+
+---
+
+## 5. Estado atual
 
 | Dimensão | Status | Resumo objetivo | Próxima ação / gatilho |
 |---|---|---|---|
@@ -74,7 +101,7 @@
 
 ---
 
-## 5. Próximas ações
+## 6. Próximas ações
 
 | Tarefa | Responsável | Prazo | Status |
 |---|---|---|---|
@@ -82,18 +109,18 @@
 
 ---
 
-## 6. Decisões relevantes
+## 7. Decisões relevantes
 
 > As decisões completas permanecem em `decisoes.md`.
 
 - [Data] — [Decisão e impacto atual]
 
-## 7. Próximo marco
+## 8. Próximo marco
 
 **Marco:** [Descrição]  
 **Data:** [DD/MM/AAAA]  
 **Condição de conclusão:** [Critério objetivo]
 
-## 8. Observação do Conselho
+## 9. Observação do Conselho
 
 [Síntese das principais preocupações e orientação de curto prazo.]

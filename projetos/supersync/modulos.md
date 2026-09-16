@@ -15,11 +15,12 @@ Inventário gerencial resumido. Componentes técnicos podem estar separados no c
 | Relatórios | Produção; serviço compartilhado | TI; Alexandro Nascimento e Filipe Fachetti | Autonomia para atender áreas. Registrar demandas não planejadas e sinalizar risco ao planejamento. |
 | Dashboard | Planejado; fora de produção | Fabrício Medeiros | Um painel por módulo. Filipe responde pelos dados; Alexandro pelo desenvolvimento; dono de cada módulo valida seus indicadores. |
 | Social Listening | Prova de conceito funcional em produção restrita | TI; Fabrício Medeiros | Sem rotina agendada. Acesso restrito à TI. Componentes podem ser reaproveitados no SAC após decisão formal. Fabrício informa mudanças de status. |
+| Central do Associado | Implementação parcial; homologação a confirmar | Fabrício Medeiros, Alexandro Nascimento e Filipe Fachetti | Portal, usuários, lojas e auditoria implementados na `master` em `8c0478c`; executar testes, homologar permissionamento e reconciliar as frentes restantes com o cronograma até 14/10/2026. |
 
 ## Ainda a classificar
 
 - Usuários e autenticação;
 - Associados;
-- Lojas;
+- Lojas como módulo interno independente da visão exposta pela Central do Associado;
 - Análise de Promoções;
 - demais componentes que venham a ser reconhecidos como módulos gerenciais.

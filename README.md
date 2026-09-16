@@ -2,7 +2,7 @@
 
 Base operacional de gestão de portfólio e projetos assistida por IA.
 
-**Navegação:** [Portfólio](portfolio.md) · [Projetos](projetos/README.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
+**Navegação:** [Portfólio](portfolio.md) · [Tarefas do Escritório](tarefas-escritorio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Divulgação no Trello](atividades/divulgacao-andamento-trello.md) · [Projetos](projetos/README.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
 
 ## Princípios
 
@@ -10,6 +10,7 @@ Base operacional de gestão de portfólio e projetos assistida por IA.
 - Markdown é a fonte oficial de informação; conversas são contexto de trabalho.
 - Documentação é um subproduto da gestão: toda discussão deve terminar em decisão, tarefa, pendência ou nenhuma ação necessária.
 - O Conselho recomenda e acompanha; o humano direciona, decide e valida assuntos relevantes.
+- Toda nova proposta deve explicitar como o valor será medido; projetos atuais incorporarão essa mensuração progressivamente, sempre distinguindo fatos, estimativas e hipóteses.
 
 ## Estrutura
 
@@ -18,6 +19,7 @@ conselho/  papéis, protocolo e regras de governança
 modelos/   modelos reutilizáveis dos registros de cada projeto
 projetos/  memória de gestão de cada projeto
 portfolio.md  visão executiva consolidada do portfólio
+tarefas-escritorio.md  iniciativas transversais e evolução do PMO
 ```
 
 ## Camadas de informação
@@ -36,6 +38,11 @@ O código não altera automaticamente o escopo aprovado. Diferenças entre o pla
 2. Copie os arquivos de `modelos/` para a nova pasta.
 3. Preencha primeiro `projeto.md` com a linha de base e o estado atual conhecido.
 4. Registre somente decisões, tarefas e acontecimentos que alterem ou expliquem o projeto.
+5. Preencha a mensuração de valor com objetivo, resultado-chave, linha de base, meta, evidências e nível de confiança.
+
+## Mensuração de valor
+
+O Escritório mantém uma linha transversal de mensuração de valor aplicável a cada nova proposta e, progressivamente, aos projetos existentes. A análise pode combinar custo interno, referência de mercado, custo evitado, ganhos financeiro e operacional, produtividade ou capacidade liberada, risco mitigado e públicos beneficiados. Toda medida deve indicar sua evidência e ser classificada como `Confirmado`, `Estimado` ou `Hipótese`. Use `modelos/mensuracao-valor.md` e acompanhe a implantação em `tarefas-escritorio.md`.
 
 Consulte o [Conselho](conselho/README.md), seus [papéis](conselho/papeis.md), [protocolo](conselho/protocolo.md) e [regras](conselho/regras.md) antes de operar um projeto.
 
@@ -43,7 +50,13 @@ Consulte o [Conselho](conselho/README.md), seus [papéis](conselho/papeis.md), [
 
 Cada projeto pode manter uma `comunicacao.md` com sua matriz oficial de públicos, eventos, canais, frequência, responsáveis e aprovações. O modelo está em `modelos/comunicacao.md`.
 
+O Trello será utilizado como camada de divulgação do andamento do portfólio. Ele não substitui os registros canônicos: os cartões devem resumir informações confirmadas no Escritório e seguir o fluxo definido em [Divulgação do andamento dos projetos no Trello](atividades/divulgacao-andamento-trello.md).
+
 No Windows, `scripts/Enviar-StatusProjeto.ps1` gera uma prévia ou envia o status pela API do ZeptoMail. Endereços e tokens não devem ser registrados nos arquivos do projeto; configure-os somente por parâmetros locais ou variáveis de ambiente. Consulte `scripts/README.md`.
+
+## Avaliação de contratações
+
+Solicitações para contratação, renovação ou substituição de ferramentas e serviços são conduzidas pela atividade transversal de [Avaliação de Contratações de Ferramentas e Serviços](atividades/avaliacao-contratacoes-ferramentas.md). Cada solicitação deve comparar alternativas, explicitar critérios, custos, riscos e condições, apresentar uma recomendação e registrar a decisão humana. O Trello acompanha o fluxo, mas não substitui o arquivo canônico nem a aprovação formal.
 
 ## Limites de responsabilidade
 

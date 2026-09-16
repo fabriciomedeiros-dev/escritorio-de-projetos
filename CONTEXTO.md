@@ -15,6 +15,8 @@ O Escritório de Projetos e a base operacional para organizar, acompanhar e pres
 - Cada iniciativa pode possuir tres camadas: gestao neste Escritorio, documentacao do comportamento esperado e desenvolvimento do que foi efetivamente implementado.
 - O repositorio de desenvolvimento deve permitir reproduzir a aplicacao localmente e preservar stack, codigo, modelo de dados, migracoes, testes e evidencias de entrega.
 - Divergencias entre sprint, documentacao e codigo devem ser classificadas como atendido, parcial, divergente, nao implementado ou adicional. Codigo adicional nao altera o escopo sem validacao humana.
+- O Escritorio mantem uma linha transversal de mensuracao de valor para novas propostas e, progressivamente, para projetos atuais, sempre com evidencia e nivel de confianca (`Confirmado`, `Estimado` ou `Hipotese`).
+- O Trello e uma camada de divulgacao do andamento dos projetos. Os cartoes resumem informacoes confirmadas neste repositorio e nao substituem os registros canonicos nem aprovam mudancas de linha de base.
 
 ## Estrutura do repositorio
 
@@ -22,6 +24,7 @@ O Escritório de Projetos e a base operacional para organizar, acompanhar e pres
 conselho/  governanca, papeis e protocolo operacional
 modelos/   modelos de projeto, decisoes, tarefas e historico
 projetos/  memoria especifica de cada projeto
+tarefas-escritorio.md  iniciativas transversais e evolucao do PMO
 ```
 
 ## Principios inegociaveis
@@ -50,6 +53,9 @@ Para iniciar ou atualizar um projeto, use os modelos abaixo:
 - `modelos/decisoes.md`: decisoes completas e justificadas.
 - `modelos/tarefas.md`: acoes verificaveis, responsaveis e prazos.
 - `modelos/historico.md`: fatos que explicam a evolucao do projeto.
+- `modelos/mensuracao-valor.md`: objetivo, resultado-chave, linha de base, meta, dimensoes de valor, evidencias e confianca.
+
+As tarefas transversais ficam em `tarefas-escritorio.md`. Para cada nova proposta, registrar como o valor sera medido. Nos projetos atuais, incorporar progressivamente custo interno, referencia de mercado, custo evitado, ganhos financeiro e operacional, produtividade ou capacidade liberada, risco mitigado e publico beneficiado, sem converter estimativas ou hipoteses em fatos.
 
 Avalie sempre: prazo, escopo, qualidade, recursos, impedimentos e riscos, e resultado. Use `Controlado`, `Atencao` ou `Intervencao` somente com justificativa objetiva.
 

@@ -2,7 +2,10 @@
 
 **Navegação:** [Início](../README.md) · [Projetos](../projetos/README.md) · [Conselho](../conselho/README.md)
 
+- [Avaliação de contratação de ferramenta ou serviço](avaliacao-contratacao-ferramenta.md)
+
 - [Projeto](projeto.md)
+- [Mensuração de valor](mensuracao-valor.md)
 - [Decisões](decisoes.md)
 - [Tarefas](tarefas.md)
 - [Histórico](historico.md)

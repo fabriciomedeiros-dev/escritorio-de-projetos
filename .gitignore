@@ -11,3 +11,7 @@ Thumbs.db
 *.status-preview.html
 config/*.local.json
 config/*.token.local
+
+# Build local do portal Quartz
+.quartz-build/
+site/public/

@@ -7,10 +7,10 @@
 **Repositório:** https://github.com/Liencourt/supersync.git  
 **Caminho local de referência:** `C:\Users\fabri\Projetos\supersync`  
 **Branch principal remota:** `master`  
-**Revisão observada:** `feature/lojas-inconformidades-ux` em `384d1cc`  
-**Data da inspeção:** 10/09/2026
+**Revisão observada:** `master` em `8c0478c`
+**Data da inspeção:** 16/09/2026
 
-O checkout foi validado limpo após o envio, com o branch local e `origin/feature/lojas-inconformidades-ux` apontando para o mesmo commit.
+O checkout foi atualizado por fast-forward e validado limpo, com `master` e `origin/master` apontando para o mesmo commit. A branch `feature/lojas-inconformidades-ux` foi preservada e permanece sincronizada com seu remoto.
 
 ## Stack implementada
 
@@ -25,7 +25,7 @@ O checkout foi validado limpo após o envio, com o branch local e `origin/featur
 
 ## Estrutura funcional observada
 
-Foram observados módulos de usuários e autenticação, contratos e acordos comerciais, apuração de contratos e grades, auditoria, envio de dados, relatórios, pricing, social listening, lojas, inconformidades, dashboard e serviços GCP. O estado individual em produção ainda precisa ser confirmado pelo responsável.
+Foram observados módulos de usuários e autenticação, contratos e acordos comerciais, apuração de contratos e grades, auditoria, envio de dados, relatórios, pricing, social listening, lojas, inconformidades, dashboard, serviços GCP e a nova Central do Associado. Na Central, a revisão observada contém portal externo, cerca de acesso, gestão de usuários, painel SAERJ, lojas e auditoria de contratos. Grades estão preparadas nas permissões, mas registradas no próprio código como fase futura.
 
 ## Modelo de dados
 
@@ -39,7 +39,7 @@ O modelo é distribuído entre apps Django e possui migrations versionadas. Fora
 | Configuração não secreta de exemplo | 🔴 Intervenção | Não foi localizado `.env.example`; o README relata valores sensíveis hardcoded.                                     |
 | Banco, migrations e seed            | 🟡 Atenção     | Migrations existem; processo seguro e mínimo de seed não está documentado de forma conclusiva.                      |
 | Execução documentada                | 🟡 Atenção     | README e AGENTS possuem comandos, mas o README está desatualizado em relação aos módulos e ao Dockerfile existente. |
-| Testes reproduzíveis                | 🟡 Atenção     | Há arquivos de teste e comando documentado, sem evidência consolidada de execução nesta inspeção.                   |
+| Testes reproduzíveis                | 🟡 Atenção     | A Central possui 106 testes automatizados identificados estaticamente; a suíte não foi executada nesta inspeção.    |
 | Segredos fora do Git                | 🔴 Intervenção | `gcp_credencials.json` está versionado; validade e exposição não foram verificadas.                                 |
 
 ## Riscos e lacunas
@@ -48,13 +48,13 @@ O modelo é distribuído entre apps Django e possui migrations versionadas. Fora
 - Arquivos gerados do Celery Beat estão versionados e podem causar ruído ou divergência operacional.
 - O README descreve arquitetura e rotas antigas, incompatíveis com a quantidade atual de módulos.
 - Existem `.env`, bancos e dumps no diretório local; não foram abertos e seu rastreamento deve permanecer bloqueado.
-- O checkout está em uma branch de funcionalidade; o merge e a definição da próxima baseline válida no branch principal permanecem sob responsabilidade de Alexandro Nascimento.
+- A `master` contém 130 commits incorporados desde a revisão local anterior; a nova linha de base candidata é `8c0478c`, ainda pendente de validação formal.
 - Não há vínculo padronizado entre sprint, requisito, commit, teste e aceite.
 
 ## Próximas verificações
 
 - confirmar e tratar credenciais potencialmente expostas;
-- escolher uma revisão estável para a baseline inicial;
+- confirmar `8c0478c` ou uma revisão posterior como baseline inicial;
 - executar instalação, migrations, aplicação e testes em ambiente limpo;
 - criar configuração de exemplo sem segredos e instruções atuais de reprodução;
 - inventariar módulos em produção e desenvolvimento;
