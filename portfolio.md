@@ -4,12 +4,27 @@
 
 ## Visão executiva
 
+| Projeto                                                                | Patrocinador               | Responsável       | Fase                                        | Saúde          | Próximo marco                                                                                                    |
+| ---------------------------------------------------------------------- | -------------------------- | ----------------- | ------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [SAC — Supermarket](projetos/sac-supermarket/projeto.md)               | Marketing                  | Fabrício Medeiros | Pré-desenvolvimento                         | 🟡 Atenção     | Reunião final de preparação em 15/09 e fechamento das pendências até 16/09/2026                                  |
+| [SuperSync — Intranet Rede Supermarket](projetos/supersync/projeto.md) | Diretoria — Marcelo Rebelo | Fabrício Medeiros | Operação e evolução contínua                | 🔴 Intervenção | Validar a primeira entrega da Central do Associado e reconciliar código, cronograma e homologação até 21/09/2026 |
+| [CRM Rock (antiga BNEX)](projetos/crm-rock/projeto.md)                 | A confirmar                | A confirmar       | Operação e evolução contínua                | 🟡 Atenção     | Consolidar responsáveis, prioridades e linha de base das frentes — data a confirmar                              |
+| [Integração com a 99Food](projetos/integracao-99food/projeto.md)       | Marketing                  | A confirmar       | Integração concluída; aguardando lançamento | 🟡 Atenção     | Confirmação da data de lançamento pela 99Food                                                                    |
+
+### Frente: Financeiro
+
 | Projeto | Patrocinador | Responsável | Fase | Saúde | Próximo marco |
 |---|---|---|---|---|---|
-| [SAC — Supermarket](projetos/sac-supermarket/projeto.md) | Marketing | Fabrício Medeiros | Pré-desenvolvimento | 🟡 Atenção | Reunião final de preparação em 15/09 e fechamento das pendências até 16/09/2026 |
-| [SuperSync — Intranet Rede Supermarket](projetos/supersync/projeto.md) | Diretoria — Marcelo Rebelo | Fabrício Medeiros | Operação e evolução contínua | 🔴 Intervenção | Validar a primeira entrega da Central do Associado e reconciliar código, cronograma e homologação até 21/09/2026 |
-| [CRM Rock (antiga BNEX)](projetos/crm-rock/projeto.md) | A confirmar | A confirmar | Operação e evolução contínua | 🟡 Atenção | Consolidar responsáveis, prioridades e linha de base das frentes — data a confirmar |
-| [Integração com a 99Food](projetos/integracao-99food/projeto.md) | Marketing | A confirmar | Integração concluída; aguardando lançamento | 🟡 Atenção | Confirmação da data de lançamento pela 99Food |
+| Painel DRE | A confirmar | A confirmar | Registro inicial | A confirmar | A definir |
+| Orçamento | A confirmar | A confirmar | Registro inicial | A confirmar | A definir |
+| Conta Corrente de Fornecedor | A confirmar | A confirmar | Registro inicial | A confirmar | A definir |
+
+### Frente: Melhorias em Lojas
+
+| Projeto | Patrocinador | Responsável | Fase | Saúde | Próximo marco |
+|---|---|---|---|---|---|
+| Notificação de Intenção de Abertura de Loja | A confirmar | A confirmar | Registro inicial | A confirmar | A definir |
+| Viabilidade de Loja | A confirmar | A confirmar | Registro inicial | A confirmar | A definir |
 
 ## Alertas do portfólio
 
