@@ -1,6 +1,6 @@
 # Projeto: CRM Rock (antiga BNEX)
 
-**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Demanda de monitoramento](demandas/2026-09-14-monitoramento-integridade-vendas.md) · [Referências técnicas](referencias/README.md)
+**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Reunião — integração no Torre](reunioes/2026-09-21-configuracao-integracao-torre.md) · [Demanda de monitoramento](demandas/2026-09-14-monitoramento-integridade-vendas.md) · [Divergência de vendas — chamado 202578](demandas/2026-09-18-divergencia-vendas-consinco-crm.md) · [Referências técnicas](referencias/README.md)
 
 ## 1. Identificação
 
@@ -16,7 +16,7 @@
 **Fase:** Operação e evolução contínua  
 **Implantação original:** 2021  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 14/09/2026
+**Última atualização:** 18/09/2026
 
 ### Fontes canônicas relacionadas
 
@@ -44,7 +44,7 @@ CRM operando com integração de vendas confiável e monitorada, infraestrutura 
 
 | Frente | Situação atual | Resultado pretendido | Próximo ponto de controle |
 |---|---|---|---|
-| Novo integrador de vendas via API da Rock | Implantação em andamento; chamado `200955` parcialmente atendido, sem retorno sobre a URL de produção; cobrança urgente registrada no `Id Movidesk_202180` | Substituir a integração desenvolvida pela Consinco pela integração mantida pela Rock | Obter confirmação da Rock antes de migrar os novos associados |
+| Novo integrador de vendas via API da Rock | Implantação em andamento; reunião de configuração no Torre agendada para 21/09/2026 às 8h30; mudança para a URL de produção ainda sem confirmação; chamado `202578` aberto após divergências entre CRM e data lake em três lojas | Substituir a integração desenvolvida pela Consinco pela integração mantida pela Rock, com integridade comprovada dos dados | Preparar e realizar a configuração no Torre com apoio da Rock e do consultor de PDV Consinco; confirmar a URL de produção e validar a integridade antes de ampliar as migrações |
 | Migração do servidor do CRM para SaaS da Rock | Em análise, elaboração de contrato e avaliação de viabilidade técnica | Definir se a migração é técnica, operacional e financeiramente viável | Concluir análise comparativa, riscos, contrato e recomendação para decisão |
 | Carteira digital no aplicativo do CRM | Implantação prevista; estágio a confirmar | Disponibilizar carteira digital no aplicativo | Definir requisitos, dependências, responsável, prazo e critérios de aceite |
 | Monitoramento da integração de vendas | Melhoria solicitada em 14/09/2026 | Identificar lojas cujas vendas não foram registradas corretamente no CRM | Confirmar regra atual, fonte do alerta e conteúdo do novo e-mail |
@@ -89,9 +89,9 @@ CRM operando com integração de vendas confiável e monitorada, infraestrutura 
 |---|---|---|---|
 | Prazo | 🟡 Atenção | Não há cronograma consolidado para as quatro frentes. | Levantar marcos e prazos por frente. |
 | Escopo | 🟡 Atenção | Frentes principais identificadas, ainda sem requisitos e limites completos. | Refinar e priorizar cada frente. |
-| Qualidade | 🟡 Atenção | O alerta atual não permite distinguir baixa venda real de falha no registro no CRM. | Validar regra e transformar o alerta em controle de integridade. |
+| Qualidade | 🟡 Atenção | Além da limitação do alerta atual, o chamado `202578` registra sub-registro relevante de vendas e faturamento em três lojas na comparação com o data lake. | Apurar período, regras de conciliação e causa; corrigir e revalidar os dados. |
 | Recursos | 🟡 Atenção | Responsáveis da Rede, Rock e Consinco não estão consolidados. | Montar matriz de responsabilidades. |
-| Impedimentos & Riscos | 🟡 Atenção | A mudança da URL para produção segue sem confirmação da Rock e condiciona a migração segura de novos associados; também há dependências de contrato, ERP, API e qualidade dos dados. | Cobrar retorno dos chamados `200955` e `Id Movidesk_202180` e não direcionar novos associados ao ambiente de homologação. |
+| Impedimentos & Riscos | 🟡 Atenção | A mudança da URL para produção segue sem confirmação e o chamado `202578` aponta divergências ainda sem causa definida; ambos condicionam a migração segura de novos associados. | Cobrar os retornos pendentes, investigar o chamado `202578` e não ampliar a migração sem validação da URL e da integridade dos dados. |
 | Resultado | 🟡 Atenção | O CRM está implantado, mas não há indicadores consolidados das evoluções. | Definir indicadores por frente. |
 
 ## 6. Próximo marco
