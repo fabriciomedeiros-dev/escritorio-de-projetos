@@ -4,6 +4,12 @@
 
 ## 1. Identificação
 
+**ID:** SAERJ-CRM-ROCK
+
+**Portfólio:** saerj
+
+**Visibilidade:** restrita-saerj
+
 **Status geral:** 🟡 Atenção  
 **Responsável:** A confirmar  
 **Sponsor:** A confirmar  

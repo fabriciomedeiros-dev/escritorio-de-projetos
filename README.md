@@ -2,7 +2,7 @@
 
 Base operacional de gestão de portfólio e projetos assistida por IA.
 
-**Navegação:** [Portfólio](portfolio.md) · [Tarefas do Escritório](tarefas-escritorio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Divulgação no Trello](atividades/divulgacao-andamento-trello.md) · [Projetos](projetos/README.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
+**Navegação:** [Portfólios](portfolios/README.md) · [SAERJ](portfolios/saerj/portfolio.md) · [Pessoal](portfolios/pessoal/portfolio.md) · [Tarefas do Escritório](tarefas-escritorio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Divulgação no Trello](atividades/divulgacao-andamento-trello.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
 
 ## Princípios
 
@@ -17,8 +17,7 @@ Base operacional de gestão de portfólio e projetos assistida por IA.
 ```text
 conselho/  papéis, protocolo e regras de governança
 modelos/   modelos reutilizáveis dos registros de cada projeto
-projetos/  memória de gestão de cada projeto
-portfolio.md  visão executiva consolidada do portfólio
+portfolios/  portfólios isolados por empresa ou domínio pessoal
 tarefas-escritorio.md  iniciativas transversais e evolução do PMO
 ```
 
@@ -34,7 +33,7 @@ O código não altera automaticamente o escopo aprovado. Diferenças entre o pla
 
 ## Como iniciar um projeto
 
-1. Crie `projetos/<nome-do-projeto>/`.
+1. Escolha explicitamente o portfólio e crie `portfolios/<portfolio>/projetos/<nome-do-projeto>/`.
 2. Copie os arquivos de `modelos/` para a nova pasta.
 3. Preencha primeiro `projeto.md` com a linha de base e o estado atual conhecido.
 4. Registre somente decisões, tarefas e acontecimentos que alterem ou expliquem o projeto.
@@ -62,4 +61,12 @@ Solicitações para contratação, renovação ou substituição de ferramentas 
 
 Este repositório é a fonte canônica de gestão: portfólio, estado executivo, objetivo, escopo, prioridade, orçamento, riscos relevantes, governança, decisões gerenciais, tarefas, marcos e autorizações executivas.
 
-Os repositórios de documentação e desenvolvimento de cada iniciativa continuam sendo as fontes de suas definições e entregas. Cada pasta em `projetos/` deve apontar claramente para esses repositórios e para suas evidências. Cada decisão deve ter uma única fonte canônica; quando uma decisão de implementação afetar a linha de base gerencial, o impacto e a aprovação devem ser registrados neste repositório.
+Os repositórios de documentação e desenvolvimento de cada iniciativa continuam sendo as fontes de suas definições e entregas. Cada pasta em `portfolios/<portfolio>/projetos/` deve apontar claramente para esses repositórios e para suas evidências. Cada decisão deve ter uma única fonte canônica; quando uma decisão de implementação afetar a linha de base gerencial, o impacto e a aprovação devem ser registrados neste repositório.
+
+## Isolamento entre portfólios
+
+- `saerj` contém exclusivamente projetos profissionais geridos para a SAERJ.
+- `pessoal` contém exclusivamente projetos pessoais.
+- Toda automação, relatório ou comunicação deve receber o portfólio explicitamente.
+- Consolidações entre portfólios são proibidas por padrão e exigem solicitação e aprovação explícitas.
+- Uma nova empresa deve receber seu próprio identificador e a estrutura `portfolios/<empresa>/`.

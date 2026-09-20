@@ -1,6 +1,6 @@
 # Projetos
 
-**Navegação:** [Início](../README.md) · [Portfólio](../portfolio.md) · [Modelos](../modelos/README.md) · [Conselho](../conselho/README.md)
+**Navegação:** [Início](../../../README.md) · [Portfólio SAERJ](../portfolio.md) · [Modelos](../../../modelos/README.md) · [Conselho](../../../conselho/README.md)
 
 ## Projetos ativos
 
@@ -14,7 +14,7 @@ Crie uma pasta por projeto usando um identificador claro, por exemplo `integraca
 Estrutura mínima de cada projeto:
 
 ```text
-projetos/<nome-do-projeto>/
+portfolios/saerj/projetos/<nome-do-projeto>/
 ├── projeto.md
 ├── decisoes.md
 ├── tarefas.md
@@ -22,7 +22,9 @@ projetos/<nome-do-projeto>/
 └── desenvolvimento.md  # quando houver repositório de código
 ```
 
-Copie os arquivos correspondentes de `../modelos/` antes de iniciar o registro.
+Copie os arquivos correspondentes de `../../../modelos/` antes de iniciar o registro.
+
+Todo `projeto.md` deve declarar o portfólio `saerj` e possuir um identificador iniciado por `SAERJ-`.
 ﻿# Projetos do Portfólio
 
 Cada subpasta representa a memória gerencial de uma iniciativa do portfólio.

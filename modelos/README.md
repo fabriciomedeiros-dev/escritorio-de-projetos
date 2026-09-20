@@ -1,6 +1,6 @@
 # Modelos
 
-**Navegação:** [Início](../README.md) · [Projetos](../projetos/README.md) · [Conselho](../conselho/README.md)
+**Navegação:** [Início](../README.md) · [Portfólios](../portfolios/README.md) · [Conselho](../conselho/README.md)
 
 - [Avaliação de contratação de ferramenta ou serviço](avaliacao-contratacao-ferramenta.md)
 

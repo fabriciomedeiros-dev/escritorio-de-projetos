@@ -4,6 +4,12 @@
 
 ## 1. Identificação
 
+**ID:** SAERJ-SAC
+
+**Portfólio:** saerj
+
+**Visibilidade:** restrita-saerj
+
 **Status geral:** 🟡 Atenção  
 **Responsável:** Fabrício Medeiros  
 **Área patrocinadora:** Marketing  

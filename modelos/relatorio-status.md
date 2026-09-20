@@ -1,5 +1,9 @@
 # Relatório de Atividade — Projeto [Nome do Projeto]
 
+**Portfólio:** [Identificador obrigatório]
+
+**ID do projeto:** [PREFIXO-IDENTIFICADOR]
+
 **Data de referência:** [DD/MM/AAAA]  
 **Fase:** [Fase atual]  
 **Período coberto:** [Período ou data-limite dos registros consultados]
@@ -29,3 +33,5 @@
 1. [Próxima ação objetiva.]
 
 **Fontes consultadas:** `projeto.md`, `tarefas.md`, `decisoes.md`, `historico.md` e demais evidências explicitamente referenciadas.
+
+**Regra de isolamento:** consulte somente arquivos pertencentes ao portfólio indicado. Não agregue informações de outro portfólio sem solicitação e aprovação explícitas.

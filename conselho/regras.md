@@ -6,6 +6,14 @@
 2. Uma conversa, sugestão ou hipótese não se torna fato somente por ter sido mencionada por uma IA.
 3. Registros devem conter data, contexto suficiente e, quando aplicável, a origem/evidência.
 
+### Isolamento entre portfólios
+
+- Cada empresa ou domínio pessoal possui uma pasta própria em `portfolios/<identificador>/`.
+- Todo projeto deve declarar seu portfólio e usar um identificador com prefixo exclusivo daquele portfólio.
+- Relatórios, comunicações, publicações e automações devem receber o portfólio explicitamente e consultar somente sua pasta.
+- É proibido consolidar informações de portfólios distintos por padrão. Uma consolidação excepcional exige solicitação e aprovação humanas explícitas.
+- Destinatários, canais, permissões e configurações de comunicação devem ser definidos separadamente por portfólio.
+
 ### Autoridade entre repositórios
 
 - O Escritório de Projetos é a fonte canônica das decisões gerenciais, incluindo objetivo, escopo, prioridade, orçamento, riscos relevantes, governança, marcos e autorizações executivas.

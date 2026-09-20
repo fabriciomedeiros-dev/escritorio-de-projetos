@@ -20,7 +20,7 @@
 **Decisor:** Fabrício Medeiros  
 **Decisão:** Marcelo representa a diretoria como sponsor; Fabrício gerencia o projeto; Alexandro responde por desenvolvimento e segurança; Filipe responde por dados; cada módulo terá dono funcional. Demandas passam pela triagem de Fabrício, com exceção de incidentes urgentes. Publicação restrita pode anteceder o aceite; liberação ampla exige dono funcional, Fabrício e Marcelo.  
 **Impacto:** Institui acompanhamento semanal, ciclos por módulo, piloto do canal Teams e documento executivo para decisões financeiras.  
-**Referência:** [Governança](governanca.md); [modelo de decisão financeira](../../modelos/decisao-financeira.md).
+**Referência:** [Governança](governanca.md); [modelo de decisão financeira](../../../../modelos/decisao-financeira.md).
 
 ## 11/09/2026 — Serviços compartilhados e projetos consumidores
 

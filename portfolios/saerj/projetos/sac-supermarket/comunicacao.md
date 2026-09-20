@@ -27,7 +27,7 @@
 7. próximas ações recomendadas;
 8. fontes consultadas.
 
-O relatório deve seguir o [modelo de relatório de status](../../modelos/relatorio-status.md) e ser exibido integralmente para aprovação antes do envio.
+O relatório deve seguir o [modelo de relatório de status](../../../../modelos/relatorio-status.md) e ser exibido integralmente para aprovação antes do envio.
 
 ## Pendências de configuração
 

@@ -4,6 +4,12 @@
 
 ## 1. Identificação
 
+**ID:** SAERJ-SUPERSYNC
+
+**Portfólio:** saerj
+
+**Visibilidade:** restrita-saerj
+
 **Status geral:** 🔴 Intervenção  
 **Responsável:** Fabrício Medeiros  
 **Sponsor:** Diretoria da Rede Supermarket, representada por Marcelo Rebelo  

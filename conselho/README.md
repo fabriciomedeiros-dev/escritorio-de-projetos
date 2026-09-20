@@ -1,6 +1,6 @@
 # Conselho — Governança
 
-**Navegação:** [Início](../README.md) · [Portfólio](../portfolio.md) · [Projetos](../projetos/README.md) · [Modelos](../modelos/README.md)
+**Navegação:** [Início](../README.md) · [Portfólios](../portfolios/README.md) · [SAERJ](../portfolios/saerj/portfolio.md) · [Pessoal](../portfolios/pessoal/portfolio.md) · [Modelos](../modelos/README.md)
 
 - [Papéis do Conselho](papeis.md)
 - [Protocolo operacional](protocolo.md)

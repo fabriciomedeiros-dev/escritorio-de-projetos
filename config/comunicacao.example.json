@@ -3,15 +3,23 @@
     "fromAddress": "escritorio-projetos@dominio-validado.com",
     "fromName": "Escritório de Projetos"
   },
-  "projects": {
-    "sac-supermarket": {
-      "status-executivo": {
-        "to": [
-          "destinatario-principal@exemplo.com"
-        ],
-        "cc": [
-          "destinatario-copia@exemplo.com"
-        ]
+  "portfolios": {
+    "saerj": {
+      "projects": {
+        "sac-supermarket": {
+          "status-executivo": {
+            "to": [
+              "destinatario-principal@exemplo.com"
+            ],
+            "cc": [
+              "destinatario-copia@exemplo.com"
+            ]
+          }
+        }
+      }
+    },
+    "pessoal": {
+      "projects": {
       }
     }
   }

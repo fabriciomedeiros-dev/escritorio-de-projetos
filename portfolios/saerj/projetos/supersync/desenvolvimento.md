@@ -1,6 +1,6 @@
 # Camada de Desenvolvimento — SuperSync
 
-**Navegação:** [Projeto](projeto.md) · [Módulos](modulos.md) · [Governança](governanca.md) · [Tarefas](tarefas.md) · [Validação de sprint](../../modelos/validacao-sprint.md)
+**Navegação:** [Projeto](projeto.md) · [Módulos](modulos.md) · [Governança](governanca.md) · [Tarefas](tarefas.md) · [Validação de sprint](../../../../modelos/validacao-sprint.md)
 
 ## Identificação
 
@@ -58,4 +58,4 @@ O modelo é distribuído entre apps Django e possui migrations versionadas. Fora
 - executar instalação, migrations, aplicação e testes em ambiente limpo;
 - criar configuração de exemplo sem segredos e instruções atuais de reprodução;
 - inventariar módulos em produção e desenvolvimento;
-- identificar a sprint atual e aplicar `modelos/validacao-sprint.md`.
+- identificar a sprint atual e aplicar `../../../../modelos/validacao-sprint.md`.

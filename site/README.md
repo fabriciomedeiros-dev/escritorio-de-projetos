@@ -13,12 +13,15 @@ O portal transforma os documentos Markdown canônicos deste repositório em um s
 
 O script `site/build.sh` cria uma cópia temporária do Quartz, inclui apenas o conteúdo gerencial aprovado e gera o site. A pasta temporária não é versionada.
 
+Cada execução publica somente o portfólio indicado por `PORTFOLIO`; quando a variável não é informada, o padrão atual é `saerj`. Use implantações e controles de acesso separados para SAERJ e pessoal. A navegação separada, sozinha, não constitui controle de acesso.
+
 ## Configuração do Cloudflare Pages
 
 | Campo | Valor |
 |---|---|
 | Branch de produção | `main` |
-| Comando de build | `bash site/build.sh` |
+| Comando de build SAERJ | `PORTFOLIO=saerj bash site/build.sh` |
+| Comando de build pessoal | `PORTFOLIO=pessoal bash site/build.sh` |
 | Diretório de saída | `.quartz-build/public` |
 | Versão do Node | 22 ou superior |
 
@@ -34,4 +37,3 @@ Antes do primeiro envio de conteúdo:
 6. executar e validar o primeiro deploy.
 
 O site não deve expor credenciais, arquivos `.env`, configurações locais ou tokens. O script publica somente os arquivos e diretórios explicitamente listados.
-

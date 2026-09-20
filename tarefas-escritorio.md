@@ -1,6 +1,6 @@
 # Tarefas — Escritório de Projetos
 
-**Navegação:** [Início](README.md) · [Portfólio](portfolio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
+**Navegação:** [Início](README.md) · [Portfólios](portfolios/README.md) · [SAERJ](portfolios/saerj/portfolio.md) · [Pessoal](portfolios/pessoal/portfolio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
 
 | ID | Tarefa | Responsável | Prazo | Prioridade | Status | Dependência / evidência |
 |---|---|---|---|---|---|---|

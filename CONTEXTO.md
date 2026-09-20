@@ -8,7 +8,8 @@ O Escritório de Projetos e a base operacional para organizar, acompanhar e pres
 
 - Arquivos Markdown versionados no Git sao a fonte oficial.
 - Chats servem para analise e trabalho; fatos relevantes devem ser registrados nos arquivos.
-- Cada projeto fica em `projetos/<nome-do-projeto>/` e usa os modelos existentes em `modelos/`.
+- Cada projeto fica em `portfolios/<portfolio>/projetos/<nome-do-projeto>/` e usa os modelos existentes em `modelos/`.
+- Os portfólios `saerj` e `pessoal` são isolados. Relatórios, comunicações e automações devem indicar o portfólio e não podem agregar outro domínio por padrão.
 - A pasta `conselho/` contem as regras de governanca, papeis e protocolo de trabalho.
 - Este repositorio e a fonte canonica das decisoes gerenciais; o repositorio de cada iniciativa e a fonte das decisoes tecnicas e funcionais de implementacao e de suas evidencias.
 - Cada decisao deve ter uma unica fonte canonica. Se uma decisao de implementacao afetar a linha de base gerencial, registrar aqui o impacto e a aprovacao correspondente.
@@ -23,7 +24,7 @@ O Escritório de Projetos e a base operacional para organizar, acompanhar e pres
 ```text
 conselho/  governanca, papeis e protocolo operacional
 modelos/   modelos de projeto, decisoes, tarefas e historico
-projetos/  memoria especifica de cada projeto
+portfolios/  portfólios isolados por empresa ou domínio pessoal
 tarefas-escritorio.md  iniciativas transversais e evolucao do PMO
 ```
 
@@ -72,4 +73,4 @@ Ao receber uma solicitacao:
 
 ## Retomada do trabalho
 
-Ao continuar este projeto em outro computador, leia este arquivo, `README.md`, `portfolio.md` e os arquivos de `conselho/`. Em seguida, pergunte qual projeto ou demanda deve ser tratado. O Git e a referencia para sincronizar os arquivos entre computadores.
+Ao continuar este projeto em outro computador, leia este arquivo, `README.md`, `portfolios/README.md`, o `portfolio.md` do portfólio solicitado e os arquivos de `conselho/`. Antes de preparar status ou comunicação, confirme o portfólio a ser tratado. O Git e a referencia para sincronizar os arquivos entre computadores.

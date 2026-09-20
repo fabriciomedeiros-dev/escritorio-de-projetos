@@ -2,6 +2,12 @@
 
 ## 1. Identificação
 
+**ID:** [PREFIXO-IDENTIFICADOR]
+
+**Portfólio:** [saerj / pessoal / outro identificador aprovado]
+
+**Visibilidade:** [restrita-organização / privada / classificação aprovada]
+
 **Status geral:** 🟢 / 🟡 / 🔴  
 **Responsável:** [Pessoa]  
 **Sponsor:** [Pessoa]  

@@ -4,7 +4,7 @@ O script `Enviar-StatusProjeto.ps1` lê o estado atual de um projeto e prepara u
 
 ## Configuração local
 
-Copie `config/comunicacao.example.json` para `config/comunicacao.local.json` e preencha remetente e destinatários. O arquivo local é ignorado pelo Git. Os grupos devem corresponder aos públicos aprovados em `projetos/<projeto>/comunicacao.md`.
+Copie `config/comunicacao.example.json` para `config/comunicacao.local.json` e preencha remetente e destinatários. O arquivo local é ignorado pelo Git. Os grupos devem corresponder aos públicos aprovados em `portfolios/<portfolio>/projetos/<projeto>/comunicacao.md`. As configurações são separadas por portfólio para impedir mistura de destinatários.
 
 ```powershell
 Copy-Item .\config\comunicacao.example.json .\config\comunicacao.local.json
@@ -30,19 +30,19 @@ notepad .\config\zeptomail.token.local
 ## Pré-visualização
 
 ```powershell
-.\scripts\Enviar-StatusProjeto.ps1 -Projeto sac-supermarket
+.\scripts\Enviar-StatusProjeto.ps1 -Portfolio saerj -Projeto sac-supermarket
 ```
 
 Para revisar um relatório criado a partir do modelo:
 
 ```powershell
-.\scripts\Enviar-StatusProjeto.ps1 -Projeto sac-supermarket -ArquivoRelatorio ".\projetos\sac-supermarket\comunicacoes\2026-09-10-status.md"
+.\scripts\Enviar-StatusProjeto.ps1 -Portfolio saerj -Projeto sac-supermarket -ArquivoRelatorio ".\portfolios\saerj\projetos\sac-supermarket\comunicacoes\2026-09-10-status.md"
 ```
 
 Também é possível informar destinatários apenas para validar a composição, sem enviar:
 
 ```powershell
-.\scripts\Enviar-StatusProjeto.ps1 -Projeto sac-supermarket -Para "pessoa@exemplo.com"
+.\scripts\Enviar-StatusProjeto.ps1 -Portfolio saerj -Projeto sac-supermarket -Para "pessoa@exemplo.com"
 ```
 
 ## Envio
@@ -50,10 +50,10 @@ Também é possível informar destinatários apenas para validar a composição,
 O envio exige confirmação explícita depois da revisão da prévia:
 
 ```powershell
-.\scripts\Enviar-StatusProjeto.ps1 -Projeto sac-supermarket -ArquivoRelatorio ".\projetos\sac-supermarket\comunicacoes\2026-09-10-status.md" -Enviar -Confirmacao APROVADO
+.\scripts\Enviar-StatusProjeto.ps1 -Portfolio saerj -Projeto sac-supermarket -ArquivoRelatorio ".\portfolios\saerj\projetos\sac-supermarket\comunicacoes\2026-09-10-status.md" -Enviar -Confirmacao APROVADO
 ```
 
-O script envia uma requisição HTTPS para `https://api.zeptomail.com/v1.1/email`, usando o cabeçalho `Authorization: Zoho-enczapikey <Send API key>`. Ele interrompe o envio se faltar configuração, destinatário, confirmação explícita ou projeto. O token é usado somente em memória durante a execução.
+O script envia uma requisição HTTPS para `https://api.zeptomail.com/v1.1/email`, usando o cabeçalho `Authorization: Zoho-enczapikey <Send API key>`. Ele interrompe o envio se faltar configuração, destinatário, confirmação explícita, portfólio ou projeto. O parâmetro `-Portfolio` é obrigatório e restringe a leitura à pasta correspondente. O token é usado somente em memória durante a execução.
 
 ## Fluxo pelo chat
 

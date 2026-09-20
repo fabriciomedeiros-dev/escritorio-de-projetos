@@ -38,4 +38,4 @@ Documento executivo. Manter em uma página e registrar detalhes somente quando n
 
 ## Financeiro
 
-Fabrício apresenta recomendação resumida. Marcelo e a diretoria aprovam compras, fornecedores, infraestrutura e demais custos usando o [modelo de decisão financeira](../../modelos/decisao-financeira.md).
+Fabrício apresenta recomendação resumida. Marcelo e a diretoria aprovam compras, fornecedores, infraestrutura e demais custos usando o [modelo de decisão financeira](../../../../modelos/decisao-financeira.md).

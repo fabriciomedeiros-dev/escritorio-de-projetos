@@ -1,6 +1,8 @@
-# Portfólio de Projetos
+# Portfólio de Projetos — SAERJ
 
-**Navegação:** [Início](README.md) · [Projetos](projetos/README.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md)
+**Identificador:** `saerj`
+
+**Navegação:** [Início](../../README.md) · [Portfólios](../README.md) · [Projetos](projetos/README.md) · [Conselho](../../conselho/README.md) · [Modelos](../../modelos/README.md)
 
 ## Visão executiva
 
@@ -36,3 +38,5 @@
 ## Regra de atualização
 
 Atualize esta visão quando houver alteração relevante no status, prioridade, risco, patrocínio, previsão ou próximo marco de um projeto.
+
+Este arquivo consolida exclusivamente projetos localizados em `portfolios/saerj/projetos/`. Informações pessoais ou pertencentes a outras organizações não devem ser incluídas aqui.

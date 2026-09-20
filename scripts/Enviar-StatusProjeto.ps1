@@ -2,6 +2,10 @@
 param(
     [Parameter(Mandatory = $true)]
     [ValidatePattern('^[a-z0-9][a-z0-9-]*$')]
+    [string]$Portfolio,
+
+    [Parameter(Mandatory = $true)]
+    [ValidatePattern('^[a-z0-9][a-z0-9-]*$')]
     [string]$Projeto,
 
     [string[]]$Para,
@@ -41,8 +45,9 @@ function Get-MarkdownValue {
 }
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$projectPath = Join-Path $repositoryRoot "projetos\$Projeto\projeto.md"
-$tasksPath = Join-Path $repositoryRoot "projetos\$Projeto\tarefas.md"
+$portfolioRoot = Join-Path $repositoryRoot "portfolios\$Portfolio"
+$projectPath = Join-Path $portfolioRoot "projetos\$Projeto\projeto.md"
+$tasksPath = Join-Path $portfolioRoot "projetos\$Projeto\tarefas.md"
 $localConfigPath = Join-Path $repositoryRoot 'config\comunicacao.local.json'
 $localTokenPath = Join-Path $repositoryRoot 'config\zeptomail.token.local'
 
@@ -52,10 +57,14 @@ if (Test-Path -LiteralPath $localConfigPath -PathType Leaf) {
 }
 
 if (-not (Test-Path -LiteralPath $projectPath -PathType Leaf)) {
-    throw "Projeto '$Projeto' não encontrado em '$projectPath'."
+    throw "Projeto '$Projeto' não encontrado no portfólio '$Portfolio' em '$projectPath'."
 }
 
 $projectContent = Get-Content -Raw -LiteralPath $projectPath -Encoding UTF8
+$declaredPortfolio = Get-MarkdownValue -Content $projectContent -Label 'Portfólio'
+if ($declaredPortfolio -ne $Portfolio) {
+    throw "Isolamento violado: o projeto declara o portfólio '$declaredPortfolio', mas a execução solicitou '$Portfolio'."
+}
 $tasksContent = if (Test-Path -LiteralPath $tasksPath -PathType Leaf) {
     Get-Content -Raw -LiteralPath $tasksPath -Encoding UTF8
 } else {
@@ -82,11 +91,12 @@ $taskSummary = if ($taskRows.Count -gt 0) { $taskRows -join [Environment]::NewLi
 
 $referenceDate = Get-Date -Format 'dd/MM/yyyy'
 if ([string]::IsNullOrWhiteSpace($Assunto)) {
-    $Assunto = "Status do projeto - $projectName - $referenceDate"
+    $Assunto = "Status do projeto [$Portfolio] - $projectName - $referenceDate"
 }
 
 $body = @"
 STATUS DO PROJETO — $projectName
+Portfólio: $Portfolio
 Data de referência: $referenceDate
 Última atualização registrada: $lastUpdate
 
@@ -107,7 +117,7 @@ $milestone
 Data: $milestoneDate
 Condição de conclusão: $milestoneCondition
 
-Fonte: Escritório de Projetos — projetos/$Projeto/projeto.md
+Fonte: Escritório de Projetos — portfolios/$Portfolio/projetos/$Projeto/projeto.md
 "@
 
 if (-not [string]::IsNullOrWhiteSpace($ArquivoRelatorio)) {
@@ -152,7 +162,8 @@ $configuredFromName = $null
 if ($null -ne $localConfig) {
     $configuredFrom = $localConfig.zeptomail.fromAddress
     $configuredFromName = $localConfig.zeptomail.fromName
-    $projectConfig = $localConfig.projects.$Projeto
+    $portfolioConfig = $localConfig.portfolios.$Portfolio
+    $projectConfig = if ($null -ne $portfolioConfig) { $portfolioConfig.projects.$Projeto } else { $null }
     if ($null -ne $projectConfig) {
         $eventConfig = $projectConfig.$Evento
         if ($null -ne $eventConfig) {
