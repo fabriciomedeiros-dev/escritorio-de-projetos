@@ -2,7 +2,7 @@
 
 **Data:** 21/09/2026 (segunda-feira)  
 **Horário:** 8h30  
-**Situação:** Agendada  
+**Situação:** Realizada — configuração bem-sucedida, com validação parcial
 **Projeto:** CRM Rock (antiga BNEX)  
 **Linha de trabalho:** Novo integrador de vendas via API da Rock  
 **Unidade/associado:** Torre  
@@ -13,7 +13,23 @@
 
 Realizar a configuração da nova integração no Torre e alinhar as dependências técnicas necessárias entre Rock, Consinco e a equipe responsável pelo ambiente.
 
-## Preparação necessária
+## Resultado realizado
+
+- Um PDV foi configurado no Torre com a nova integração.
+- A configuração foi concluída com sucesso.
+- A integração identificou e enviou vendas ao CRM.
+- Não foi possível testar a aplicação do **preço 2**.
+- Ficou pendente levantar como o Cruzeiro lança a promoção na regra de incentivo e repassar essa configuração ao Torre.
+
+## Pendência de validação
+
+| Ação | Situação | Responsável | Evidência esperada |
+|---|---|---|---|
+| Levantar como o Cruzeiro lança a promoção na regra de incentivo. | Pendente | Fabrício Medeiros | Regra e parâmetros utilizados pelo Cruzeiro documentados. |
+| Repassar ao Torre a forma de configuração da promoção. | Pendente | Fabrício Medeiros | Orientação encaminhada ao Torre. |
+| Executar teste de venda com aplicação do preço 2. | Bloqueada pela informação da regra de incentivo | Torre, com apoio a confirmar | Venda identificada e enviada ao CRM com o preço 2 aplicado corretamente. |
+
+## Preparação originalmente prevista
 
 | Ação | Situação | Responsável | Evidência esperada |
 |---|---|---|---|
@@ -39,7 +55,7 @@ Os itens abaixo detalham a preparação e precisam ser confirmados com as equipe
 
 Credenciais, chaves e outros segredos não devem ser registrados neste documento.
 
-## Resultado esperado da reunião
+## Resultado originalmente esperado
 
 - nova integração configurada no Torre ou impedimentos técnicos claramente registrados;
 - conectividade e autenticação validadas;
@@ -54,7 +70,7 @@ Credenciais, chaves e outros segredos não devem ser registrados neste documento
 
 ## Registro posterior
 
-Após a reunião, registrar:
+Ainda falta registrar:
 
 - participantes presentes;
 - configurações realizadas;

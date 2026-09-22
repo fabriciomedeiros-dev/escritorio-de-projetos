@@ -1,6 +1,6 @@
 # Projeto: CRM Rock (antiga BNEX)
 
-**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Reunião — integração no Torre](reunioes/2026-09-21-configuracao-integracao-torre.md) · [Demanda de monitoramento](demandas/2026-09-14-monitoramento-integridade-vendas.md) · [Divergência de vendas — chamado 202578](demandas/2026-09-18-divergencia-vendas-consinco-crm.md) · [Referências técnicas](referencias/README.md)
+**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Reunião — integração no Torre](reunioes/2026-09-21-configuracao-integracao-torre.md) · [Reunião — reenvio e URL de produção](reunioes/2026-09-22-reenvio-vendas-url-producao.md) · [Demanda de monitoramento](demandas/2026-09-14-monitoramento-integridade-vendas.md) · [Divergência de vendas — chamado 202578](demandas/2026-09-18-divergencia-vendas-consinco-crm.md) · [Referências técnicas](referencias/README.md)
 
 ## 1. Identificação
 
@@ -16,7 +16,7 @@
 **Fase:** Operação e evolução contínua  
 **Implantação original:** 2021  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 18/09/2026
+**Última atualização:** 22/09/2026
 
 ### Fontes canônicas relacionadas
 
@@ -44,7 +44,7 @@ CRM operando com integração de vendas confiável e monitorada, infraestrutura 
 
 | Frente | Situação atual | Resultado pretendido | Próximo ponto de controle |
 |---|---|---|---|
-| Novo integrador de vendas via API da Rock | Implantação em andamento; reunião de configuração no Torre agendada para 21/09/2026 às 8h30; mudança para a URL de produção ainda sem confirmação; chamado `202578` aberto após divergências entre CRM e data lake em três lojas | Substituir a integração desenvolvida pela Consinco pela integração mantida pela Rock, com integridade comprovada dos dados | Preparar e realizar a configuração no Torre com apoio da Rock e do consultor de PDV Consinco; confirmar a URL de produção e validar a integridade antes de ampliar as migrações |
+| Novo integrador de vendas via API da Rock | Um PDV foi configurado com sucesso no Torre e está identificando e enviando vendas ao CRM. O teste de preço 2 está pendente do levantamento da regra de incentivo do Cruzeiro. Para 22/09/2026 às 15h30, foi agendada reunião com CRM/Rock e Cloves, da TI do Cruzeiro, para configurar o reenvio de vendas e alterar a URL para produção. | Substituir a integração desenvolvida pela Consinco pela integração mantida pela Rock, com integridade comprovada dos dados | Executar e validar o reenvio das vendas e a troca da URL; levantar a regra de incentivo do Cruzeiro, orientar o Torre e testar o preço 2 |
 | Migração do servidor do CRM para SaaS da Rock | Em análise, elaboração de contrato e avaliação de viabilidade técnica | Definir se a migração é técnica, operacional e financeiramente viável | Concluir análise comparativa, riscos, contrato e recomendação para decisão |
 | Carteira digital no aplicativo do CRM | Implantação prevista; estágio a confirmar | Disponibilizar carteira digital no aplicativo | Definir requisitos, dependências, responsável, prazo e critérios de aceite |
 | Monitoramento da integração de vendas | Melhoria solicitada em 14/09/2026 | Identificar lojas cujas vendas não foram registradas corretamente no CRM | Confirmar regra atual, fonte do alerta e conteúdo do novo e-mail |
@@ -89,16 +89,18 @@ CRM operando com integração de vendas confiável e monitorada, infraestrutura 
 |---|---|---|---|
 | Prazo | 🟡 Atenção | Não há cronograma consolidado para as quatro frentes. | Levantar marcos e prazos por frente. |
 | Escopo | 🟡 Atenção | Frentes principais identificadas, ainda sem requisitos e limites completos. | Refinar e priorizar cada frente. |
-| Qualidade | 🟡 Atenção | Além da limitação do alerta atual, o chamado `202578` registra sub-registro relevante de vendas e faturamento em três lojas na comparação com o data lake. | Apurar período, regras de conciliação e causa; corrigir e revalidar os dados. |
+| Qualidade | 🟡 Atenção | O PDV configurado no Torre já envia vendas ao CRM, mas o preço 2 não foi testado. O chamado `202578` continua exigindo reenvio e reconciliação das vendas afetadas. | Levantar a regra de incentivo do Cruzeiro, testar o preço 2, executar o reenvio e reconciliar os dados. |
 | Recursos | 🟡 Atenção | Responsáveis da Rede, Rock e Consinco não estão consolidados. | Montar matriz de responsabilidades. |
-| Impedimentos & Riscos | 🟡 Atenção | A mudança da URL para produção segue sem confirmação e o chamado `202578` aponta divergências ainda sem causa definida; ambos condicionam a migração segura de novos associados. | Cobrar os retornos pendentes, investigar o chamado `202578` e não ampliar a migração sem validação da URL e da integridade dos dados. |
+| Impedimentos & Riscos | 🟡 Atenção | A URL de produção ainda não foi validada, o reenvio das vendas está pendente e o cenário de preço 2 depende da regra de incentivo usada pelo Cruzeiro. | Tratar URL e reenvio na reunião de 22/09 às 15h30 e concluir o levantamento necessário ao teste do preço 2. |
 | Resultado | 🟡 Atenção | O CRM está implantado, mas não há indicadores consolidados das evoluções. | Definir indicadores por frente. |
 
 ## 6. Próximo marco
 
-**Marco:** Linha de base inicial das quatro frentes  
-**Data:** A confirmar  
-**Condição de conclusão:** responsáveis, prioridades, situação, próximos marcos, dependências e critérios de aceite registrados para cada frente.
+**Marco:** Configurar o reenvio de vendas e alterar a integração para a URL de produção
+
+**Data:** 22/09/2026, às 15h30
+
+**Condição de conclusão:** PDV configurado para reenvio, vendas reprocessadas ou plano formalizado, URL de produção aplicada e transação validada no CRM.
 
 ## 7. Observação do Escritório de Projetos
 

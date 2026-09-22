@@ -4,7 +4,7 @@
 **Projeto:** CRM Rock (antiga BNEX)  
 **Linha de trabalho:** Novo integrador de vendas via API da Rock  
 **Fornecedor acionado:** Rock  
-**Status consolidado:** Aguardando retorno urgente da Rock
+**Status consolidado:** Em andamento — alteração e validação agendadas para 22/09/2026 às 15h30
 
 ## Solicitação
 
@@ -38,6 +38,12 @@ Alterar a URL utilizada pela nova integração com o CRM, substituindo o endere�
 ## Avaliação interna registrada
 
 A equipe avalia que a URL provavelmente ainda não foi alterada, pois a integração do associado atualmente em homologação continua funcionando. Essa conclusão é uma inferência operacional e permanece pendente de confirmação formal da Rock.
+
+## Atualização de 22/09/2026
+
+Foi agendada para 22/09/2026, às 15h30, reunião com a equipe do CRM/Rock e Cloves, da TI do Cruzeiro, para configurar o PDV para o reenvio de vendas e alterar a URL de homologação para produção.
+
+A demanda permanece aberta até que a alteração seja executada e validada. O resultado deverá ser registrado em `../reunioes/2026-09-22-reenvio-vendas-url-producao.md` e nos chamados relacionados.
 
 ## Condição de encerramento
 

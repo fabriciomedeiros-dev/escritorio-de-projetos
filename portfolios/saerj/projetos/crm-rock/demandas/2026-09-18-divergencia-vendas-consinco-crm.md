@@ -4,7 +4,7 @@
 **Projeto:** CRM Rock (antiga BNEX)  
 **Linha de trabalho:** Novo integrador de vendas via API da Rock  
 **Chamado:** `202578`  
-**Situação:** Aberto para apuração  
+**Situação:** Em tratamento — reenvio de vendas agendado para configuração
 **Prioridade:** Alta, a validar na triagem  
 **Responsável pelo acompanhamento:** A confirmar  
 **Período dos dados analisados:** A confirmar
@@ -57,6 +57,12 @@ A causa ainda não está confirmada. A divergência não deve ser atribuída à 
 5. Conciliar uma amostra transacional entre Consinco, data lake e CRM/Rock.
 6. Registrar no chamado `202578` a causa, a correção aplicada e a evidência da revalidação.
 7. Avaliar se o monitoramento previsto na tarefa `CRM-005` detectaria automaticamente esta ocorrência.
+
+## Atualização de 22/09/2026
+
+Foi agendada para 22/09/2026, às 15h30, reunião com a equipe do CRM/Rock e Cloves, da TI do Cruzeiro, para configurar o PDV para o reenvio das vendas. Na mesma sessão está prevista a alteração da URL de homologação para produção.
+
+O agendamento representa o início da ação corretiva, mas não encerra a apuração. Ainda será necessário confirmar quais lojas e períodos serão reprocessados, validar o resultado no CRM e realizar nova conciliação com a fonte de referência.
 
 ## Condição de encerramento
 
