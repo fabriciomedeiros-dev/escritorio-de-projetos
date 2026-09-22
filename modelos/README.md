@@ -4,6 +4,14 @@
 
 - [Avaliação de contratação de ferramenta ou serviço](avaliacao-contratacao-ferramenta.md)
 
+## Comitê de Ideação e Estruturação
+
+- [Ficha de ideia — rodada 1](ficha-ideia.md)
+- [Termo de Abertura Preliminar — rodada 2](termo-abertura-preliminar.md)
+- [Canvas de Modelo de Negócio — rodada 3](canvas-modelo-negocio.md)
+
+## Gestão de projetos
+
 - [Projeto](projeto.md)
 - [Mensuração de valor](mensuracao-valor.md)
 - [Decisões](decisoes.md)

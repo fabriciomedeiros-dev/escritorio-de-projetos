@@ -2,9 +2,19 @@
 
 ## Fonte oficial
 
-1. Os arquivos Markdown do projeto são a memória oficial.
-2. Uma conversa, sugestão ou hipótese não se torna fato somente por ter sido mencionada por uma IA.
-3. Registros devem conter data, contexto suficiente e, quando aplicável, a origem/evidência.
+1. Enquanto a iniciativa for apenas uma ideia, os arquivos em `conselho/ideias/<portfolio>/<ideia>/` são sua memória oficial.
+2. Depois da promoção, os arquivos do projeto em `portfolios/<portfolio>/projetos/<projeto>/` tornam-se a memória oficial.
+3. Uma conversa, sugestão ou hipótese não se torna fato somente por ter sido mencionada por uma IA.
+4. Registros devem conter data, contexto suficiente e, quando aplicável, a origem/evidência.
+
+### Fronteira entre ideia e projeto
+
+- Uma ideia em avaliação não integra o portfólio, não recebe saúde de projeto e não deve aparecer em relatórios de projetos ativos.
+- A existência de um TAP preliminar ou Canvas não representa aprovação, autorização financeira ou compromisso de execução.
+- Somente uma decisão humana explícita de `Promover a projeto` autoriza a criação da pasta operacional no portfólio.
+- Na promoção, o dossiê deve ser movido para `portfolios/<portfolio>/projetos/<projeto>/iniciacao/`. Não mantenha cópias canônicas concorrentes no Comitê e no projeto.
+- A promoção deve gerar os registros operacionais mínimos do projeto e preservar a referência à decisão humana.
+- Iniciativas em experimento permanecem no Comitê até nova decisão. Iniciativas arquivadas permanecem identificadas como tal e não entram no portfólio.
 
 ### Isolamento entre portfólios
 
@@ -44,17 +54,18 @@ Sempre diferenciar:
 
 - **Fato:** informação confirmada por evidência ou responsável.
 - **Hipótese:** informação ainda não comprovada.
-- **Recomendação:** orientação do Conselho.
+- **Estimativa:** valor aproximado produzido por método declarado, ainda não confirmado.
+- **Recomendação:** orientação do Comitê baseada nas evidências e hipóteses registradas.
 - **Decisão:** escolha aprovada pelo decisor humano.
 - **Ação:** trabalho a ser executado.
 
-## Autonomia do Conselho
+## Autonomia do Comitê
 
-O Conselho pode organizar análises, identificar lacunas, propor tarefas, estruturar documentação e acompanhar o plano.
+O Comitê pode organizar análises, pesquisar evidências, identificar lacunas, formular alternativas, recomendar experimentos e estruturar a documentação das três rodadas.
 
-Não pode aprovar autonomamente mudança estratégica, prioridade relevante, orçamento, risco relevante, objetivo ou alteração irreversível.
+Não pode aprovar autonomamente a criação ou promoção de projeto, mudança estratégica, prioridade relevante, orçamento, risco relevante, objetivo ou alteração irreversível.
 
-## Alterações de projeto
+## Alterações após a promoção
 
 1. Registrar a linha de base antes de substituir informações relevantes.
 2. Para mudanças com impacto, documentar motivo, impacto, alternativas e aprovação.

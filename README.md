@@ -1,12 +1,13 @@
 # Escritório de Projetos
 
-Base operacional de gestão de portfólio e projetos assistida por IA.
+Base operacional de ideação, estruturação e gestão de portfólios e projetos assistida por IA.
 
 **Navegação:** [Portfólios](portfolios/README.md) · [SAERJ](portfolios/saerj/portfolio.md) · [Pessoal](portfolios/pessoal/portfolio.md) · [Tarefas do Escritório](tarefas-escritorio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Divulgação no Trello](atividades/divulgacao-andamento-trello.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
 
 ## Princípios
 
 - A memória pertence ao projeto, não ao modelo de IA.
+- Antes da promoção, a memória pertence à ideia e permanece dentro do Comitê.
 - Markdown é a fonte oficial de informação; conversas são contexto de trabalho.
 - Documentação é um subproduto da gestão: toda discussão deve terminar em decisão, tarefa, pendência ou nenhuma ação necessária.
 - O Conselho recomenda e acompanha; o humano direciona, decide e valida assuntos relevantes.
@@ -15,7 +16,7 @@ Base operacional de gestão de portfólio e projetos assistida por IA.
 ## Estrutura
 
 ```text
-conselho/  papéis, protocolo e regras de governança
+conselho/  Comitê, ideias em avaliação, papéis, protocolo e regras de governança
 modelos/   modelos reutilizáveis dos registros de cada projeto
 portfolios/  portfólios isolados por empresa ou domínio pessoal
 tarefas-escritorio.md  iniciativas transversais e evolução do PMO
@@ -33,11 +34,12 @@ O código não altera automaticamente o escopo aprovado. Diferenças entre o pla
 
 ## Como iniciar um projeto
 
-1. Escolha explicitamente o portfólio e crie `portfolios/<portfolio>/projetos/<nome-do-projeto>/`.
-2. Copie os arquivos de `modelos/` para a nova pasta.
-3. Preencha primeiro `projeto.md` com a linha de base e o estado atual conhecido.
-4. Registre somente decisões, tarefas e acontecimentos que alterem ou expliquem o projeto.
-5. Preencha a mensuração de valor com objetivo, resultado-chave, linha de base, meta, evidências e nível de confiança.
+1. Registre a iniciativa em `conselho/ideias/<portfolio>/<nome-da-ideia>/`.
+2. Conduza as três rodadas do Comitê: descoberta, TAP preliminar e modelo de negócio.
+3. Obtenha a decisão humana explícita de promoção.
+4. Crie `portfolios/<portfolio>/projetos/<nome-do-projeto>/` e mova o dossiê para `iniciacao/`.
+5. Crie os registros operacionais usando os modelos de projeto, decisões, tarefas e histórico.
+6. Adicione o projeto ao portfólio correspondente.
 
 ## Mensuração de valor
 

@@ -2,13 +2,14 @@
 
 ## Objetivo deste projeto
 
-O Escritório de Projetos e a base operacional para organizar, acompanhar e preservar a memoria do portfólio. Ele atua como um PMO assistido por IA: estrutura novos projetos, acompanha sua evolucao, identifica riscos e prepara comunicacoes executivas. Ele apoia a gestao, mas nao substitui as decisoes e validacoes humanas.
+O Escritório de Projetos e a base operacional para explorar novas ideias, estruturar propostas, organizar projetos aprovados, acompanhar sua evolucao e preservar a memoria do portfólio. O Comitê de Ideação transforma ideias em propostas por meio de descoberta, TAP preliminar e Canvas; o Escritório passa a gerir a iniciativa somente depois da promoção humana explícita.
 
 ## Como a memoria funciona
 
 - Arquivos Markdown versionados no Git sao a fonte oficial.
 - Chats servem para analise e trabalho; fatos relevantes devem ser registrados nos arquivos.
 - Cada projeto fica em `portfolios/<portfolio>/projetos/<nome-do-projeto>/` e usa os modelos existentes em `modelos/`.
+- Antes da promoção, cada ideia fica em `conselho/ideias/<portfolio>/<nome-da-ideia>/` e não integra o portfólio nem os relatórios de projetos ativos.
 - Os portfólios `saerj` e `pessoal` são isolados. Relatórios, comunicações e automações devem indicar o portfólio e não podem agregar outro domínio por padrão.
 - A pasta `conselho/` contem as regras de governanca, papeis e protocolo de trabalho.
 - Este repositorio e a fonte canonica das decisoes gerenciais; o repositorio de cada iniciativa e a fonte das decisoes tecnicas e funcionais de implementacao e de suas evidencias.
@@ -22,7 +23,7 @@ O Escritório de Projetos e a base operacional para organizar, acompanhar e pres
 ## Estrutura do repositorio
 
 ```text
-conselho/  governanca, papeis e protocolo operacional
+conselho/  Comitê, ideias em avaliação, governanca, papeis e protocolo
 modelos/   modelos de projeto, decisoes, tarefas e historico
 portfolios/  portfólios isolados por empresa ou domínio pessoal
 tarefas-escritorio.md  iniciativas transversais e evolucao do PMO

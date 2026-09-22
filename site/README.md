@@ -37,3 +37,5 @@ Antes do primeiro envio de conteúdo:
 6. executar e validar o primeiro deploy.
 
 O site não deve expor credenciais, arquivos `.env`, configurações locais ou tokens. O script publica somente os arquivos e diretórios explicitamente listados.
+
+As ideias em avaliação armazenadas em `conselho/ideias/` não são publicadas pelo build. Elas permanecem restritas ao repositório durante as rodadas do Comitê e somente chegam ao portal depois de promovidas e incorporadas ao portfólio correspondente.

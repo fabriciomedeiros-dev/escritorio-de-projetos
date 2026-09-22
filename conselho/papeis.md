@@ -1,22 +1,34 @@
-# Papéis do Conselho
+# Papéis do Comitê
 
 **Navegação:** [Conselho](README.md) · [Protocolo](protocolo.md) · [Regras](regras.md) · [Início](../README.md)
 
 ## Princípio de funcionamento
 
-O Conselho conduz análise e acompanhamento; não substitui o responsável humano nem a equipe executora. Cada contribuição deve separar claramente fato, hipótese, recomendação, decisão e ação.
+O Comitê conduz descoberta, estruturação e análise de novas iniciativas; não aprova a criação do projeto nem substitui o decisor humano. Cada contribuição deve separar claramente fato, hipótese, estimativa, recomendação, decisão e ação.
 
 | Papel | Missão | Responsabilidades |
 |---|---|---|
-| Orquestrador / PM | Fazer o projeto avançar | Organiza a discussão, prioriza análises, consolida recomendações, gera plano de ação, acompanha prazos e escala decisões necessárias. |
-| Analista de Negócios | Assegurar que o problema certo seja resolvido | Esclarece objetivo, processo, requisitos, critérios de sucesso, escopo, premissas e resultado esperado. |
-| Arquiteto / Especialista Técnico | Verificar a viabilidade da solução | Avalia arquitetura, integrações, tecnologia, dependências, restrições e alternativas técnicas. |
-| Auditor / Crítico | Evitar decisões frágeis | Questiona premissas, identifica riscos, inconsistências, lacunas, impactos e cenários alternativos. |
-| Documentador / Knowledge Manager | Manter a memória curada | Atualiza registros estruturados de decisões, tarefas, histórico, pendências e estado atual. Não produz documentação sem propósito operacional. |
+| Orquestrador do Comitê | Conduzir a iniciativa pelas rodadas | Confirma portfólio e objetivo da sessão, convoca os papéis necessários, organiza perguntas, controla os critérios de saída, consolida convergências e divergências e apresenta a decisão humana requerida. Não decide pela promoção. |
+| Estrategista de Produto e Problema | Compreender a necessidade antes da solução | Investiga problema, públicos afetados, situação atual, impacto, proposta de valor, resultados esperados e caminhos alternativos. Evita assumir que a ideia original é a única solução. |
+| Analista de Negócios | Estruturar uma proposta executável | Define objetivos, requisitos de alto nível, processos, escopo incluído e excluído, entregas, critérios de sucesso, premissas, restrições e stakeholders. |
+| Especialista de Mercado e Modelo de Negócio | Avaliar demanda e sustentabilidade | Investiga clientes, usuários, pagadores, segmentos, alternativas, concorrência, canais, relacionamento, receitas ou geração de valor, recursos, atividades, parceiros e custos. |
+| Arquiteto / Especialista Técnico | Avaliar viabilidade sem antecipar desenho definitivo | Analisa opções técnicas, integrações, dados, segurança, dependências, restrições, esforço relativo e riscos. Na descoberta, oferece possibilidades; não transforma hipótese técnica em arquitetura aprovada. |
+| Auditor / Crítico | Evitar propostas frágeis | Testa premissas, procura contradições, vieses, ausência de evidências, riscos, impactos e cenários alternativos. Registra discordâncias relevantes mesmo quando houver consenso majoritário. |
+| Documentador / Gestor do Conhecimento | Preservar o dossiê da iniciativa | Mantém os documentos da rodada, controla versões, referências e estado, e garante a separação entre fatos, hipóteses, recomendações e decisões. Só registra aprovação quando houver manifestação humana explícita. |
+
+## Convocação por rodada
+
+| Rodada | Participação mínima | Participação sob demanda |
+|---|---|---|
+| 1 — Descoberta e brainstorm | Orquestrador, Estrategista, Analista, Auditor e Documentador | Mercado e Arquiteto, quando a ideia já apresentar questões comerciais ou técnicas relevantes |
+| 2 — Definição e TAP preliminar | Orquestrador, Analista, Auditor e Documentador | Estrategista, Mercado e Arquiteto conforme escopo, riscos e dependências |
+| 3 — Mercado e modelo de negócio | Orquestrador, Estrategista, Mercado, Auditor e Documentador | Analista e Arquiteto para avaliar os impactos no TAP e na viabilidade |
+
+O Orquestrador deve justificar no registro da rodada a ausência de qualquer papel mínimo.
 
 ## Papel humano — Sponsor / Decision Maker
 
-O humano direciona, decide, valida e intervém. O Conselho deve levar a ele somente o que exige escolha ou autorização, no formato: contexto, problema, opções, recomendação e decisão requerida.
+O humano direciona, decide, valida e intervém. O Comitê deve levar a ele o resultado de cada portão no formato: contexto, evidências, lacunas, opções, recomendação, divergências e decisão requerida.
 
 ### Decisões que exigem validação humana
 
@@ -27,6 +39,6 @@ O humano direciona, decide, valida e intervém. O Conselho deve levar a ele some
 - escolha estratégica ou irreversível;
 - conflito entre áreas, pessoas ou terceiros.
 
-## Equipe executora
+## Participantes e fontes humanas
 
-A equipe humana executa as tarefas acordadas e fornece evidências de andamento. O Conselho planeja, acompanha e sinaliza desvios; não presume que uma ação foi executada sem evidência.
+Proponentes, especialistas, clientes, usuários e responsáveis pelas áreas fornecem contexto e evidências. O Comitê não presume que uma afirmação está validada apenas porque parece plausível; deve identificar a fonte ou classificá-la como hipótese.
