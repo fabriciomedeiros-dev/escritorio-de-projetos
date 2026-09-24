@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Status executivo do SuperSync e evolução do Portal do Associado em 24 de setembro de 2026.">
+  <title>SuperSync — Status executivo — 24/09/2026</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230e3f75'/%3E%3Cpath d='M17 22h25l-6-6m11 26H22l6 6' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #0c2f54;
+      --blue: #155fa0;
+      --blue-soft: #eaf3fb;
+      --ink: #172333;
+      --muted: #617084;
+      --bg: #f3f6f9;
+      --surface: #ffffff;
+      --line: #dce4ec;
+      --green: #157347;
+      --green-soft: #e9f6ef;
+      --amber: #9a5a00;
+      --amber-soft: #fff4dd;
+      --shadow: 0 14px 38px rgba(12, 47, 84, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #e8f0f7 0, var(--bg) 360px);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    main { width: min(1180px, calc(100% - 32px)); margin: 28px auto 48px; display: grid; gap: 20px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { max-width: 760px; color: var(--navy); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.05; letter-spacing: -.035em; }
+    h2 { color: var(--navy); font-size: 1.08rem; letter-spacing: -.01em; }
+    h3 { color: var(--navy); font-size: .98rem; }
+    .eyebrow { margin-bottom: 7px; color: var(--blue); font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .muted { color: var(--muted); }
+    .small { font-size: .84rem; }
+    .header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      padding: 24px 26px;
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 20px;
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    .status-block { min-width: 245px; padding: 15px 17px; border: 1px solid #f2d397; border-radius: 14px; background: var(--amber-soft); }
+    .status { display: flex; align-items: center; gap: 9px; color: var(--amber); font-weight: 800; }
+    .status::before { content: ""; width: 10px; height: 10px; flex: 0 0 10px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 5px rgba(154,90,0,.1); }
+    .status-block p { margin-top: 5px; color: #765018; font-size: .86rem; }
+    .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: 0 8px 25px rgba(12,47,84,.04); }
+    .kpi-label { color: var(--muted); font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .045em; }
+    .value { margin: 5px 0 1px; color: var(--navy); font-size: 1.85rem; font-weight: 800; letter-spacing: -.035em; }
+    .value.green { color: var(--green); }
+    .value.amber { color: var(--amber); }
+    .layout { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(300px, .72fr); gap: 20px; align-items: start; }
+    section, aside { display: grid; gap: 12px; }
+    .section-head { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+    .table-card { padding: 6px 18px 12px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 13px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+    tr:last-child td { border-bottom: 0; }
+    th { color: var(--muted); font-size: .78rem; font-weight: 750; text-transform: uppercase; letter-spacing: .035em; }
+    td:first-child { min-width: 210px; font-weight: 650; }
+    td:nth-child(3), td:nth-child(4), th:nth-child(3), th:nth-child(4) { white-space: nowrap; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 8px; border-radius: 999px; font-size: .78rem; font-weight: 750; white-space: nowrap; }
+    .pill.ok { color: var(--green); background: var(--green-soft); }
+    .pill.attention { color: var(--amber); background: var(--amber-soft); }
+    .flow { padding: 18px; }
+    .steps { display: grid; margin-top: 13px; }
+    .step { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; min-height: 68px; }
+    .marker { display: grid; justify-items: center; grid-template-rows: 22px 1fr; }
+    .dot { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: var(--green-soft); color: var(--green); font-size: .72rem; font-weight: 850; }
+    .connector { width: 2px; min-height: 34px; background: var(--line); }
+    .step:last-child .connector { visibility: hidden; }
+    .step.current .dot { color: var(--amber); background: var(--amber-soft); outline: 3px solid #fff; box-shadow: 0 0 0 4px #f5d697; }
+    .step.future .dot { color: var(--muted); background: #edf1f5; }
+    .step strong, .step span { display: block; }
+    .step span { margin-top: 2px; color: var(--muted); font-size: .86rem; }
+    .next { margin-top: 4px; padding: 14px; border-left: 4px solid var(--amber); border-radius: 4px 10px 10px 4px; background: var(--amber-soft); }
+    .next p { margin-top: 4px; color: #68450e; }
+    .bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .list { margin: 8px 0 0; padding-left: 20px; }
+    .list li + li { margin-top: 7px; }
+    .note { border-left: 4px solid var(--blue); }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; padding-top: 2px; color: var(--muted); font-size: .82rem; }
+    code { color: var(--navy); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .9em; }
+    @media (max-width: 840px) {
+      .header, .layout, .bottom { grid-template-columns: 1fr; }
+      .status-block { min-width: 0; }
+      .kpis { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      main { width: min(100% - 20px, 1180px); margin-top: 10px; }
+      .header { padding: 19px; }
+      .card { padding: 15px; }
+      .table-card { padding: 4px 8px 8px; }
+      th, td { padding: 12px 8px; }
+    }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; }
+      .header, .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="header">
+      <div>
+        <p class="eyebrow">Rede Supermarket · Status report executivo</p>
+        <h1>SuperSync — Portal do Associado</h1>
+        <p class="muted" style="margin-top:10px">Posição consolidada em 24 de setembro de 2026 · revisão técnica <code>bba8f83</code></p>
+      </div>
+      <div class="status-block" aria-label="Situação executiva">
+        <div class="status">Atenção</div>
+        <p>Pronto para aprovação executiva. Não há impedimento funcional registrado.</p>
+      </div>
+    </header>
+
+    <div class="kpis" aria-label="Indicadores principais">
+      <article class="card">
+        <div class="kpi-label">Escopo planejado</div>
+        <div class="value green">6 de 6</div>
+        <p>Frentes validadas pela equipe antes do encerramento do cronograma.</p>
+      </article>
+      <article class="card">
+        <div class="kpi-label">Qualidade técnica</div>
+        <div class="value green">551 testes</div>
+        <p>Suíte aprovada e checagem do Django sem problemas identificados.</p>
+      </article>
+      <article class="card">
+        <div class="kpi-label">Pendência decisória</div>
+        <div class="value amber">1 aprovação</div>
+        <p>Apresentação e decisão de Marcelo Rebelo ainda precisam ser agendadas.</p>
+      </article>
+    </div>
+
+    <div class="layout">
+      <section aria-labelledby="funcionalidades">
+        <div class="section-head">
+          <h2 id="funcionalidades">Evolução das frentes planejadas</h2>
+          <span class="muted small">Validação consolidada: 24/09/2026</span>
+        </div>
+        <div class="card table-card table-wrap">
+          <table>
+            <thead><tr><th>Frente</th><th>Situação</th><th>Prevista</th><th>Validada</th></tr></thead>
+            <tbody>
+              <tr><td>Permissionamento</td><td><span class="pill ok">✓ Validado</span></td><td>21/09/2026</td><td>24/09/2026</td></tr>
+              <tr><td>Relatórios de ofensores</td><td><span class="pill ok">✓ Validado</span></td><td>02/10/2026</td><td>24/09/2026</td></tr>
+              <tr><td>Lista de contratos ativos</td><td><span class="pill ok">✓ Validado</span></td><td>05/10/2026</td><td>24/09/2026</td></tr>
+              <tr><td>Acompanhamento de grade</td><td><span class="pill ok">✓ Validado</span></td><td>08/10/2026</td><td>24/09/2026</td></tr>
+              <tr><td>Lojas</td><td><span class="pill ok">✓ Validado</span></td><td>11/10/2026</td><td>24/09/2026</td></tr>
+              <tr><td>Ruptura de promoções</td><td><span class="pill attention">◉ Validado pela equipe</span></td><td>14/10/2026</td><td>24/09/2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted small">As datas realizadas representam a validação consolidada. Ruptura de promoções foi confirmada pela equipe, mas ainda requer vínculo explícito com a evidência técnica correspondente.</p>
+      </section>
+
+      <aside aria-labelledby="fluxo">
+        <div class="card flow">
+          <h2 id="fluxo">Fluxo de conclusão</h2>
+          <div class="steps">
+            <div class="step"><div class="marker"><span class="dot">✓</span><span class="connector"></span></div><div><strong>Implementação</strong><span>Escopo planejado concluído.</span></div></div>
+            <div class="step"><div class="marker"><span class="dot">✓</span><span class="connector"></span></div><div><strong>Validação funcional</strong><span>Seis frentes consideradas aptas.</span></div></div>
+            <div class="step current"><div class="marker"><span class="dot">3</span><span class="connector"></span></div><div><strong>Apresentação executiva</strong><span>Fabrício Medeiros · a agendar.</span></div></div>
+            <div class="step future"><div class="marker"><span class="dot">4</span><span class="connector"></span></div><div><strong>Aprovação</strong><span>Decisão de Marcelo Rebelo.</span></div></div>
+            <div class="step future"><div class="marker"><span class="dot">5</span><span class="connector"></span></div><div><strong>Implantação</strong><span>Apresentar aos diretores e definir pontos focais.</span></div></div>
+            <div class="step future"><div class="marker"><span class="dot">6</span><span class="connector"></span></div><div><strong>Próximo ciclo</strong><span>Priorizar sugestões de melhoria.</span></div></div>
+          </div>
+          <div class="next"><strong>Próximo marco</strong><p>Apresentar o Portal do Associado e registrar aprovação ou condicionantes.</p></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="bottom">
+      <section class="card" aria-labelledby="implementacoes">
+        <h2 id="implementacoes">Implementações recentes</h2>
+        <ul class="list">
+          <li>Recuperação de senha, gestão de usuários e cerca de acesso.</li>
+          <li>Contratos burlados, busca por fornecedor, exportação e justificativas de cobrança.</li>
+          <li>Resumo de contratos, grades, fidelidade, aderência e ofensores.</li>
+          <li>Cadastro de lojas, mapa da rede, setores geográficos e isócronas.</li>
+        </ul>
+      </section>
+      <section class="card note" aria-labelledby="atencao">
+        <h2 id="atencao">Pontos de atenção</h2>
+        <ul class="list">
+          <li>Formalizar <code>bba8f83</code> ou revisão posterior como linha de base aprovada.</li>
+          <li>Reproduzir instalação, migrations e testes em ambiente limpo.</li>
+          <li>Atualizar README, configuração de exemplo e rastreabilidade entre requisito, teste e aceite.</li>
+          <li>Concluir o inventário e confirmar responsáveis funcionais por módulo.</li>
+        </ul>
+      </section>
+    </div>
+
+    <footer class="meta" aria-label="Metadados do relatório">
+      <span>Fonte: Escritório de Projetos SAERJ</span>
+      <span>Repositório de desenvolvimento: SuperSync</span>
+      <span>Atualização: 24/09/2026</span>
+    </footer>
+  </main>
+</body>
+</html>

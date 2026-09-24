@@ -19,6 +19,7 @@
 - [Histórico](historico.md)
 - [Comunicação](comunicacao.md)
 - [Relatório de status](relatorio-status.md)
+- [Status Report visual](status-report-visual/README.md)
 - [Dependências](dependencias.md)
 - [Camada de desenvolvimento](desenvolvimento.md)
 - [Validação de sprint](validacao-sprint.md)

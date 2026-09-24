@@ -1,6 +1,6 @@
 # Projeto: SuperSync — Intranet Rede Supermarket
 
-**Navegação:** [Portfólio](../../portfolio.md) · [Governança](governanca.md) · [Módulos](modulos.md) · [Desenvolvimento](desenvolvimento.md) · [Serviços compartilhados](servicos-compartilhados.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Reunião de 15/09/2026](reunioes/2026-09-15-alinhamento-marcelo.md) · [Cronograma da Central do Associado](cronogramas/central-do-associado.md)
+**Navegação:** [Portfólio](../../portfolio.md) · [Relatório de status — 24/09/2026](relatorio-status-2026-09-24.md) · [Abrir painel visual](status-visual/dist/index.html) · [Sobre o painel](status-visual/README.md) · [Governança](governanca.md) · [Módulos](modulos.md) · [Desenvolvimento](desenvolvimento.md) · [Serviços compartilhados](servicos-compartilhados.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Reunião de 15/09/2026](reunioes/2026-09-15-alinhamento-marcelo.md) · [Cronograma da Central do Associado](cronogramas/central-do-associado.md)
 
 ## 1. Identificação
 
@@ -10,20 +10,20 @@
 
 **Visibilidade:** restrita-saerj
 
-**Status geral:** 🔴 Intervenção  
+**Status geral:** 🟡 Atenção
 **Responsável:** Fabrício Medeiros  
 **Sponsor:** Diretoria da Rede Supermarket, representada por Marcelo Rebelo  
 **Fase:** Operação e evolução contínua  
 **Início:** A confirmar  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 16/09/2026
+**Última atualização:** 24/09/2026
 
 ### Fontes canônicas relacionadas
 
 **Repositório de documentação:** A confirmar  
 **Repositório de desenvolvimento:** https://github.com/Liencourt/supersync.git  
 **Caminho local observado:** `C:\Users\fabri\Projetos\supersync`  
-**Revisão observada:** branch `master`, commit `8c0478c`
+**Revisão observada:** branch `master`, commit `bba8f83`
 
 ---
 
@@ -73,21 +73,21 @@ A confirmar durante a consolidação da linha de base gerencial, incluindo benef
 
 | Dimensão | Status | Resumo objetivo | Próxima ação |
 |---|---|---|---|
-| Prazo | 🟡 Atenção | A Central do Associado avançou além da sequência prevista, com três fases implementadas entre 15 e 16/09; o avanço ainda precisa ser conciliado com o cronograma gerencial e a homologação. | Validar com a equipe o progresso real de cada frente e registrar aceite ou pendências. |
-| Escopo | 🟡 Atenção | A `master` já contém portal e permissionamento, gestão de usuários, lojas e auditoria de contratos; grades, contratos ativos e ruptura de promoções ainda não aparecem concluídos como frentes próprias. | Atualizar a linha de base da Central e manter rastreabilidade entre frente, commit, teste e aceite. |
-| Qualidade | 🟡 Atenção | Foram identificados 106 testes automatizados da Central do Associado, mas não há evidência consolidada de execução e homologação nesta inspeção. | Executar a suíte na revisão `8c0478c` e registrar resultado e evidências de homologação. |
+| Prazo | 🟢 Adequado | Todas as funcionalidades planejadas foram concluídas e validadas antes do encerramento do cronograma consolidado. | Agendar a apresentação executiva e registrar a decisão. |
+| Escopo | 🟢 Adequado | As seis frentes planejadas foram validadas e estão funcionando. Sugestões de melhoria serão tratadas em ciclo posterior. | Consolidar o backlog de melhorias sem reabrir o escopo validado. |
+| Qualidade | 🟢 Adequado | A validação funcional foi concluída com resultado satisfatório; a suíte da revisão `bba8f83` também executou 551 testes com sucesso. | Preservar as evidências e anexar o aceite executivo após a apresentação. |
 | Recursos | 🟡 Atenção | Papéis centrais foram definidos; capacidade e responsáveis por módulo ainda precisam ser confirmados. | Mapear donos funcionais e capacidade por módulo. |
-| Impedimentos & Riscos | 🔴 Intervenção | Há artefato de credencial versionado e documentação que relata práticas inseguras; a validade e a exposição precisam ser avaliadas. | Fazer triagem de segredos, revogar se necessário e retirar artefatos do histórico conforme plano aprovado. |
-| Resultado | 🟡 Atenção | O uso em produção foi confirmado, mas benefícios e indicadores ainda não estão registrados por módulo. | Fornecer evidências do Acordos Comerciais à atividade transversal de mensuração de ganhos e valoração da TI. |
+| Impedimentos & Riscos | 🟢 Adequado | Não há impedimento funcional registrado para a apresentação e aprovação. A credencial GCP foi desconsiderada como risco deste status por direcionamento gerencial. | Monitorar apenas novos impedimentos que afetem aprovação ou operação. |
+| Resultado | 🟡 Atenção | O escopo planejado está validado; falta a aprovação de Marcelo Rebelo para concluir o marco executivo. | Apresentar as implementações e formalizar aprovação ou condicionantes. |
 
 ---
 
 ## 5. Próximo marco
 
-**Marco:** Validar a primeira entrega da Central do Associado e reconciliar código, cronograma e homologação
-**Data:** 21/09/2026
-**Condição de conclusão:** fases implementadas classificadas por frente gerencial, suíte executada na revisão `8c0478c`, responsáveis confirmados e aceite ou pendências do módulo de permissionamento registrados.
+**Marco:** Apresentar as implementações do Portal do Associado para aprovação de Marcelo Rebelo
+**Data:** A agendar
+**Condição de conclusão:** funcionalidades apresentadas, decisão executiva registrada e eventuais condicionantes encaminhados. Após a aprovação, apresentar o portal aos diretores e definir os responsáveis em cada associado; sugestões de melhoria seguem para o ciclo posterior.
 
 ## 6. Observação do Escritório de Projetos
 
-O SuperSync é o projeto piloto para integrar gestão, documentação e desenvolvimento. A Central do Associado apresenta implementação avançada, mas o estado gerencial permanece em intervenção até que segurança, reprodução, testes executados e homologação estejam formalmente evidenciados.
+O Portal do Associado concluiu a implementação e a validação funcional do escopo planejado. A revisão `bba8f83` também passou em 551 testes automatizados. O status permanece em atenção até a aprovação de Marcelo Rebelo. Na sequência, o portal será apresentado aos diretores e serão definidos os responsáveis em cada associado; melhorias sugeridas serão tratadas em ciclo posterior.

@@ -10,9 +10,11 @@
 
 **Data de entrada:** 22/09/2026
 
-**Última atualização:** 22/09/2026
+**Última atualização:** 24/09/2026
 
 **Divulgação no Trello:** [SAERJ-IDEIA-001 — Base Centralizada de Histórico Funcional](https://trello.com/c/f3leMAGM)
+
+**Resumo executivo:** [Documento Word](artefatos/resumo-executivo-base-centralizada-historico-funcional.docx)
 
 > Esta iniciativa está no Comitê de Ideação. Não é projeto ativo, não possui autorização de execução e não integra a visão executiva do portfólio SAERJ.
 

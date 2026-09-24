@@ -45,6 +45,19 @@ As responsabilidades acima se aplicam às seis frentes do cronograma.
 | 11/10/2026 | Conclusão planejada da frente de lojas. |
 | 14/10/2026 | Conclusão planejada da ruptura de promoções e do cronograma consolidado. |
 
+## Conciliação com a execução — 24/09/2026
+
+| Frente | Evidência técnica | Situação gerencial |
+|---|---|---|
+| Módulo de permissionamento | Portal, cerca de acesso, gestão de usuários e recuperação de senha presentes em `bba8f83` | Validado — OK |
+| Relatórios de ofensores | Auditoria de contratos burlados, busca por fornecedor, exportação e ciclo de justificativa presentes | Validado — OK |
+| Lista de contratos ativos | Resumo de contratos com lista, detalhe, paginação e exportação presente | Validado — OK |
+| Acompanhamento de grade | Lista, detalhe, fidelidade/aderência, ofensores e exportação presentes | Validado — OK |
+| Lojas | Cadastro, confirmação, mapa da rede, setores e isócronas presentes | Validado — OK |
+| Ruptura de promoções | Funcionalidade incluída no ciclo de validação informado pela equipe | Validado — OK |
+
+A suíte completa da revisão executou 551 testes com sucesso e todas as funcionalidades planejadas foram validadas pela equipe. A próxima etapa é a apresentação das implementações para aprovação de Marcelo Rebelo. Sugestões de melhoria serão registradas e implementadas no ciclo seguinte.
+
 ## Limites do cronograma gerencial
 
 - Os percentuais de progresso do XMind não foram usados como confirmação de execução; precisam ser validados com a equipe.

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Status Report — [Nome do Projeto]</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: light-dark(#f5f7fb, #111827);
+      --surface: light-dark(#ffffff, #1f2937);
+      --text: light-dark(#172033, #f3f4f6);
+      --muted: light-dark(#667085, #aeb7c6);
+      --line: light-dark(#e4e8f0, #364152);
+      --green: light-dark(#16794b, #55d69e);
+      --amber: light-dark(#a15c00, #f6b94c);
+      --soft-green: light-dark(#eaf8f1, #173d31);
+      --soft-amber: light-dark(#fff4dd, #47351d);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.45; }
+    main { width: min(1120px, calc(100% - 32px)); margin: 32px auto; display: grid; gap: 20px; }
+    header { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+    h1, h2, p { margin: 0; }
+    h1 { font-size: clamp(1.6rem, 3vw, 2.25rem); }
+    h2 { font-size: 1.05rem; }
+    .muted { color: var(--muted); }
+    .status { display: inline-flex; align-items: center; gap: 8px; color: var(--amber); font-weight: 650; }
+    .status::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+    .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+    .value { font-size: 1.55rem; font-weight: 700; margin: 4px 0; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, .8fr); gap: 24px; align-items: start; }
+    section, aside { display: grid; gap: 12px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    th { color: var(--muted); font-size: .86rem; font-weight: 650; }
+    td:nth-child(3), td:nth-child(4), th:nth-child(3), th:nth-child(4) { white-space: nowrap; }
+    .ok { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-weight: 650; }
+    .flow { display: grid; }
+    .step { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; min-height: 60px; }
+    .marker { display: grid; justify-items: center; grid-template-rows: 20px 1fr; }
+    .dot { width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; background: var(--soft-green); color: var(--green); font-size: .72rem; font-weight: 700; }
+    .current .dot { background: var(--soft-amber); color: var(--amber); }
+    .future .dot { background: var(--line); color: var(--muted); }
+    .connector { width: 2px; background: var(--line); min-height: 30px; }
+    .step:last-child .connector { visibility: hidden; }
+    .step strong, .step span { display: block; }
+    .step span { color: var(--muted); margin-top: 3px; }
+    .next { border-left: 3px solid var(--amber); padding-left: 12px; }
+    @media (max-width: 760px) { .kpis, .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div><h1>[Nome do Projeto]</h1><p class="muted">Status report executivo · [DD/MM/AAAA]</p></div>
+      <div class="status">[Situação executiva]</div>
+    </header>
+    <div class="kpis" aria-label="Indicadores principais">
+      <article class="card"><div class="muted">Escopo planejado</div><div class="value">[X/Y]</div><p>[funcionalidades concluídas ou validadas]</p></article>
+      <article class="card"><div class="muted">Qualidade técnica</div><div class="value">[resultado]</div><p>[evidência principal]</p></article>
+      <article class="card"><div class="muted">Pendência decisória</div><div class="value">[quantidade]</div><p>[aprovação ou decisão necessária]</p></article>
+    </div>
+    <div class="layout">
+      <section aria-labelledby="funcionalidades">
+        <h2 id="funcionalidades">Funcionalidades</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Funcionalidade</th><th>Status</th><th>Data prevista</th><th>Data realizada</th></tr></thead>
+            <tbody>
+              <tr><td>[Funcionalidade 1]</td><td><span class="ok">✓ [Status]</span></td><td>[DD/MM/AAAA]</td><td>[DD/MM/AAAA ou —]</td></tr>
+              <tr><td>[Funcionalidade 2]</td><td><span class="ok">✓ [Status]</span></td><td>[DD/MM/AAAA]</td><td>[DD/MM/AAAA ou —]</td></tr>
+              <tr><td>[Funcionalidade 3]</td><td><span class="ok">✓ [Status]</span></td><td>[DD/MM/AAAA]</td><td>[DD/MM/AAAA ou —]</td></tr>
+              <tr><td>[Funcionalidade 4]</td><td><span class="ok">✓ [Status]</span></td><td>[DD/MM/AAAA]</td><td>[DD/MM/AAAA ou —]</td></tr>
+              <tr><td>[Funcionalidade 5]</td><td><span class="ok">✓ [Status]</span></td><td>[DD/MM/AAAA]</td><td>[DD/MM/AAAA ou —]</td></tr>
+              <tr><td>[Funcionalidade 6]</td><td><span class="ok">✓ [Status]</span></td><td>[DD/MM/AAAA]</td><td>[DD/MM/AAAA ou —]</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">Use a data de validação ou aceite como data realizada. Melhorias futuras devem permanecer separadas do escopo em aprovação.</p>
+      </section>
+      <aside aria-labelledby="fluxo">
+        <h2 id="fluxo">Fluxo de conclusão</h2>
+        <div class="flow">
+          <div class="step"><div class="marker"><span class="dot">✓</span><span class="connector"></span></div><div><strong>Implementação</strong><span>[Situação]</span></div></div>
+          <div class="step"><div class="marker"><span class="dot">✓</span><span class="connector"></span></div><div><strong>Validação funcional</strong><span>[Situação]</span></div></div>
+          <div class="step current"><div class="marker"><span class="dot">3</span><span class="connector"></span></div><div><strong>Apresentação executiva</strong><span>[Responsável e data]</span></div></div>
+          <div class="step future"><div class="marker"><span class="dot">4</span><span class="connector"></span></div><div><strong>Aprovação</strong><span>[Decisor]</span></div></div>
+          <div class="step future"><div class="marker"><span class="dot">5</span><span class="connector"></span></div><div><strong>Implantação e responsáveis</strong><span>[Próxima ação]</span></div></div>
+          <div class="step future"><div class="marker"><span class="dot">6</span><span class="connector"></span></div><div><strong>Próximo ciclo</strong><span>[Melhorias priorizadas]</span></div></div>
+        </div>
+        <div class="next"><strong>Próximo marco</strong><p>[Resultado verificável e data]</p></div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
