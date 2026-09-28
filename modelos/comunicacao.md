@@ -9,9 +9,9 @@
 
 ## Matriz
 
-| ID | Comunicação | Objetivo | Destinatários | Canal | Frequência / gatilho | Responsável | Aprovação | Evidência |
-|---|---|---|---|---|---|---|---|---|
-| COM-001 | Status executivo | Informar saúde, avanços, riscos, decisões requeridas e próximos passos. | [Papéis ou grupos] | E-mail | [Periodicidade ou evento] | [Pessoa] | [Pessoa ou Não requerida] | [Referência do envio] |
+| ID      | Comunicação      | Objetivo                                                                | Destinatários      | Canal  | Frequência / gatilho      | Responsável | Aprovação                 | Evidência             |
+| ------- | ---------------- | ----------------------------------------------------------------------- | ------------------ | ------ | ------------------------- | ----------- | ------------------------- | --------------------- |
+| COM-001 | Status executivo | Informar saúde, avanços, riscos, decisões requeridas e próximos passos. | [Papéis ou grupos] | E-mail | [Periodicidade ou evento] | [Pessoa]    | [Pessoa ou Não requerida] | [Referência do envio] |
 
 ## Conteúdo mínimo do status
 

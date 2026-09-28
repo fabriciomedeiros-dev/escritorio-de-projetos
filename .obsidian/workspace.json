@@ -11,14 +11,17 @@
             "id": "e7d8abcab6d6e8b1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "conselho/protocolo.md",
-                "mode": "preview",
-                "source": false
+                "file": "Escritório de Projetos/Sem título.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
               },
-              "icon": "lucide-file",
-              "title": "protocolo"
+              "icon": "lucide-layout-dashboard",
+              "title": "Sem título"
             }
           }
         ]
@@ -41,7 +44,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Explorador de arquivos"
@@ -185,6 +190,9 @@
   },
   "active": "e7d8abcab6d6e8b1",
   "lastOpenFiles": [
+    "Escritório de Projetos/Bem-vindo.md",
+    "CONTEXTO.md",
+    "conselho/protocolo.md",
     "conselho/regras.md",
     "conselho/papeis.md",
     "README.md",
@@ -199,7 +207,6 @@
     "modelos/dependencias.md",
     "modelos/decisoes.md",
     "modelos/decisao-financeira.md",
-    "modelos/comunicacao.md",
-    "conselho/protocolo.md"
+    "modelos/comunicacao.md"
   ]
 }
