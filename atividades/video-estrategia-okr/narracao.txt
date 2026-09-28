@@ -1,0 +1,17 @@
+Quando uma nova demanda chega à área de tecnologia, a pergunta principal não é apenas o que vamos construir. A pergunta é: qual objetivo estratégico essa iniciativa ajuda a alcançar?
+
+É aí que entram os OKRs. O objetivo descreve o resultado amplo que queremos para a empresa. Os resultados-chave, ou KRs, dizem quais mudanças concretas precisamos alcançar. Os indicadores mostram se estamos avançando. E as ações são os projetos e iniciativas que podem contribuir para esses resultados.
+
+Por isso, um projeto não deve entrar no roadmap só porque tem uma solução interessante ou porque a tecnologia já está disponível. Ele precisa estar ligado a um objetivo e demonstrar como pretende mover pelo menos um resultado-chave.
+
+Pense no objetivo de melhorar o cumprimento dos acordos com fornecedores. Um KR pode ser aumentar a visibilidade das compras em relação ao que foi negociado. Indicadores possíveis são a proporção do volume comprado frente ao acordado, o tempo para identificar desvios e a precisão no cálculo das comissões. Um projeto de visibilidade de contratos pode ser uma ação candidata. Ele será priorizado se sua contribuição estratégica, evidência, custo, prazo e capacidade disponível justificarem a entrada no roadmap.
+
+Valorar uma entrega de TI é explicar esse caminho entre o projeto e o resultado. Nem todo valor aparece como receita nova ou redução imediata de despesas. Também podemos medir eficiência: por exemplo, reduzir o tempo de atendimento pela metade; melhorar a acuracidade dos resultados; diminuir erros e retrabalho; liberar capacidade da equipe; reduzir riscos; ou oferecer um serviço melhor a associados e fornecedores.
+
+Esses benefícios precisam de indicadores, linha de base e período de comparação. Se o tempo de atendimento era dez minutos e passa a cinco, temos uma redução de cinquenta por cento. Se a qualidade melhora, precisamos definir como medir erros, correções ou acertos. A redução de pessoas não deve ser presumida: só entra como benefício se for resultado confirmado e validado.
+
+Também comparamos as alternativas de execução. Suponha uma solução externa com dez mil reais de implantação e oitocentos reais mensais. No primeiro ano, são dezenove mil e seiscentos reais, antes de outros custos. O desenvolvimento interno pode evitar o desembolso ao fornecedor, mas não é gratuito: exige horas da equipe, infraestrutura, suporte e manutenção, além de ocupar capacidade que poderia atender outra prioridade. A comparação deve usar o mesmo escopo e horizonte.
+
+No momento da decisão, a gestão avalia alinhamento ao objetivo, contribuição aos KRs, benefícios econômicos e operacionais, custo total, riscos, dependências e capacidade. O projeto pode ser priorizado, testado em piloto, adiado até haver dados ou não entrar no roadmap.
+
+Depois da entrega, medimos novamente. Registramos o que foi confirmado, o que é estimativa e o que ainda é hipótese. Assim, os OKRs orientam as escolhas e a valoração mostra, com evidências, se os projetos de tecnologia estão produzindo o valor que a empresa precisa.

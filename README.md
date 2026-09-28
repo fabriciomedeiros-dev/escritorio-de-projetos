@@ -2,7 +2,7 @@
 
 Base operacional de ideação, estruturação e gestão de portfólios e projetos assistida por IA.
 
-**Navegação:** [Portfólios](portfolios/README.md) · [SAERJ](portfolios/saerj/portfolio.md) · [Pessoal](portfolios/pessoal/portfolio.md) · [Tarefas do Escritório](tarefas-escritorio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Divulgação no Trello](atividades/divulgacao-andamento-trello.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
+**Navegação:** [Portfólios](portfolios/README.md) · [SAERJ](portfolios/saerj/portfolio.md) · [Pessoal](portfolios/pessoal/portfolio.md) · [Tarefas do Escritório](tarefas-escritorio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [OKRs e valoração para decisões de roadmap](atividades/okr-e-valorizacao-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Divulgação no Trello](atividades/divulgacao-andamento-trello.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
 
 ## Princípios
 
@@ -43,7 +43,7 @@ O código não altera automaticamente o escopo aprovado. Diferenças entre o pla
 
 ## Mensuração de valor
 
-O Escritório mantém uma linha transversal de mensuração de valor aplicável a cada nova proposta e, progressivamente, aos projetos existentes. A análise pode combinar custo interno, referência de mercado, custo evitado, ganhos financeiro e operacional, produtividade ou capacidade liberada, risco mitigado e públicos beneficiados. Toda medida deve indicar sua evidência e ser classificada como `Confirmado`, `Estimado` ou `Hipótese`. Use `modelos/mensuracao-valor.md` e acompanhe a implantação em `tarefas-escritorio.md`.
+O Escritório mantém uma linha transversal de mensuração de valor aplicável a cada nova proposta e, progressivamente, aos projetos existentes. Os OKRs definem os resultados estratégicos e orientam a decisão de entrada no roadmap; cada projeto candidato deve estar ligado a um objetivo e explicar como pretende mover um KR. A valoração compara alternativas e registra benefícios econômicos e não econômicos, custo total, evidências e incertezas. Toda medida deve indicar sua fonte e ser classificada como `Confirmado`, `Estimado` ou `Hipótese`. Consulte [OKRs e valoração para decisões de roadmap](atividades/okr-e-valorizacao-ti.md), use `modelos/mensuracao-valor.md` e acompanhe a implantação em `tarefas-escritorio.md`.
 
 Consulte o [Conselho](conselho/README.md), seus [papéis](conselho/papeis.md), [protocolo](conselho/protocolo.md) e [regras](conselho/regras.md) antes de operar um projeto.
 
