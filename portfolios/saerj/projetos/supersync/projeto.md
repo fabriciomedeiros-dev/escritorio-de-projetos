@@ -16,7 +16,7 @@
 **Fase:** Operação e evolução contínua  
 **Início:** A confirmar  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 24/09/2026
+**Última atualização:** 29/09/2026
 
 ### Fontes canônicas relacionadas
 
@@ -79,6 +79,14 @@ A confirmar durante a consolidação da linha de base gerencial, incluindo benef
 | Recursos | 🟡 Atenção | Papéis centrais foram definidos; capacidade e responsáveis por módulo ainda precisam ser confirmados. | Mapear donos funcionais e capacidade por módulo. |
 | Impedimentos & Riscos | 🟢 Adequado | Não há impedimento funcional registrado para a apresentação e aprovação. A credencial GCP foi desconsiderada como risco deste status por direcionamento gerencial. | Monitorar apenas novos impedimentos que afetem aprovação ou operação. |
 | Resultado | 🟡 Atenção | O escopo planejado está validado; falta a aprovação de Marcelo Rebelo para concluir o marco executivo. | Apresentar as implementações e formalizar aprovação ou condicionantes. |
+
+### Acordos Comerciais — alinhamento de 29/09/2026
+
+- crescimento de vendas permanece em análise por Filipe Fachetti, com prazo em 06/10/2026;
+- Filipe deve entregar o relatório de triangulação para evolução do processo e início da homologação; o prazo informado foi 01/09/2026 e precisa ser confirmado por ser anterior à reunião;
+- o processo de devolução de mercadorias pelo fornecedor permanece sem responsável e prazo definidos;
+- a análise gerencial dos dados da Apuração de Contratos foi indicada para novembro ou dezembro de 2026, ainda sem mês, responsável e critérios de aceite confirmados;
+- as necessidades de auditoria da DHS relacionadas ao Observador passam a ser tratadas no projeto independente [Desligamento do Observador](../desligamento-observador/projeto.md).
 
 ---
 
