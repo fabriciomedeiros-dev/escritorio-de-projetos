@@ -1,6 +1,6 @@
 # Projeto: CRM Rock (antiga BNEX)
 
-**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Reunião — integração no Torre](reunioes/2026-09-21-configuracao-integracao-torre.md) · [Reunião — reenvio e URL de produção](reunioes/2026-09-22-reenvio-vendas-url-producao.md) · [Demanda de monitoramento](demandas/2026-09-14-monitoramento-integridade-vendas.md) · [Divergência de vendas — chamado 202578](demandas/2026-09-18-divergencia-vendas-consinco-crm.md) · [Referências técnicas](referencias/README.md)
+**Navegação:** [Portfólio](../../portfolio.md) · [Decisões](decisoes.md) · [Tarefas](tarefas.md) · [Histórico](historico.md) · [Reunião — integração no Torre](reunioes/2026-09-21-configuracao-integracao-torre.md) · [Reunião — reenvio e URL de produção](reunioes/2026-09-22-reenvio-vendas-url-producao.md) · [Demanda de monitoramento](demandas/2026-09-14-monitoramento-integridade-vendas.md) · [Divergência de vendas — chamado 202578](demandas/2026-09-18-divergencia-vendas-consinco-crm.md) · [Regra de incentivo no PDV](demandas/2026-10-01-regra-incentivo-erp-pdv.md) · [Referências técnicas](referencias/README.md)
 
 ## 1. Identificação
 
@@ -16,7 +16,7 @@
 **Fase:** Operação e evolução contínua  
 **Implantação original:** 2021  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 22/09/2026
+**Última atualização:** 01/10/2026
 
 ### Fontes canônicas relacionadas
 
@@ -44,7 +44,7 @@ CRM operando com integração de vendas confiável e monitorada, infraestrutura 
 
 | Frente | Situação atual | Resultado pretendido | Próximo ponto de controle |
 |---|---|---|---|
-| Novo integrador de vendas via API da Rock | Um PDV foi configurado com sucesso no Torre e está identificando e enviando vendas ao CRM. O teste de preço 2 está pendente do levantamento da regra de incentivo do Cruzeiro. Para 22/09/2026 às 15h30, foi agendada reunião com CRM/Rock e Cloves, da TI do Cruzeiro, para configurar o reenvio de vendas e alterar a URL para produção. | Substituir a integração desenvolvida pela Consinco pela integração mantida pela Rock, com integridade comprovada dos dados | Executar e validar o reenvio das vendas e a troca da URL; levantar a regra de incentivo do Cruzeiro, orientar o Torre e testar o preço 2 |
+| Novo integrador de vendas via API da Rock | Um PDV foi configurado com sucesso no Torre e está identificando e enviando vendas ao CRM. O teste de Preço 2 continua pendente. Em 01/10/2026 foi consolidada a documentação para solicitar à TOTVS o procedimento completo de cadastro, carga e diagnóstico das regras de incentivo do ERP no PDV. | Substituir a integração desenvolvida pela Consinco pela integração mantida pela Rock, com integridade comprovada dos dados | Preencher os dados do ambiente, abrir o chamado na TOTVS, validar a regra de incentivo em homologação e registrar o resultado na demanda CRM-008 |
 | Migração do servidor do CRM para SaaS da Rock | Em análise, elaboração de contrato e avaliação de viabilidade técnica | Definir se a migração é técnica, operacional e financeiramente viável | Concluir análise comparativa, riscos, contrato e recomendação para decisão |
 | Carteira digital no aplicativo do CRM | Implantação prevista; estágio a confirmar | Disponibilizar carteira digital no aplicativo | Definir requisitos, dependências, responsável, prazo e critérios de aceite |
 | Monitoramento da integração de vendas | Melhoria solicitada em 14/09/2026 | Identificar lojas cujas vendas não foram registradas corretamente no CRM | Confirmar regra atual, fonte do alerta e conteúdo do novo e-mail |
@@ -89,18 +89,18 @@ CRM operando com integração de vendas confiável e monitorada, infraestrutura 
 |---|---|---|---|
 | Prazo | 🟡 Atenção | Não há cronograma consolidado para as quatro frentes. | Levantar marcos e prazos por frente. |
 | Escopo | 🟡 Atenção | Frentes principais identificadas, ainda sem requisitos e limites completos. | Refinar e priorizar cada frente. |
-| Qualidade | 🟡 Atenção | O PDV configurado no Torre já envia vendas ao CRM, mas o preço 2 não foi testado. O chamado `202578` continua exigindo reenvio e reconciliação das vendas afetadas. | Levantar a regra de incentivo do Cruzeiro, testar o preço 2, executar o reenvio e reconciliar os dados. |
+| Qualidade | 🟡 Atenção | O PDV configurado no Torre já envia vendas ao CRM, mas o Preço 2 não foi validado. A documentação pública da TOTVS não cobre todo o caminho da regra entre ERP e PDV. O chamado `202578` continua exigindo reenvio e reconciliação das vendas afetadas. | Abrir o chamado técnico da demanda CRM-008, testar o Preço 2 conforme a orientação recebida, executar o reenvio e reconciliar os dados. |
 | Recursos | 🟡 Atenção | Responsáveis da Rede, Rock e Consinco não estão consolidados. | Montar matriz de responsabilidades. |
-| Impedimentos & Riscos | 🟡 Atenção | A URL de produção ainda não foi validada, o reenvio das vendas está pendente e o cenário de preço 2 depende da regra de incentivo usada pelo Cruzeiro. | Tratar URL e reenvio na reunião de 22/09 às 15h30 e concluir o levantamento necessário ao teste do preço 2. |
+| Impedimentos & Riscos | 🟡 Atenção | A URL de produção e o reenvio de vendas ainda precisam de resultado documentado. O cenário de Preço 2 depende da configuração e da carga da regra de incentivo no Consinco, sem procedimento completo disponível na documentação pública. | Confirmar o resultado das ações de 22/09 e acompanhar a TOTVS pela demanda CRM-008 até a homologação do Preço 2. |
 | Resultado | 🟡 Atenção | O CRM está implantado, mas não há indicadores consolidados das evoluções. | Definir indicadores por frente. |
 
 ## 6. Próximo marco
 
-**Marco:** Configurar o reenvio de vendas e alterar a integração para a URL de produção
+**Marco:** Obter a orientação da TOTVS e homologar a regra de incentivo do ERP no PDV
 
-**Data:** 22/09/2026, às 15h30
+**Data:** A confirmar após a abertura do chamado
 
-**Condição de conclusão:** PDV configurado para reenvio, vendas reprocessadas ou plano formalizado, URL de produção aplicada e transação validada no CRM.
+**Condição de conclusão:** procedimento registrado, regra localizada na carga e no PDV, cliente elegível identificado pelo CRM ROCK, Preço 2 aplicado e evidências preservadas na demanda CRM-008.
 
 ## 7. Observação do Escritório de Projetos
 
