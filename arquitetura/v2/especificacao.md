@@ -10,7 +10,7 @@ Tipos principais: ideia, solicitação, projeto e tarefa. Diretoria é origem, n
 
 | Componente | Responsabilidade |
 |---|---|
-| Interface Codex | Receber texto e artefatos; apresentar resumo, consultas e aprovações |
+| Interface substituível | Receber texto e artefatos; apresentar resumo, consultas e aprovações; Codex inicialmente |
 | Agente gestor único | Interpretar pedidos, propor classificação e coordenar operações autorizadas |
 | Operações verificáveis | Persistir, verificar, consultar, aprovar, vincular fontes e calcular capacidade |
 | Fonte operacional única | Estado, responsáveis, prazos, dependências, esforço e histórico |
@@ -19,6 +19,16 @@ Tipos principais: ideia, solicitação, projeto e tarefa. Diretoria é origem, n
 | Visões e relatórios | Status e planejamento derivados, com fontes e data de atualização |
 
 O agente não usa a memória da conversa como fonte oficial. Regras de integridade e gravação devem ser verificadas pelas operações de armazenamento, não apenas por instruções ao modelo.
+
+## Independência de agente e interface
+
+Requisito aprovado: Codex é a interface inicial, substituível por Claude Code ou outro agente. Dados, documentação, identidades, aprovações, regras de negócio e operações pertencem ao Escritório e não ao fornecedor do agente.
+
+O núcleo expõe um contrato versionado de operações com entradas e resultados estruturados: portfólio, identidade verificada quando aplicável, ID da operação, versão esperada do registro, conteúdo e referências de evidência; resultados incluem IDs persistidos, verificação, lacunas, conflitos, erros e estado de proteção. A implementação e o transporte (CLI, API ou MCP) serão definidos posteriormente; o contrato não depende de sintaxe de chat, skills ou IDs de sessão de um produto.
+
+Adaptadores traduzem as capacidades de cada cliente para esse contrato. Instruções e modelos portáveis definem o comportamento comum; configurações específicas de cada ferramenta apenas os referenciam. Permissões, aprovações, isolamento, idempotência e critérios de conclusão são aplicados pelo núcleo operacional, independentemente do modelo utilizado.
+
+Trocar de agente não exige migrar os registros nem manter o histórico do chat anterior. O novo cliente consulta a mesma fonte, recupera pendências e originais e continua as operações autorizadas. Identificadores de chats são metadados opcionais de origem, nunca chaves canônicas ou prova de autorização. Funcionalidades de interface indisponíveis devem ter alternativa explícita, como aprovação textual registrada e consulta por links, sem reduzir as verificações.
 
 ## Captura e aprovação
 

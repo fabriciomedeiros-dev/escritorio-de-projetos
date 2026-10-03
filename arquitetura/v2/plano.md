@@ -14,15 +14,15 @@
 
 ## Etapa 3 — escolha e migração
 
-Avaliar fonte própria, Trello e Notion com documentação oficial atual e prova prática, sem assumir capacidade de anexos, API, histórico ou exportação. Comparar custo, operação, acesso pelo Codex, portfólios, autoria, aprovação por versão, dependências, concorrência, exportação, cópia independente e restauração. Uma ferramenta pode ser interface sem ser a fonte oficial.
+Avaliar fonte própria, Trello e Notion com documentação oficial atual e prova prática, sem assumir capacidade de anexos, API, histórico ou exportação. Comparar custo, operação, acesso por clientes substituíveis (Codex inicialmente), portfólios, autoria, aprovação por versão, dependências, concorrência, exportação, cópia independente e restauração. Uma ferramenta pode ser interface sem ser a fonte oficial.
 
-Critérios eliminatórios: recuperação completa com arquivos e vínculos; identidade estável; isolamento; histórico; consulta e atualização verificáveis; ausência de fontes oficiais concorrentes. Registrar lacunas e compensações necessárias. Escolher somente depois da comparação.
+Critérios eliminatórios: independência de fornecedor do agente e acesso por contrato portável; recuperação completa com arquivos e vínculos; identidade estável; isolamento; histórico; consulta e atualização verificáveis; ausência de fontes oficiais concorrentes. Registrar lacunas e compensações necessárias. Escolher somente depois da comparação.
 
 Inventariar registros existentes, preservar caminhos/IDs e originais, mapear campos e conciliar divergências com fontes. Fazer ensaio de migração e restauração antes do corte. Declarar por conjunto de dados qual fonte passa a valer e quando; preservar versão anterior e plano de reversão. Não migrar dados reais silenciosamente nem transformar metas antigas em fatos atuais.
 
 ## Etapa 4 — fluxo mínimo
 
-Implementar operações de captura idempotente, verificação, consulta por ID/assunto/origem/período/status, atualização com evidência, registro de bloqueio e aprovação de reunião por versão. Depois configurar instruções/skills do gestor e os resumos de entrada. Cada operação recebe portfólio explícito. Primeiro uso somente por Fabrício; nenhum menu pode anunciar função ainda indisponível.
+Implementar operações de captura idempotente, verificação, consulta por ID/assunto/origem/período/status, atualização com evidência, registro de bloqueio e aprovação de reunião por versão. Definir contrato versionado de operações e instruções portáveis do gestor; depois configurar o adaptador inicial do Codex e os resumos de entrada. Cada operação recebe portfólio explícito. Primeiro uso somente por Fabrício; nenhum menu pode anunciar função ainda indisponível.
 
 ## Critérios de aceitação do piloto
 
@@ -35,6 +35,7 @@ Implementar operações de captura idempotente, verificação, consulta por ID/a
 | Entrega de código dependente de API | Avanço parcial visível; tarefa total pendente; motivo e próxima ação recuperáveis |
 | Relatos conflitantes | Preservar autores/datas, sinalizar conflito e não concluir por recência |
 | Falha de gravação/anexo e reenvio | Não confirmar íntegro; retomar sem duplicar efeitos; mostrar pendência |
+| Troca de agente | Cliente alternativo ou adaptador de referência recupera IDs, documentos, pendências e aprovações sem importar chats; mesmas regras e permissões, sem duplicar efeitos |
 | Novo chat | Recuperar registros e fontes sem depender do chat anterior |
 | Restauração independente | Reconstruir registros, originais, aprovações, relações e histórico; conferir manifesto e checksums |
 | Consulta de portfólio | Nenhum conteúdo de outro domínio; visão conjunta somente por pedido explícito |

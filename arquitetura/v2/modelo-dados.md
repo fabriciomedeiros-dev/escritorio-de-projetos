@@ -1,6 +1,6 @@
 # Modelo lógico de dados — versão 2
 
-Modelo independente de tecnologia. Campos obrigatórios para acompanhamento podem estar ausentes na captura, mas devem gerar lacunas explícitas. Nunca preencher responsável, prazo ou esforço fictício.
+Modelo independente de tecnologia, agente e interface. IDs de chats ou sessões de fornecedores são somente metadados opcionais; identidades, aprovações e IDs operacionais pertencem ao Escritório. Campos obrigatórios para acompanhamento podem estar ausentes na captura, mas devem gerar lacunas explícitas. Nunca preencher responsável, prazo ou esforço fictício.
 
 ## Convenções comuns
 

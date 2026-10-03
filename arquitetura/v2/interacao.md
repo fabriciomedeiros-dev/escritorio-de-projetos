@@ -2,13 +2,19 @@
 
 Comportamento proposto; nenhuma skill, serviço ou interface nova está implantada por este documento.
 
-## Conversas no Codex
+## Conversas na interface inicial
 
 Um chat de rotina por portfólio recebe solicitações pontuais e atualizações. Chats dedicados servem aos projetos ativos, ideias e análises extensas. Uma solicitação não exige um novo chat; seu identificador é independente da conversa. Abrir um chat específico quando solicitado pelo usuário, sem depender dele para preservar memória.
 
 Ao receber oi, identificar o portfólio e consultar registros antes de mostrar um resumo curto: entregas vencidas, bloqueios, ausência de prazo, aprovações pendentes e riscos. Oferecer registrar demanda, consultar andamento, planejar semana, revisar reunião, gerar relatório e avaliar ideia. Não inventar contagens nem consultar outro domínio para preencher o resumo. Pedidos diretos dispensam menu.
 
 Respostas iniciais em texto, tabelas e links. Confirmação de registro indica ID, resumo do salvo, lacunas e pendência de proteção, quando houver. Consultas de status mostram atualização, fonte, evidência, restante e dependências. Nenhum chat presume possuir dados atualizados sem consultar a fonte.
+
+## Portabilidade
+
+Codex é o primeiro cliente; Claude Code ou outro agente pode substituí-lo. O fluxo de resumo, captura, consulta e aprovação é comum e não exige comandos exclusivos de um produto. Skills e arquivos de configuração específicos são adaptadores das instruções comuns, não a fonte das regras de negócio.
+
+Abertura automática de chats e apresentação visual dependem das capacidades do cliente. Quando não disponíveis, orientar o usuário a abrir a conversa e recuperar o contexto pelo identificador do registro. O histórico de conversas não é necessário para a continuidade. Anexos precisam ser persistidos fora do armazenamento exclusivo do chat.
 
 ## Conselho
 
@@ -20,7 +26,7 @@ Guardar e verificar o original; extrair tópicos; agrupar por projeto/solicitaç
 
 ## Participação da equipe
 
-Etapa inicial: Fabrício encaminha relatos com origem informada. Etapa posterior: identidade individual autenticada, lista minhas tarefas, atualização por formulário e chat opcional. Registrar entregue, restante, dificuldade, prazo, esforço e anexos na mesma fonte operacional consultada pelo Codex.
+Etapa inicial: Fabrício encaminha relatos com origem informada. Etapa posterior: identidade individual autenticada, lista minhas tarefas, atualização por formulário e chat opcional. Registrar entregue, restante, dificuldade, prazo, esforço e anexos na mesma fonte operacional consultada por qualquer cliente autorizado.
 
 Executores atualizam tarefas autorizadas e propõem prazos; mudanças de escopo, responsável total, prioridade e meta seguem aprovação gerencial. Permissões devem ser verificadas no serviço. Chat compartilhado é opcional; conversas individuais podem alimentar os mesmos registros.
 

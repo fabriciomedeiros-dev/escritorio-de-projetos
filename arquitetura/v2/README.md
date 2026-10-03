@@ -4,11 +4,13 @@ Data: 2026-10-03. Situação: desenho funcional aprovado por Fabrício nesta ses
 
 A versão 2 amplia a gestão para ideias, solicitações pontuais, projetos e tarefas. Um agente gestor acompanha o trabalho; o conselho existente prepara ideias antes da promoção humana a projeto. Os papéis do conselho não são agentes operacionais de gestão.
 
+Codex será o cliente inicial, mas a estrutura é agnóstica: Claude Code ou outro agente deve acessar a mesma fonte por operações portáveis, sem migração de memória nem dependência do histórico dos chats.
+
 ## Documentos
 
 - [Especificação funcional e arquitetura](especificacao.md)
 - [Modelo lógico de dados](modelo-dados.md)
-- [Interação pelo Codex e colaboração futura](interacao.md)
+- [Interação agnóstica, Codex inicial e colaboração futura](interacao.md)
 - [Plano de implementação e validação](plano.md)
 
 ## Autoridade e transição
