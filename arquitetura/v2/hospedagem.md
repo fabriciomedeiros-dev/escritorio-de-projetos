@@ -2,6 +2,10 @@
 
 Data: 2026-10-03. Situação: comparação concluída; recomendação para decisão de Fabrício. Não há fornecedor aprovado, conta criada, contratação, implantação ou transferência de dados.
 
+## Atualização — infraestrutura existente informada
+
+Em 03/10/2026, após esta comparação, Fabrício informou servidor SuperSync com PostgreSQL e possibilidade de interfaces e controle de usuários. A recomendação atual passa a priorizar a avaliação dessa infraestrutura, com ambiente local isolado antes de mudanças e implementação por outra pessoa. Supabase permanece alternativa caso a infraestrutura existente não atenda aos requisitos; não houve contratação. Capacidade, versão, anexos e recuperação do servidor ainda não foram inspecionados. Consulte o [roteiro de implementação](implementacao-supersync.md).
+
 ## Requisitos e premissas
 
 PostgreSQL central já foi escolhido. O escritório precisa ser acessível por vários computadores desde o início, com documentos originais centralizados, serviço autenticado e proteção independente. Inicialmente um usuário, depois três. O volume de dados, a infraestrutura interna disponível e a autorização para nuvem não foram estabelecidos. Valores abaixo são referências públicas em USD/mês, sem câmbio, impostos ou descontos temporários.
@@ -63,7 +67,7 @@ O volume faturável é o volume retido de cópias, não apenas a base atual. Exe
 
 Política inicial proposta para dimensionamento, ainda a validar: snapshot/exportação diária, proteção incremental mais frequente durante o uso, monitoramento de atraso e teste mensal de restauração. Backup diário sozinho permite perder registros posteriores à última cópia. A confirmação de gravação e o estado da proteção permanecem separados, conforme decisão já aprovada. Definir frequência e retenção com a tolerância real à perda, sem prometer perda zero.
 
-## Recomendação
+## Recomendação original — anterior ao servidor informado
 
 Minha recomendação arquitetural é começar a avaliação de contratação pelo Supabase Pro, com PostgreSQL, identidade e arquivos integrados, na região de São Paulo quando disponível. Ele reduz componentes administrados pela equipe e prepara o acesso dos subordinados. Preservar API de negócio própria, SQL versionado, originais exportáveis e cópia independente evita vincular a memória ao agente ou exclusivamente à plataforma.
 

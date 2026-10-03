@@ -14,6 +14,8 @@ Codex será o cliente inicial, mas a estrutura é agnóstica: Claude Code ou out
 - [Plano de implementação e validação](plano.md)
 - [Comparação e escolha de armazenamento operacional](armazenamento.md)
 - [Comparação de hospedagem e custos](hospedagem.md)
+- [Preparação e passagem para implementação no SuperSync](implementacao-supersync.md)
+- [Ambiente local de testes](../../desenvolvimento/local/README.md)
 
 ## Autoridade e transição
 

@@ -22,7 +22,9 @@ Critérios eliminatórios: independência de fornecedor do agente e acesso por c
 
 Inventariar registros existentes, preservar caminhos/IDs e originais, mapear campos e conciliar divergências com fontes. Fazer ensaio de migração e restauração antes do corte. Declarar por conjunto de dados qual fonte passa a valer e quando; preservar versão anterior e plano de reversão. Não migrar dados reais silenciosamente nem transformar metas antigas em fatos atuais.
 
-Comparação de hospedagem: [alternativas, custos e recomendação](hospedagem.md). Supabase Pro é a recomendação para avaliação de contratação; não houve aprovação de fornecedor ou implantação. Esquema físico e contrato podem avançar sem depender dessa decisão.
+Comparação de hospedagem: [alternativas, custos e recomendação](hospedagem.md). Após Fabrício informar servidor PostgreSQL existente, priorizar avaliação do SuperSync; Supabase permanece alternativa. Não houve aprovação de implantação. Esquema físico e contrato podem avançar sem depender dessa decisão.
+
+Preparação local: PostgreSQL isolado inicializado e smoke test aprovado, sem aplicação ou integração implementadas. Seguir [roteiro de passagem](implementacao-supersync.md) e [comandos locais](../../desenvolvimento/local/README.md). A iniciativa está capturada como SAERJ-IDEIA-002, sem promoção formal.
 
 ## Etapa 4 — fluxo mínimo
 

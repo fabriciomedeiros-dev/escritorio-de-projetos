@@ -15,3 +15,6 @@ config/*.token.local
 # Build local do portal Quartz
 .quartz-build/
 site/public/
+
+# Ambiente local isolado do Escritório v2 (dados, senhas e logs)
+.runtime/

@@ -9,6 +9,7 @@
 - Registra plano de escolha de armazenamento, migração, piloto e implantação.
 - Escolhe PostgreSQL central após confirmação de acesso por vários computadores; documenta comparação com Markdown/Git, Trello, Notion e SQLite e ensaios sintéticos de integridade/restauração.
 - Compara infraestrutura interna, VM autogerida e serviços gerenciados, com custos públicos e proteção separada de arquivos; recomenda Supabase Pro para avaliação, sem contratação.
+- Incorpora servidor PostgreSQL do SuperSync como direção de avaliação; prepara ambiente local isolado e roteiro para outro implementador; captura SAERJ-IDEIA-002 sem promoção.
 - Preserva os registros operacionais atuais; fonte estruturada e funcionalidades ainda não implantadas.
 
 Versões anteriores não tinham marcador de versão no repositório. Este arquivo não atribui retrospectivamente uma versão aos commits existentes.
