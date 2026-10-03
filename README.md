@@ -1,6 +1,8 @@
 # Escritório de Projetos
 
-Base operacional de ideação, estruturação e gestão de portfólios e projetos assistida por IA.
+**Versão 2.0.0 — arquitetura documentada, implantação em etapas.** Consulte [Arquitetura v2](arquitetura/v2/README.md) e [Histórico de versões](CHANGELOG.md).
+
+Base operacional de ideação, estruturação e gestão de portfólios, projetos, solicitações e tarefas assistida por IA.
 
 **Navegação:** [Portfólios](portfolios/README.md) · [SAERJ](portfolios/saerj/portfolio.md) · [Pessoal](portfolios/pessoal/portfolio.md) · [Tarefas do Escritório](tarefas-escritorio.md) · [Mensuração de ganhos e valor da TI](atividades/mensuracao-ganhos-valor-ti.md) · [OKRs e valoração para decisões de roadmap](atividades/okr-e-valorizacao-ti.md) · [Contratações de ferramentas](atividades/avaliacao-contratacoes-ferramentas.md) · [Divulgação no Trello](atividades/divulgacao-andamento-trello.md) · [Conselho](conselho/README.md) · [Modelos](modelos/README.md) · [Contexto](CONTEXTO.md)
 
@@ -8,7 +10,7 @@ Base operacional de ideação, estruturação e gestão de portfólios e projeto
 
 - A memória pertence ao projeto, não ao modelo de IA.
 - Antes da promoção, a memória pertence à ideia e permanece dentro do Comitê.
-- Markdown é a fonte oficial de informação; conversas são contexto de trabalho.
+- Durante a transição, Markdown continua sendo a fonte oficial dos registros existentes; conversas são contexto de trabalho. A [versão 2](arquitetura/v2/README.md) prevê uma fonte estruturada única para dados operacionais, com documentação e originais preservados; sua ativação exige migração validada.
 - Documentação é um subproduto da gestão: toda discussão deve terminar em decisão, tarefa, pendência ou nenhuma ação necessária.
 - O Conselho recomenda e acompanha; o humano direciona, decide e valida assuntos relevantes.
 - Toda nova proposta deve explicitar como o valor será medido; projetos atuais incorporarão essa mensuração progressivamente, sempre distinguindo fatos, estimativas e hipóteses.

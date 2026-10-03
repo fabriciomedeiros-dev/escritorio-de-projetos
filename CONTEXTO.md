@@ -1,8 +1,12 @@
 # Contexto para continuidade em nuvem — Escritório de Projetos
 
+## Versão 2 e continuidade
+
+Versão documental atual: `2.0.0` (`VERSION`). Ler [Arquitetura v2](arquitetura/v2/README.md) para o desenho aprovado e o plano. Um único agente gestor acompanhará solicitações, projetos e tarefas; o conselho existente prepara ideias. A fonte operacional estruturada ainda não foi escolhida nem implantada. Registros Markdown atuais continuam oficiais até migração conciliada e corte de autoridade explícito. Não apresentar rotinas propostas como recursos implementados.
+
 ## Objetivo deste projeto
 
-O Escritório de Projetos e a base operacional para explorar novas ideias, estruturar propostas, organizar projetos aprovados, acompanhar sua evolucao e preservar a memoria do portfólio. O Comitê de Ideação transforma ideias em propostas por meio de descoberta, TAP preliminar e Canvas; o Escritório passa a gerir a iniciativa somente depois da promoção humana explícita.
+O Escritório de Projetos e a base operacional para explorar novas ideias, estruturar propostas, organizar projetos aprovados, acompanhar sua evolucao e preservar a memoria do portfólio. O Comitê de Ideação transforma ideias em propostas por meio de descoberta, TAP preliminar e Canvas; projetos entram na gestão após promoção humana explícita; solicitações e tarefas pontuais podem ser acompanhadas sem promoção a projeto.
 
 ## Como a memoria funciona
 
