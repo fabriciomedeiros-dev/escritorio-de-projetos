@@ -6,13 +6,15 @@
 |---|---|---|
 | 1 | Especificação, arquitetura e interação aprovadas funcionalmente | Documentadas nesta versão |
 | 2 | Modelo lógico, entidades, estados e invariantes | Documentado; esquema físico depende da etapa 3 |
-| 3 | Avaliação e escolha de armazenamento | Pendente |
+| 3 | Avaliação e escolha de armazenamento | PostgreSQL central escolhido; comparação e ensaios sintéticos concluídos; hospedagem pendente |
 | 4 | Fluxo mínimo pelo Codex | Pendente |
 | 5 | Piloto com casos reais e recuperação | Pendente |
 | 6 | Planejamento semanal, capacidade e alertas | Pendente |
 | 7 | Interface individual para dois integrantes | Posterior à validação do uso individual |
 
 ## Etapa 3 — escolha e migração
+
+Resultado: [comparação de armazenamento](armazenamento.md). PostgreSQL central, serviço autenticado e arquivos centrais; Fabrício precisa de acesso por vários computadores desde o início. Ensaios sintéticos SQLite e PostgreSQL passaram. Escolha técnica não significa implantação: hospedagem e proteção externa continuam pendentes.
 
 Avaliar fonte própria, Trello e Notion com documentação oficial atual e prova prática, sem assumir capacidade de anexos, API, histórico ou exportação. Comparar custo, operação, acesso por clientes substituíveis (Codex inicialmente), portfólios, autoria, aprovação por versão, dependências, concorrência, exportação, cópia independente e restauração. Uma ferramenta pode ser interface sem ser a fonte oficial.
 

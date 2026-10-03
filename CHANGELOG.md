@@ -7,6 +7,7 @@
 - Define modelo lógico, aprovação integral de tópicos de reuniões, conclusão por evidência e planejamento semanal por capacidade.
 - Define interação agnóstica de fornecedor (Codex inicial), contrato portável de operações, colaboração futura, verificação de registros e proteção independente.
 - Registra plano de escolha de armazenamento, migração, piloto e implantação.
+- Escolhe PostgreSQL central após confirmação de acesso por vários computadores; documenta comparação com Markdown/Git, Trello, Notion e SQLite e ensaios sintéticos de integridade/restauração.
 - Preserva os registros operacionais atuais; fonte estruturada e funcionalidades ainda não implantadas.
 
 Versões anteriores não tinham marcador de versão no repositório. Este arquivo não atribui retrospectivamente uma versão aos commits existentes.

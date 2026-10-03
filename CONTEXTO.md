@@ -2,7 +2,7 @@
 
 ## Versão 2 e continuidade
 
-Versão documental atual: `2.0.0` (`VERSION`). Ler [Arquitetura v2](arquitetura/v2/README.md) para o desenho aprovado e o plano. Codex é somente a interface inicial; regras, dados e operações devem ser portáveis para Claude Code ou outro agente. Um único agente gestor acompanhará solicitações, projetos e tarefas; o conselho existente prepara ideias. A fonte operacional estruturada ainda não foi escolhida nem implantada. Registros Markdown atuais continuam oficiais até migração conciliada e corte de autoridade explícito. Não apresentar rotinas propostas como recursos implementados.
+Versão documental atual: `2.0.0` (`VERSION`). Ler [Arquitetura v2](arquitetura/v2/README.md) para o desenho aprovado e o plano. Codex é somente a interface inicial; regras, dados e operações devem ser portáveis para Claude Code ou outro agente. Um único agente gestor acompanhará solicitações, projetos e tarefas; o conselho existente prepara ideias. A fonte operacional escolhida é PostgreSQL central com serviço próprio e arquivos centrais; hospedagem, esquema físico e implantação estão pendentes. Consulte `arquitetura/v2/armazenamento.md`. Registros Markdown atuais continuam oficiais até migração conciliada e corte de autoridade explícito. Não apresentar rotinas propostas como recursos implementados.
 
 ## Objetivo deste projeto
 

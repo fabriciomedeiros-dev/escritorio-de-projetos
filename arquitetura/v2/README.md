@@ -12,6 +12,7 @@ Codex será o cliente inicial, mas a estrutura é agnóstica: Claude Code ou out
 - [Modelo lógico de dados](modelo-dados.md)
 - [Interação agnóstica, Codex inicial e colaboração futura](interacao.md)
 - [Plano de implementação e validação](plano.md)
+- [Comparação e escolha de armazenamento operacional](armazenamento.md)
 
 ## Autoridade e transição
 
@@ -19,7 +20,7 @@ Esta pasta é a fonte do desenho da versão 2, não uma base operacional implant
 
 Na arquitetura alvo, cada campo operacional terá uma única fonte estruturada oficial; Markdown e arquivos continuam preservando documentação, decisões explicadas e evidências. Visões operacionais em Markdown serão geradas a partir da fonte oficial e identificadas como derivadas. Requisitos e documentação técnica continuam nos repositórios indicados por cada projeto.
 
-A ferramenta de armazenamento ainda será avaliada. Trello, Notion e aplicação própria são alternativas, sem obrigatoriedade. A migração exige inventário, conciliação, teste de restauração e declaração explícita do corte de autoridade por conjunto de dados; não haverá duas fontes oficiais concorrentes.
+A [avaliação de armazenamento](armazenamento.md) escolhe PostgreSQL central com serviço próprio e armazenamento de arquivos, diante do requisito de acesso por vários computadores desde o início. Hospedagem e implantação ainda estão pendentes. Trello e Notion podem ser interfaces complementares, sem duplicar a fonte oficial. A migração exige inventário, conciliação, teste de restauração e declaração explícita do corte de autoridade por conjunto de dados; não haverá duas fontes oficiais concorrentes.
 
 ## Identificação da versão
 
