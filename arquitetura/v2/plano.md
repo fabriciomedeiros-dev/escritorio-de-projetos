@@ -7,7 +7,7 @@
 | 1 | Especificação, arquitetura e interação aprovadas funcionalmente | Documentadas nesta versão |
 | 2 | Modelo lógico, entidades, estados e invariantes | Documentado; esquema físico 001 aplicado e testado localmente |
 | 3 | Avaliação e escolha de armazenamento | PostgreSQL central escolhido; comparação e ensaios sintéticos concluídos; comparação de hospedagem concluída, decisão pendente |
-| 4 | Fluxo mínimo pelo Codex | Schema e contrato preparados; serviço, autenticação e adaptadores pendentes |
+| 4 | Fluxo mínimo pelo Codex | Piloto HTTP/cliente local implementados para texto, criação, relato e consulta; evidências/reuniões e integração SuperSync pendentes |
 | 5 | Piloto com casos reais e recuperação | Pendente |
 | 6 | Planejamento semanal, capacidade e alertas | Pendente |
 | 7 | Interface individual para dois integrantes | Posterior à validação do uso individual |
@@ -24,7 +24,7 @@ Inventariar registros existentes, preservar caminhos/IDs e originais, mapear cam
 
 Comparação de hospedagem: [alternativas, custos e recomendação](hospedagem.md). Após Fabrício informar servidor PostgreSQL existente, priorizar avaliação do SuperSync; Supabase permanece alternativa. Não houve aprovação de implantação. Esquema físico e contrato podem avançar sem depender dessa decisão.
 
-Preparação local: PostgreSQL isolado inicializado e smoke test aprovado, schema 001 aplicado e testes de integridade aprovados, sem aplicação ou integração implementadas. Seguir [roteiro de passagem](implementacao-supersync.md) e [comandos locais](../../desenvolvimento/local/README.md). A iniciativa está capturada como SAERJ-IDEIA-002, sem promoção formal.
+Preparação local: PostgreSQL isolado inicializado e smoke test aprovado, schema 001 aplicado e testes de integridade aprovados. Serviço mínimo HTTP e cliente local implementados e testados com identidades sintéticas; integração SuperSync pendente. Seguir [roteiro de passagem](implementacao-supersync.md) e [comandos locais](../../desenvolvimento/local/README.md). A iniciativa está capturada como SAERJ-IDEIA-002, sem promoção formal.
 
 ## Etapa 4 — fluxo mínimo
 

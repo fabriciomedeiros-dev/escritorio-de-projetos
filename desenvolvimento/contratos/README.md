@@ -1,6 +1,6 @@
 # Contrato de operações — Escritório v2
 
-Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). Este contrato é uma proposta implementável, não um serviço disponível. Nenhum endereço de produção foi presumido.
+Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
 
 ## Identidade, isolamento e repetição
 
@@ -49,4 +49,4 @@ Persistência e proteção são separadas: `estado=verificada` significa gravaç
 
 Rotas e nomes não dependem de Codex, Claude Code ou formato de chats. Adaptadores CLI/MCP e interface SuperSync usam o mesmo contrato. Mudanças incompatíveis precisam de versão de API nova; migrações SQL possuem numeração própria e checksum.
 
-Documentação de referência: [OpenAPI 3.1](https://spec.openapis.org/oas/v3.1.0.html). Nesta etapa foram conferidos JSON, referências locais e estrutura do contrato; validação por ferramenta OpenAPI completa e implementação end-to-end permanecem pendentes.
+Documentação de referência: [OpenAPI 3.1](https://spec.openapis.org/oas/v3.1.0.html). Foram conferidos JSON, referências locais, estrutura do contrato e validação JSON Schema dos pedidos/respostas do piloto, com testes HTTP end-to-end. Validação integral por ferramenta OpenAPI completa e implementação dos demais comandos permanecem pendentes.

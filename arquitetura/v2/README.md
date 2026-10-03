@@ -18,6 +18,7 @@ Codex será o cliente inicial, mas a estrutura é agnóstica: Claude Code ou out
 - [Ambiente local de testes](../../desenvolvimento/local/README.md)
 - [Esquema PostgreSQL e migração inicial](../../desenvolvimento/migrations/README.md)
 - [Contrato das operações](../../desenvolvimento/contratos/README.md)
+- [Serviço mínimo local e cliente de referência](../../desenvolvimento/servico/README.md)
 
 ## Autoridade e transição
 

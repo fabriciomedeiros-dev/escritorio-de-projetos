@@ -1,6 +1,6 @@
 # Ambiente local — Escritório v2
 
-Ambiente de teste do PostgreSQL, independente do SuperSync. O esquema físico inicial está aplicado; aplicação, interfaces e integração de usuários ainda não estão implementadas. Preparado e verificado em 03/10/2026.
+Ambiente de teste do PostgreSQL, independente do SuperSync. O esquema físico inicial está aplicado; o [serviço mínimo HTTP e cliente local](../servico/README.md) estão implementados com identidades sintéticas. Interface web e integração de usuários SuperSync ainda não estão implementadas. Preparado e verificado em 03/10/2026.
 
 ## Uso
 

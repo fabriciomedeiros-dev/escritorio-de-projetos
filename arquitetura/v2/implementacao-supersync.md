@@ -27,9 +27,10 @@ Arquivos originais precisam de armazenamento persistente e recuperável, com per
 |---|---|
 | Regras e escopo funcional | [Especificação v2](especificacao.md) |
 | Entidades, estados e integridade | [Modelo de dados](modelo-dados.md) e [schema aplicado localmente](../../desenvolvimento/migrations/README.md) |
-| Operações agnósticas do cliente | [Contrato e OpenAPI](../../desenvolvimento/contratos/README.md) — serviço ainda não implementado |
+| Operações agnósticas do cliente | [Contrato e OpenAPI](../../desenvolvimento/contratos/README.md) — serviço mínimo local implementado; demais comandos pendentes |
 | Interação inicial e futura equipe | [Interação](interacao.md) |
 | Critérios de validação | [Plano](plano.md) |
+| Serviço mínimo HTTP e cliente de referência | [Piloto local](../../desenvolvimento/servico/README.md), sem integração SuperSync |
 | Ambiente local inicializado | [Comandos e limites](../../desenvolvimento/local/README.md) |
 | Prova sintética de recuperação | [Ensaio PostgreSQL](experimentos/validar_postgresql.py) |
 | Dependência de serviços | [Serviços compartilhados SuperSync](../../portfolios/saerj/projetos/supersync/servicos-compartilhados.md) |

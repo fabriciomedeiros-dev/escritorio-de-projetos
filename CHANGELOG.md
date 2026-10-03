@@ -11,6 +11,7 @@
 - Compara infraestrutura interna, VM autogerida e serviços gerenciados, com custos públicos e proteção separada de arquivos; recomenda Supabase Pro para avaliação, sem contratação.
 - Incorpora servidor PostgreSQL do SuperSync como direção de avaliação; prepara ambiente local isolado e roteiro para outro implementador; captura SAERJ-IDEIA-002 sem promoção.
 - Aplica schema PostgreSQL 001 no ambiente local, com checksum, testes de integridade e restauração do schema em outra base local; define contrato OpenAPI 3.1 independente do agente, ainda sem serviço implantado.
+- Implementa piloto HTTP local e cliente portável para texto, criação, relatos e consultas, com perfil SQL restrito, identidades sintéticas e testes de autorização, repetição concorrente e recuperação pós-commit.
 - Preserva os registros operacionais atuais; fonte estruturada e funcionalidades ainda não implantadas.
 
 Versões anteriores não tinham marcador de versão no repositório. Este arquivo não atribui retrospectivamente uma versão aos commits existentes.

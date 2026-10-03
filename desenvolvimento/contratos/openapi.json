@@ -3,7 +3,7 @@
   "info": {
     "title": "Operações do Escritório de Projetos",
     "version": "2.0.0",
-    "description": "Contrato proposto para implementação por outro responsável. Não há endpoint implantado."
+    "description": "Contrato v2; piloto HTTP local implementa captura de texto, criação de tarefa/solicitação/ideia, relatos e consultas. Demais comandos indisponíveis; não há endpoint produtivo."
   },
   "security": [
     {
@@ -25,7 +25,7 @@
       ],
       "post": {
         "operationId": "executarOperacao",
-        "summary": "Executar comando de negócio; API proposta, ainda não implementada",
+        "summary": "Executar comando de negócio do piloto local; subconjunto indicado nos schemas",
         "parameters": [
           {
             "name": "Idempotency-Key",
@@ -130,6 +130,16 @@
           },
           "503": {
             "description": "Serviço indisponível; consultar operação antes de reenviar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Falha interna; consultar operação antes de repetir",
             "content": {
               "application/json": {
                 "schema": {
@@ -508,7 +518,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": true
       },
       "criar_registro": {
         "type": "object",
@@ -583,7 +594,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": true
       },
       "registrar_relato": {
         "type": "object",
@@ -674,7 +686,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": true
       },
       "registrar_dependencia": {
         "type": "object",
@@ -755,7 +768,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "resolver_dependencia": {
         "type": "object",
@@ -806,7 +820,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "preparar_artefato": {
         "type": "object",
@@ -854,7 +869,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "verificar_artefato": {
         "type": "object",
@@ -885,7 +901,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "propor_topicos_reuniao": {
         "type": "object",
@@ -952,7 +969,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "aprovar_topicos_reuniao": {
         "type": "object",
@@ -1017,7 +1035,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "propor_prazo": {
         "type": "object",
@@ -1070,7 +1089,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "validar_conclusao": {
         "type": "object",
@@ -1128,7 +1148,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "exportar_portfolio": {
         "type": "object",
@@ -1160,7 +1181,8 @@
           "comando",
           "dados"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-implementado-piloto": false
       },
       "Pedido": {
         "oneOf": [

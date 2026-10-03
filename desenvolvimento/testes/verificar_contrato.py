@@ -37,4 +37,4 @@ for example in examples:
     data = schema['properties']['dados']
     assert set(data['required']) <= set(example['dados']) <= set(data['properties'])
 print('PASSOU: JSON, referências internas, campos requeridos, IDs de rotas e estrutura dos exemplos.')
-print('Validação completa OpenAPI/JSON Schema e chamadas ao serviço ainda não realizadas.')
+print('Esta checagem não executa validador OpenAPI integral; verificar_servico.py valida JSON Schema e HTTP.')

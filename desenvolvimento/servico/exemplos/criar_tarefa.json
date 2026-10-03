@@ -1,0 +1,10 @@
+{
+  "operacao_id": "10000000-0000-0000-0000-000000000001",
+  "comando": "criar_registro",
+  "dados": {
+    "tipo": "tarefa",
+    "titulo": "Exemplo sintético: preparar relatório trimestral",
+    "resultado_esperado": "Relatório recuperável para revisão",
+    "criterio_conclusao": "Relatório completo, revisado e com evidência"
+  }
+}
