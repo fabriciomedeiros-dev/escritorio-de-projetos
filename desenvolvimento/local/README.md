@@ -1,6 +1,6 @@
 # Ambiente local — Escritório v2
 
-Ambiente de teste do PostgreSQL, independente do SuperSync. A aplicação, as interfaces e a integração de usuários ainda não estão implementadas. Preparado e verificado em 03/10/2026.
+Ambiente de teste do PostgreSQL, independente do SuperSync. O esquema físico inicial está aplicado; aplicação, interfaces e integração de usuários ainda não estão implementadas. Preparado e verificado em 03/10/2026.
 
 ## Uso
 
@@ -21,6 +21,19 @@ python3 desenvolvimento/local/ambiente.py stop
 Dados, senha aleatória e logs ficam em `.runtime/escritorio-v2/`, ignorada pelo Git. A senha é gerada localmente com permissão restrita e não aparece na saída. O script ignora variáveis PostgreSQL herdadas e conecta apenas ao socket criado pelo próprio ambiente. O PostgreSQL não escuta conexões TCP; a porta interna 55432 identifica o serviço no socket e não é publicada.
 
 Foi verificado: inicialização, autenticação SCRAM, base própria, ausência de TCP, restrição de relacionamento por portfólio, rejeição de versão obsoleta, rollback e parada. Nenhum acesso remoto foi realizado. O cluster permanece inicializado e parado após a preparação.
+
+## Esquema operacional e testes
+
+O comando `migrate` aplica a revisão 001 somente à base local e verifica seu checksum. Não importa trabalhos existentes nem semeia dados reais. Uma segunda execução não reaplica a migração.
+
+```bash
+python3 desenvolvimento/local/ambiente.py start
+python3 desenvolvimento/local/ambiente.py migrate
+python3 desenvolvimento/testes/verificar_esquema.py
+python3 desenvolvimento/local/ambiente.py stop
+```
+
+O schema `escritorio` persiste inicializado, sem registros operacionais. Os testes sintéticos revertem suas alterações e verificam dump/restauração do schema em uma base temporária distinta. Consulte o [esquema físico](../migrations/README.md) e o [contrato de operações](../contratos/README.md).
 
 ## Limites e próxima implementação
 

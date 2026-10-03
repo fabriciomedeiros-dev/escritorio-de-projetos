@@ -2,6 +2,7 @@
 Não usa URLs, credenciais ou servidores existentes. Requer ferramentas PostgreSQL.
 """
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -142,6 +143,23 @@ def smoke():
     print('Nenhuma tabela operacional foi criada; aplicação e integração SuperSync ainda não implementadas.')
 
 
+def migrate():
+    if not running():
+        raise RuntimeError('Inicie o ambiente local antes da migração.')
+    migration = ROOT / 'desenvolvimento' / 'migrations' / '001_nucleo.sql'
+    digest = hashlib.sha256(migration.read_bytes()).hexdigest()
+    if sql("SELECT count(*) FROM information_schema.schemata WHERE schema_name='escritorio';") == '1':
+        current = sql('SELECT hash_sql FROM escritorio.migracoes WHERE versao=1;')
+        if current != digest:
+            raise RuntimeError('Checksum da migração diverge; não reaplicar nem modificar schema existente.')
+        print('Migração 001 já aplicada e checksum conferido; nada alterado.')
+        return
+    execute([binary('psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-v', 'hash_sql=' + digest,
+             '-f', str(migration)], connection())
+    assert sql('SELECT hash_sql FROM escritorio.migracoes WHERE versao=1;') == digest
+    print('Migração 001 aplicada e verificada somente no banco local escritorio_test.')
+
+
 def stop():
     if not running():
         print('Cluster local já parado; dados preservados.')
@@ -156,12 +174,12 @@ def stop():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('command', choices=['init', 'start', 'smoke', 'stop', 'status'])
+    parser.add_argument('command', choices=['init', 'start', 'smoke', 'migrate', 'stop', 'status'])
     command = parser.parse_args().command
     if command == 'status':
         print('Em execução' if running() else 'Parado')
     else:
-        {'init': initialize, 'start': start, 'smoke': smoke, 'stop': stop}[command]()
+        {'init': initialize, 'start': start, 'smoke': smoke, 'migrate': migrate, 'stop': stop}[command]()
 
 
 if __name__ == '__main__':

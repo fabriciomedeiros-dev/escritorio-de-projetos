@@ -1,0 +1,1345 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Operações do Escritório de Projetos",
+    "version": "2.0.0",
+    "description": "Contrato proposto para implementação por outro responsável. Não há endpoint implantado."
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/v1/portfolios/{portfolio}/operacoes": {
+      "parameters": [
+        {
+          "name": "portfolio",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          }
+        }
+      ],
+      "post": {
+        "operationId": "executarOperacao",
+        "summary": "Executar comando de negócio; API proposta, ainda não implementada",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pedido"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado verificado ou repetição já conhecida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resultado"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Operação recebida, ainda sem confirmação de registro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resultado"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pedido inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identidade ausente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Operação não autorizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ausente ou fora do escopo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflito de versão ou repetição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Pré-condição de negócio não satisfeita",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Serviço indisponível; consultar operação antes de reenviar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/portfolios/{portfolio}/operacoes/{operacao_id}": {
+      "parameters": [
+        {
+          "name": "portfolio",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          }
+        },
+        {
+          "name": "operacao_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "consultarOperacao",
+        "summary": "Reconciliar gravação após falha de conexão",
+        "responses": {
+          "200": {
+            "description": "Estado da operação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resultado"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pedido inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identidade ausente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Operação não autorizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ausente ou fora do escopo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflito de versão ou repetição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Pré-condição de negócio não satisfeita",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Serviço indisponível; consultar operação antes de reenviar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/portfolios/{portfolio}/registros": {
+      "parameters": [
+        {
+          "name": "portfolio",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "consultarRegistros",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "tipo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "estado",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "assunto",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "origem",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "desde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "ate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Página com fontes e lacunas; cursor opaco",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "itens": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "proximo_cursor": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "itens",
+                    "proximo_cursor"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pedido inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identidade ausente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Operação não autorizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ausente ou fora do escopo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflito de versão ou repetição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Pré-condição de negócio não satisfeita",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Serviço indisponível; consultar operação antes de reenviar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "capturar_entrada": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "capturar_entrada"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "texto": {
+                "type": "string",
+                "minLength": 1
+              },
+              "artefato_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "origem": {
+                "type": "object"
+              },
+              "classificacao_sugerida": {
+                "type": "string",
+                "enum": [
+                  "ideia",
+                  "solicitacao",
+                  "projeto",
+                  "tarefa"
+                ]
+              }
+            },
+            "required": [
+              "origem"
+            ],
+            "additionalProperties": false,
+            "anyOf": [
+              {
+                "required": [
+                  "texto"
+                ]
+              },
+              {
+                "required": [
+                  "artefato_id"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "criar_registro": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "criar_registro"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "tipo": {
+                "type": "string",
+                "enum": [
+                  "ideia",
+                  "solicitacao",
+                  "projeto",
+                  "tarefa"
+                ]
+              },
+              "titulo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "resultado_esperado": {
+                "type": "string",
+                "minLength": 1
+              },
+              "criterio_conclusao": {
+                "type": "string",
+                "minLength": 1
+              },
+              "responsavel_total": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "prazo_proposto": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "meta": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "origem_entrada_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "decisao_promocao_id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "tipo",
+              "titulo"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "registrar_relato": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "registrar_relato"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "registro_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "entregue": {
+                "type": "string",
+                "minLength": 1
+              },
+              "restante": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dificuldade": {
+                "type": "string",
+                "minLength": 1
+              },
+              "autor_informado": {
+                "type": "string",
+                "minLength": 1
+              },
+              "esforco_restante": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "prazo_proposto": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "artefatos": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "registro_id",
+              "versao_esperada"
+            ],
+            "additionalProperties": false,
+            "anyOf": [
+              {
+                "required": [
+                  "entregue"
+                ]
+              },
+              {
+                "required": [
+                  "restante"
+                ]
+              },
+              {
+                "required": [
+                  "dificuldade"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "registrar_dependencia": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "registrar_dependencia"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "registro_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "provedor_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "terceiro": {
+                "type": "string",
+                "minLength": 1
+              },
+              "motivo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "responsavel_acao": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "proxima_acao": {
+                "type": "string",
+                "minLength": 1
+              },
+              "acompanhar_em": {
+                "type": "string",
+                "format": "date"
+              },
+              "criterio_resolucao": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "registro_id",
+              "versao_esperada",
+              "motivo",
+              "responsavel_acao",
+              "proxima_acao",
+              "acompanhar_em",
+              "criterio_resolucao"
+            ],
+            "additionalProperties": false,
+            "anyOf": [
+              {
+                "required": [
+                  "provedor_id"
+                ]
+              },
+              {
+                "required": [
+                  "terceiro"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "resolver_dependencia": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "resolver_dependencia"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "registro_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "dependencia_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "evidencia_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "justificativa": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "registro_id",
+              "versao_esperada",
+              "dependencia_id",
+              "evidencia_id",
+              "justificativa"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "preparar_artefato": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "preparar_artefato"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tipo_midia": {
+                "type": "string",
+                "minLength": 1
+              },
+              "bytes_esperados": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "sha256_esperado": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "origem": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "nome",
+              "tipo_midia",
+              "origem"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "verificar_artefato": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "verificar_artefato"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "artefato_id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "artefato_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "propor_topicos_reuniao": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "propor_topicos_reuniao"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "original_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "topicos": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "proposta_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "versao": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "conteudo": {
+                      "type": "object"
+                    },
+                    "localizacao_fonte": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "proposta_id",
+                    "versao",
+                    "tipo",
+                    "conteudo",
+                    "localizacao_fonte"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "original_id",
+              "topicos"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "aprovar_topicos_reuniao": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "aprovar_topicos_reuniao"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "lote_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "itens": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "proposta_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "versao": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "decisao": {
+                      "enum": [
+                        "aprovada",
+                        "rejeitada"
+                      ]
+                    },
+                    "justificativa": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "proposta_id",
+                    "versao",
+                    "decisao"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "lote_id",
+              "itens"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "propor_prazo": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "propor_prazo"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "registro_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "prazo": {
+                "type": "string",
+                "format": "date"
+              },
+              "esforco_restante": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "motivo": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "registro_id",
+              "versao_esperada",
+              "prazo",
+              "motivo"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "validar_conclusao": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "validar_conclusao"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "registro_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "modo": {
+                "enum": [
+                  "verificacao",
+                  "aceite_humano"
+                ]
+              },
+              "parecer": {
+                "type": "string",
+                "minLength": 1
+              },
+              "artefatos": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "required": [
+              "registro_id",
+              "versao_esperada",
+              "modo",
+              "parecer",
+              "artefatos"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "exportar_portfolio": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "exportar_portfolio"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "formato": {
+                "enum": [
+                  "pacote_aberto"
+                ]
+              }
+            },
+            "required": [
+              "formato"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false
+      },
+      "Pedido": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/capturar_entrada"
+          },
+          {
+            "$ref": "#/components/schemas/criar_registro"
+          },
+          {
+            "$ref": "#/components/schemas/registrar_relato"
+          },
+          {
+            "$ref": "#/components/schemas/registrar_dependencia"
+          },
+          {
+            "$ref": "#/components/schemas/resolver_dependencia"
+          },
+          {
+            "$ref": "#/components/schemas/preparar_artefato"
+          },
+          {
+            "$ref": "#/components/schemas/verificar_artefato"
+          },
+          {
+            "$ref": "#/components/schemas/propor_topicos_reuniao"
+          },
+          {
+            "$ref": "#/components/schemas/aprovar_topicos_reuniao"
+          },
+          {
+            "$ref": "#/components/schemas/propor_prazo"
+          },
+          {
+            "$ref": "#/components/schemas/validar_conclusao"
+          },
+          {
+            "$ref": "#/components/schemas/exportar_portfolio"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "comando",
+          "mapping": {
+            "capturar_entrada": "#/components/schemas/capturar_entrada",
+            "criar_registro": "#/components/schemas/criar_registro",
+            "registrar_relato": "#/components/schemas/registrar_relato",
+            "registrar_dependencia": "#/components/schemas/registrar_dependencia",
+            "resolver_dependencia": "#/components/schemas/resolver_dependencia",
+            "preparar_artefato": "#/components/schemas/preparar_artefato",
+            "verificar_artefato": "#/components/schemas/verificar_artefato",
+            "propor_topicos_reuniao": "#/components/schemas/propor_topicos_reuniao",
+            "aprovar_topicos_reuniao": "#/components/schemas/aprovar_topicos_reuniao",
+            "propor_prazo": "#/components/schemas/propor_prazo",
+            "validar_conclusao": "#/components/schemas/validar_conclusao",
+            "exportar_portfolio": "#/components/schemas/exportar_portfolio"
+          }
+        }
+      },
+      "Resultado": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolio": {
+            "type": "string",
+            "minLength": 1
+          },
+          "estado": {
+            "enum": [
+              "pendente",
+              "persistida",
+              "verificada",
+              "falhou"
+            ]
+          },
+          "protecao": {
+            "enum": [
+              "pendente",
+              "confirmada",
+              "falhou"
+            ]
+          },
+          "registros": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "versao": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "id",
+                "versao"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "lacunas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "fontes": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "verificada_em": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "resultado": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "operacao_id",
+          "portfolio",
+          "estado",
+          "protecao",
+          "registros",
+          "lacunas",
+          "fontes",
+          "verificada_em",
+          "resultado"
+        ],
+        "additionalProperties": false
+      },
+      "Erro": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "enum": [
+              "NAO_AUTENTICADO",
+              "SEM_PERMISSAO",
+              "NAO_ENCONTRADO",
+              "VERSAO_DIVERGENTE",
+              "REPETICAO_DIVERGENTE",
+              "PEDIDO_INVALIDO",
+              "EVIDENCIA_INSUFICIENTE",
+              "DEPENDENCIA_PENDENTE",
+              "APROVACAO_PENDENTE",
+              "FONTE_NAO_VERIFICADA",
+              "SERVICO_INDISPONIVEL"
+            ]
+          },
+          "mensagem": {
+            "type": "string",
+            "minLength": 1
+          },
+          "detalhes": {
+            "type": "object"
+          },
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "codigo",
+          "mensagem",
+          "detalhes"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

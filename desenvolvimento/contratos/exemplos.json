@@ -1,0 +1,24 @@
+[
+  {
+    "operacao_id": "00000000-0000-0000-0000-000000000010",
+    "comando": "capturar_entrada",
+    "dados": {
+      "texto": "Solicitação de relatório de faturamento do trimestre. Prazo e responsável a confirmar.",
+      "origem": {
+        "canal": "chat",
+        "remetente_informado": "Fabrício"
+      }
+    }
+  },
+  {
+    "operacao_id": "00000000-0000-0000-0000-000000000011",
+    "comando": "registrar_relato",
+    "dados": {
+      "registro_id": "SAERJ-TAR-EXEMPLO",
+      "versao_esperada": 1,
+      "entregue": "Codificação concluída",
+      "restante": "Integração com API",
+      "autor_informado": "Executor do exemplo"
+    }
+  }
+]

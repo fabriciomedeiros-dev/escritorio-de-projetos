@@ -26,7 +26,8 @@ Arquivos originais precisam de armazenamento persistente e recuperável, com per
 | Item | Fonte / ação |
 |---|---|
 | Regras e escopo funcional | [Especificação v2](especificacao.md) |
-| Entidades, estados e integridade | [Modelo de dados](modelo-dados.md) |
+| Entidades, estados e integridade | [Modelo de dados](modelo-dados.md) e [schema aplicado localmente](../../desenvolvimento/migrations/README.md) |
+| Operações agnósticas do cliente | [Contrato e OpenAPI](../../desenvolvimento/contratos/README.md) — serviço ainda não implementado |
 | Interação inicial e futura equipe | [Interação](interacao.md) |
 | Critérios de validação | [Plano](plano.md) |
 | Ambiente local inicializado | [Comandos e limites](../../desenvolvimento/local/README.md) |

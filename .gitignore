@@ -18,3 +18,7 @@ site/public/
 
 # Ambiente local isolado do Escritório v2 (dados, senhas e logs)
 .runtime/
+
+# Cache Python de ferramentas locais
+__pycache__/
+*.pyc
