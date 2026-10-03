@@ -13,6 +13,7 @@ Codex será o cliente inicial, mas a estrutura é agnóstica: Claude Code ou out
 - [Interação agnóstica, Codex inicial e colaboração futura](interacao.md)
 - [Plano de implementação e validação](plano.md)
 - [Comparação e escolha de armazenamento operacional](armazenamento.md)
+- [Comparação de hospedagem e custos](hospedagem.md)
 
 ## Autoridade e transição
 

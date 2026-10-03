@@ -6,7 +6,7 @@
 |---|---|---|
 | 1 | Especificação, arquitetura e interação aprovadas funcionalmente | Documentadas nesta versão |
 | 2 | Modelo lógico, entidades, estados e invariantes | Documentado; esquema físico depende da etapa 3 |
-| 3 | Avaliação e escolha de armazenamento | PostgreSQL central escolhido; comparação e ensaios sintéticos concluídos; hospedagem pendente |
+| 3 | Avaliação e escolha de armazenamento | PostgreSQL central escolhido; comparação e ensaios sintéticos concluídos; comparação de hospedagem concluída, decisão pendente |
 | 4 | Fluxo mínimo pelo Codex | Pendente |
 | 5 | Piloto com casos reais e recuperação | Pendente |
 | 6 | Planejamento semanal, capacidade e alertas | Pendente |
@@ -21,6 +21,8 @@ Avaliar fonte própria, Trello e Notion com documentação oficial atual e prova
 Critérios eliminatórios: independência de fornecedor do agente e acesso por contrato portável; recuperação completa com arquivos e vínculos; identidade estável; isolamento; histórico; consulta e atualização verificáveis; ausência de fontes oficiais concorrentes. Registrar lacunas e compensações necessárias. Escolher somente depois da comparação.
 
 Inventariar registros existentes, preservar caminhos/IDs e originais, mapear campos e conciliar divergências com fontes. Fazer ensaio de migração e restauração antes do corte. Declarar por conjunto de dados qual fonte passa a valer e quando; preservar versão anterior e plano de reversão. Não migrar dados reais silenciosamente nem transformar metas antigas em fatos atuais.
+
+Comparação de hospedagem: [alternativas, custos e recomendação](hospedagem.md). Supabase Pro é a recomendação para avaliação de contratação; não houve aprovação de fornecedor ou implantação. Esquema físico e contrato podem avançar sem depender dessa decisão.
 
 ## Etapa 4 — fluxo mínimo
 
