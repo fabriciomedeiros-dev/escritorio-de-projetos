@@ -69,3 +69,7 @@ O [fluxo comum de reuniões](reunioes.md) para texto manual com tópicos e respo
 ## Incremento local — reuniões (2026-10-04)
 
 Validação funcional pelo ensaio documental concluída. Implementado fluxo comum para original manual e resposta MCP: recebimento recuperável, ata/tópicos propostos pelo agente, decisões imutáveis por versão, revisão integral e efetivação atômica de ações suportadas. Consulta de versões e reenvio sem duplicação; nenhuma criação de projeto ou conclusão habilitada por esse incremento. Cenários HTTP em base temporária incluem correção sem herança de aprovação, isolamento, origem íntegra, rollback e confirmação perdida após commit. Ver [entrega e limites](../../desenvolvimento/servico/REUNIOES.md). Proteção independente, autenticação real, centralização e migração conciliada continuam pendentes.
+
+## Incremento local — bloqueios, dependências e aceite humano
+
+Implementados registro de dependência versus impedimento de avanço, acompanhamento com histórico, resolução por evidência/critério explícito e retomada do estado anterior. Aceite humano de tarefas verifica responsável, critério, evidência e ausência de dependências/subtarefas necessárias pendentes. Migração 002 local, sem alteração da 001 ou do SuperSync. Consulta sinaliza acompanhamento vencido; não há monitor, cálculo de cronograma ou verificação automática de conclusão. Ver [fluxo e limites](../../desenvolvimento/servico/BLOQUEIOS.md).

@@ -146,18 +146,22 @@ def smoke():
 def migrate():
     if not running():
         raise RuntimeError('Inicie o ambiente local antes da migração.')
-    migration = ROOT / 'desenvolvimento' / 'migrations' / '001_nucleo.sql'
-    digest = hashlib.sha256(migration.read_bytes()).hexdigest()
-    if sql("SELECT count(*) FROM information_schema.schemata WHERE schema_name='escritorio';") == '1':
-        current = sql('SELECT hash_sql FROM escritorio.migracoes WHERE versao=1;')
-        if current != digest:
-            raise RuntimeError('Checksum da migração diverge; não reaplicar nem modificar schema existente.')
-        print('Migração 001 já aplicada e checksum conferido; nada alterado.')
-        return
-    execute([binary('psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-v', 'hash_sql=' + digest,
-             '-f', str(migration)], connection())
-    assert sql('SELECT hash_sql FROM escritorio.migracoes WHERE versao=1;') == digest
-    print('Migração 001 aplicada e verificada somente no banco local escritorio_test.')
+    migrations = sorted((ROOT / 'desenvolvimento' / 'migrations').glob('[0-9][0-9][0-9]_*.sql'))
+    has_schema = sql("SELECT count(*) FROM information_schema.schemata WHERE schema_name='escritorio';") == '1'
+    for migration in migrations:
+        version = int(migration.name.split('_')[0])
+        digest = hashlib.sha256(migration.read_bytes()).hexdigest()
+        current = sql(f'SELECT hash_sql FROM escritorio.migracoes WHERE versao={version};') if has_schema else ''
+        if current:
+            if current != digest:
+                raise RuntimeError(f'Checksum da migração {version:03d} diverge; não reaplicar nem modificar schema existente.')
+            print(f'Migração {version:03d} já aplicada e checksum conferido; nada alterado.')
+            continue
+        execute([binary('psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-v', 'hash_sql=' + digest,
+                 '-f', str(migration)], connection())
+        has_schema = True
+        assert sql(f'SELECT hash_sql FROM escritorio.migracoes WHERE versao={version};') == digest
+        print(f'Migração {version:03d} aplicada e verificada somente no banco local escritorio_test.')
 
 
 def stop():

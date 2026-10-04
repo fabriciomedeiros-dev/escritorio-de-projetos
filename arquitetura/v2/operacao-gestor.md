@@ -24,7 +24,7 @@ Um conflito de versão exige nova consulta e avaliação da mudança antes de pr
 
 Mostrar resumo salvo, identificador, situação, lacunas e pendência de proteção. Uma ideia pode estar capturada sem responsável, prazo ou esforço; lacunas não equivalem a atraso. Relatos de tarefas não concluem entregas nem aceitam prazos automaticamente.
 
-Reuniões estão disponíveis somente no piloto local, conforme limites abaixo. Não anunciar promoção, conclusão, planejamento ou proteção independente como disponíveis. Atualizar cadastro de usuário, meta, prioridade, responsável e estados continua fora desta entrega. A política de acesso técnico segue `seguranca-chat.md`; identidade sintética de demonstração não comprova autorização administrativa.
+Reuniões estão disponíveis somente no piloto local, conforme limites abaixo. Conclusão de tarefa está disponível somente por aceite humano explícito, conforme seção abaixo. Não anunciar promoção, verificação automática, conclusão de solicitação/projeto, planejamento ou proteção independente como disponíveis. Estados mudam apenas por bloqueio/retomada e aceite; cadastro de usuário, meta, prioridade e mudança de responsável total continuam fora desta entrega. A política de acesso técnico segue `seguranca-chat.md`; identidade sintética de demonstração não comprova autorização administrativa.
 
 ## Anexos e evidências
 
@@ -39,3 +39,11 @@ Seguir [fluxo de reuniões](../../desenvolvimento/servico/REUNIOES.md). Importar
 Apresentar primeiro a ata resumida agrupando apresentações e discussões; depois revisar os encaminhamentos por grupos, com contador e opções. Registrar a aprovação explícita da ata e de todos os tópicos nas revisões exatas; nenhuma aprovação deve ser inferida do original. Decisões parciais são recuperáveis e não aplicam ações. Correções criam nova revisão e não herdam aprovações.
 
 Somente após revisão integral, enviar `efetivar_topicos_reuniao` com versão esperada. A API aplica ações suportadas sem duplicação e preserva fontes/histórico. Não confirmar responsáveis/prazos aceitos, criação de projeto ou conclusão como efeito desse fluxo. Dados reais dos ensaios documentais permanecem fora do banco sintético; autenticação real e proteção continuam pendentes.
+
+## Bloqueios e conclusão de tarefa
+
+Seguir [regras do piloto](../../desenvolvimento/servico/BLOQUEIOS.md). Diferenciar dependência necessária à entrega de impedimento de avanço; não transformar toda dificuldade em bloqueio. Capturar relato com lacunas, depois obter motivo, próxima ação, responsável interno, acompanhamento e critério antes de formalizar. Gestor registra/altera/resolve; executor relata.
+
+Resolver exige decisão explícita sobre atendimento do critério e evidência íntegra; provedor interno deve estar concluído. A última resolução de bloqueio restaura o estado anterior, sem concluir a entrega. Consultas mostram acompanhamentos vencidos, sem automação agendada.
+
+`validar_conclusao` em `aceite_humano` exige decisão explícita do gestor, critério definido/atendido, responsável e evidências, sem dependências/subtarefas necessárias pendentes. Não inferir aceite de relato, upload, silêncio ou resolução de bloqueio. Identidade sintética não comprova identidade real.

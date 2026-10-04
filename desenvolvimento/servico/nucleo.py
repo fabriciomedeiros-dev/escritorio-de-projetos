@@ -15,6 +15,7 @@ from psycopg import sql
 from jsonschema import Draft202012Validator, FormatChecker
 from objetos import Objetos, MAX_BYTES
 import reunioes
+import dependencias
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'local'))
 import ambiente
@@ -24,6 +25,7 @@ API = json.loads((ROOT / 'desenvolvimento/contratos/openapi.json').read_text())
 VALIDATOR = Draft202012Validator({'components': API['components'], 'allOf': [API['components']['schemas']['Pedido']]}, format_checker=FormatChecker())
 IMPLEMENTADOS = {'capturar_entrada', 'criar_registro', 'registrar_relato', 'atualizar_registro', 'preparar_artefato', 'enviar_artefato', 'verificar_artefato', 'vincular_artefato'}
 IMPLEMENTADOS |= reunioes.COMANDOS
+IMPLEMENTADOS |= dependencias.COMANDOS
 
 
 def canonical(value):
@@ -123,6 +125,12 @@ class Servico:
                 source['integridade']='verificada' if artifact['estado']=='verificado' else 'pendente'
             except Falha: source['integridade']='indisponivel_ou_divergente'
         r['dependencias'] = [x['item'] for x in conn.execute('SELECT to_jsonb(d) AS item FROM dependencias d WHERE portfolio=%s AND entrega=%s', (portfolio, id_))]
+        today=conn.execute('SELECT (clock_timestamp() AT TIME ZONE fuso)::date AS dia FROM portfolios WHERE id=%s',(portfolio,)).fetchone()['dia'].isoformat()
+        for dep in r['dependencias']:
+            dep['acompanhamento']='encerrado' if dep['estado']!='pendente' else 'vencido' if dep['acompanhar_em']<today else 'hoje' if dep['acompanhar_em']==today else 'agendado'
+        pending=[d for d in r['dependencias'] if d['estado']=='pendente']
+        r['impedimentos']={'dependencias_pendentes':len(pending),'bloqueios_de_avanco':sum(d['impede_avanco'] for d in pending),'acompanhamentos_vencidos':sum(d['acompanhamento']=='vencido' for d in pending)}
+        r['validacoes']=[x['item'] for x in conn.execute('SELECT to_jsonb(v) AS item FROM validacoes v WHERE portfolio=%s AND registro=%s ORDER BY versao_registro DESC',(portfolio,id_))]
         r['vinculos'] = [x['item'] for x in conn.execute('SELECT to_jsonb(v) AS item FROM vinculos_registros v WHERE portfolio=%s AND (origem=%s OR destino=%s)', (portfolio,id_,id_))]
         r['atualizacoes'] = [x['item'] for x in conn.execute('SELECT to_jsonb(a) AS item FROM atualizacoes a WHERE portfolio=%s AND registro=%s ORDER BY criada_em DESC,id DESC LIMIT 25', (portfolio, id_))]
         r['lacunas'] = [label for field, label in [('responsavel_total','Responsável não definido'), ('prazo_aceito','Prazo não aceito'), ('esforco_restante','Esforço restante não informado')] if r[field] is None]
@@ -157,6 +165,8 @@ class Servico:
         result = {'operacao_id':op,'portfolio':p,'estado':'persistida','protecao':'pendente','registros':[], 'lacunas':[],'fontes':[],'verificada_em':None,'resultado':{}}
         if command in reunioes.COMANDOS:
             return reunioes.apply(self,conn,p,actor,role,op,command,d,result)
+        if command in dependencias.COMANDOS:
+            return dependencias.apply(self,conn,p,actor,role,op,command,d,result)
         if command=='preparar_artefato':
             id_=str(uuid.uuid4())
             conn.execute('INSERT INTO artefatos(portfolio,id,nome,tipo_midia,chave_objeto,sha256,bytes,origem,remetente) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)',(p,id_,d['nome'],d['tipo_midia'],id_,d['sha256_esperado'],d['bytes_esperados'],Jsonb(d['origem']),actor))
@@ -289,6 +299,7 @@ class Servico:
                     if row['comando'] in ('enviar_artefato','verificar_artefato'):
                         self.check_object(p,current)
                 reunioes.verify(self,conn,p,actor,role,result)
+                dependencias.verify(conn,p,result)
                 for ref in result['registros']:
                     saved=self.snapshot(conn,p,ref['id'],actor,role)
                     for source in saved.get('fontes',[]):

@@ -1,6 +1,6 @@
 # Contrato de operações — Escritório v2
 
-Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato, atualização de conteúdo, anexos verificados, reuniões (fonte, ata, revisões, decisões e efetivação) e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
+Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato, atualização de conteúdo, anexos verificados, reuniões (fonte, ata, revisões, decisões e efetivação), dependências/bloqueios e aceite humano de tarefas e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
 
 ## Identidade, isolamento e repetição
 
@@ -63,3 +63,7 @@ Fichas de registros incluem metadados e estado de integridade das fontes. Relato
 ## Reuniões no piloto local — 04/10/2026
 
 `receber_reuniao`, `propor_topicos_reuniao`, `aprovar_topicos_reuniao` e `efetivar_topicos_reuniao` implementados; [semântica e comandos](../servico/REUNIOES.md). Os schemas antes propostos para reuniões foram detalhados antes de uso produtivo: lote/versão esperada, ata, referências verificáveis e ações limitadas. Uma aprovação de ata usa o ID do lote como proposta; todos os tópicos da revisão devem ser decididos antes da aplicação. GET de reuniões permite consulta atual, histórica e lista paginada. Autenticação humana real, aprovação de projeto e proteção permanecem pendentes.
+
+## Bloqueios e aceite no piloto
+
+`registrar_dependencia`, `atualizar_dependencia`, `resolver_dependencia` e `validar_conclusao` disponíveis conforme [BLOQUEIOS.md](../servico/BLOQUEIOS.md). Indicação `impede_avanco` obrigatória; resolução/aceite exigem `criterio_atendido=true` e evidência. Conclusão somente em `aceite_humano` para tarefas; verificação automática permanece indisponível. Operações formais do gestor, com versão, histórico e repetição reconciliável.

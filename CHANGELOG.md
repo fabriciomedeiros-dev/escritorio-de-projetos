@@ -2,6 +2,8 @@
 
 ## 2.0.0 — 2026-10-03
 
+- Implementa dependências/bloqueios, acompanhamento, resolução com evidência e retomada; adiciona migração local 002 e aceite humano de tarefas, com impedimento de conclusão parcial, ciclos e conflitos. Planejamento, proteção e implantação continuam pendentes.
+
 - Em 04/10, implementa reuniões no piloto local: original manual/resposta MCP, ata agrupada, revisões e decisões imutáveis, consulta e efetivação transacional sem duplicação; mantém autenticação real, proteção independente e implantação pendentes.
 
 - Define duas entradas para reuniões (MCP de IA de transcrição ou texto manual com tópicos), convergindo para preservação da fonte e aprovação integral; implementação e escolha do provedor permanecem pendentes.

@@ -1019,7 +1019,8 @@
             "properties": {
               "registro_id": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
               },
               "versao_esperada": {
                 "type": "integer",
@@ -1027,15 +1028,18 @@
               },
               "provedor_id": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
               },
               "terceiro": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
               },
               "motivo": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
               },
               "responsavel_acao": {
                 "type": "string",
@@ -1043,7 +1047,8 @@
               },
               "proxima_acao": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
               },
               "acompanhar_em": {
                 "type": "string",
@@ -1051,7 +1056,11 @@
               },
               "criterio_resolucao": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "impede_avanco": {
+                "type": "boolean"
               }
             },
             "required": [
@@ -1061,19 +1070,30 @@
               "responsavel_acao",
               "proxima_acao",
               "acompanhar_em",
-              "criterio_resolucao"
+              "criterio_resolucao",
+              "impede_avanco"
             ],
             "additionalProperties": false,
-            "anyOf": [
+            "oneOf": [
               {
                 "required": [
                   "provedor_id"
-                ]
+                ],
+                "not": {
+                  "required": [
+                    "terceiro"
+                  ]
+                }
               },
               {
                 "required": [
                   "terceiro"
-                ]
+                ],
+                "not": {
+                  "required": [
+                    "provedor_id"
+                  ]
+                }
               }
             ]
           }
@@ -1084,7 +1104,7 @@
           "dados"
         ],
         "additionalProperties": false,
-        "x-implementado-piloto": false
+        "x-implementado-piloto": true
       },
       "resolver_dependencia": {
         "type": "object",
@@ -1101,7 +1121,8 @@
             "properties": {
               "registro_id": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
               },
               "versao_esperada": {
                 "type": "integer",
@@ -1117,7 +1138,11 @@
               },
               "justificativa": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "criterio_atendido": {
+                "const": true
               }
             },
             "required": [
@@ -1125,7 +1150,8 @@
               "versao_esperada",
               "dependencia_id",
               "evidencia_id",
-              "justificativa"
+              "justificativa",
+              "criterio_atendido"
             ],
             "additionalProperties": false
           }
@@ -1136,7 +1162,7 @@
           "dados"
         ],
         "additionalProperties": false,
-        "x-implementado-piloto": false
+        "x-implementado-piloto": true
       },
       "preparar_artefato": {
         "type": "object",
@@ -1712,7 +1738,8 @@
             "properties": {
               "registro_id": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
               },
               "versao_esperada": {
                 "type": "integer",
@@ -1726,7 +1753,8 @@
               },
               "parecer": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "\\S"
               },
               "artefatos": {
                 "type": "array",
@@ -1736,6 +1764,9 @@
                   "type": "string",
                   "format": "uuid"
                 }
+              },
+              "criterio_atendido": {
+                "const": true
               }
             },
             "required": [
@@ -1743,7 +1774,8 @@
               "versao_esperada",
               "modo",
               "parecer",
-              "artefatos"
+              "artefatos",
+              "criterio_atendido"
             ],
             "additionalProperties": false
           }
@@ -1754,7 +1786,8 @@
           "dados"
         ],
         "additionalProperties": false,
-        "x-implementado-piloto": false
+        "x-implementado-piloto": true,
+        "description": "Piloto: somente aceite_humano explícito do gestor, com critério atendido, evidências íntegras e nenhuma pendência. Verificação automática continua indisponível."
       },
       "exportar_portfolio": {
         "type": "object",
@@ -1841,6 +1874,9 @@
           },
           {
             "$ref": "#/components/schemas/efetivar_topicos_reuniao"
+          },
+          {
+            "$ref": "#/components/schemas/atualizar_dependencia"
           }
         ],
         "discriminator": {
@@ -1862,7 +1898,8 @@
             "enviar_artefato": "#/components/schemas/enviar_artefato",
             "vincular_artefato": "#/components/schemas/vincular_artefato",
             "receber_reuniao": "#/components/schemas/receber_reuniao",
-            "efetivar_topicos_reuniao": "#/components/schemas/efetivar_topicos_reuniao"
+            "efetivar_topicos_reuniao": "#/components/schemas/efetivar_topicos_reuniao",
+            "atualizar_dependencia": "#/components/schemas/atualizar_dependencia"
           }
         }
       },
@@ -1965,7 +2002,8 @@
               "DEPENDENCIA_PENDENTE",
               "APROVACAO_PENDENTE",
               "FONTE_NAO_VERIFICADA",
-              "SERVICO_INDISPONIVEL"
+              "SERVICO_INDISPONIVEL",
+              "DEPENDENCIA_CICLICA"
             ]
           },
           "mensagem": {
@@ -2319,6 +2357,79 @@
             "required": [
               "lote_id",
               "versao_esperada"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false,
+        "x-implementado-piloto": true
+      },
+      "atualizar_dependencia": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "atualizar_dependencia"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "registro_id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "dependencia_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "motivo": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "alteracoes": {
+                "type": "object",
+                "properties": {
+                  "responsavel_acao": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "proxima_acao": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "acompanhar_em": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "impede_avanco": {
+                    "type": "boolean"
+                  }
+                },
+                "minProperties": 1,
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "registro_id",
+              "versao_esperada",
+              "dependencia_id",
+              "motivo",
+              "alteracoes"
             ],
             "additionalProperties": false
           }

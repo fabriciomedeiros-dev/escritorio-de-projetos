@@ -117,6 +117,7 @@ def main():
             env['PGDATABASE'] = restored
             ambiente.execute([ambiente.binary('pg_restore'), '--exit-on-error', '-d', restored, str(archive)], env)
             assert ambiente.sql('SELECT hash_sql FROM escritorio.migracoes WHERE versao=1;', database=restored) == ambiente.sql('SELECT hash_sql FROM escritorio.migracoes WHERE versao=1;')
+            assert ambiente.sql('SELECT hash_sql FROM escritorio.migracoes WHERE versao=2;', database=restored) == ambiente.sql('SELECT hash_sql FROM escritorio.migracoes WHERE versao=2;')
             assert ambiente.sql(TEST, database=restored).endswith('ROLLBACK')
         finally:
             # Apenas a base de ensaio cujo nome foi gerado nesta execução.

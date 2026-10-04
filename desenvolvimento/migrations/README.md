@@ -39,7 +39,7 @@ python3 desenvolvimento/testes/verificar_esquema.py
 python3 desenvolvimento/local/ambiente.py stop
 ```
 
-O comando aceita apenas o banco local criado pelo próprio ambiente. Aplicação é transacional e serializada por advisory lock. A segunda execução confere o checksum e não reaplica. Alteração de uma migração aplicada é rejeitada pelo runner; evolução exige `002_...sql` e extensão do runner. O runner inicial suporta somente a revisão 001.
+O comando aceita apenas o banco local criado pelo próprio ambiente. Aplicação é transacional e serializada por advisory lock. A segunda execução confere o checksum e não reaplica. Alteração de uma migração aplicada é rejeitada pelo runner; evolução exige arquivo numerado novo. O runner percorre migrações em ordem e confere cada checksum. A migração [002_bloqueios.sql](002_bloqueios.sql) acrescenta indicação explícita de impedimento de avanço e preservação do estado anterior da tarefa.
 
 Nenhum portfólio, pessoa ou trabalho real é semeado. Testes usam dados sintéticos e rollback; também exportam/restauram o schema real em outra base temporária e repetem os testes nela. A base de restauração gerada é removida ao terminar, sem remover o cluster persistente. O schema persiste vazio, exceto o registro de migração. Não há função de reset destrutivo. Rollback de implantação futura exige plano específico e exportação prévia; não remover schema para desfazer uma mudança com dados reais.
 

@@ -61,3 +61,7 @@ Uma solicitação gera várias tarefas e pode originar projeto sem perder sua or
 ## Autoridade dos campos
 
 Estado, prazo, responsável, esforço e dependências: fonte operacional futura. Narrativa de decisões e documentos gerenciais: Markdown vinculado, com índices operacionais. Requisitos funcionais: repositório de documentação indicado. Código e evidências técnicas: repositório de desenvolvimento. Metadados locais apontam para essas fontes, sem redefini-las.
+
+## Incremento físico local — bloqueios
+
+Migração 002 acrescenta `dependencias.impede_avanco` e `registros.estado_antes_bloqueio`. Dependência pendente sempre impede conclusão, mas somente impedimento explícito muda a tarefa para bloqueada. Última resolução restaura o estado anterior. Acompanhamento e resolução preservam autoria e histórico; conclusão por aceite humano registra validação da versão final. Isso não altera fase de projeto ou prazo automaticamente.

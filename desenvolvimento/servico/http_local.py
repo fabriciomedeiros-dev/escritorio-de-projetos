@@ -93,7 +93,7 @@ def server(service=None,port=8765):
 
 if __name__=='__main__':
     http=server()
-    print('Piloto local em http://127.0.0.1:8765 — captura, criação, relatos, consultas e reuniões com revisão/aplicação; proteção pendente.')
+    print('Piloto local em http://127.0.0.1:8765 — captura, criação, relatos, reuniões, bloqueios/dependências e aceite humano; proteção pendente.')
     try: http.serve_forever()
     except KeyboardInterrupt: pass
     finally: http.server_close()
