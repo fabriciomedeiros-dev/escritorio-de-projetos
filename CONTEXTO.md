@@ -91,3 +91,7 @@ Ao continuar este projeto em outro computador, leia este arquivo, `README.md`, `
 ## Bloqueios e aceite no piloto
 
 Migração 002 local diferencia dependência necessária de impedimento de avanço e preserva estado de retomada. API registra/altera acompanhamento/resolve com evidência e critério explicitamente aceito; impede ciclos e conclusão com pendências. Aceite humano de tarefa exige responsável ativo, critério e evidências; verificação automática e encerramento de solicitação/projeto permanecem pendentes. Ver `desenvolvimento/servico/BLOQUEIOS.md`. Identidades são sintéticas, proteção independente e implantação central continuam pendentes.
+
+## Replicação local v2
+
+Instalação e transferência lógica verificadas em ambientes separados no macOS. Guia: `desenvolvimento/local/REPLICACAO.md`. Pacote preserva dados demonstrativos, objetos e revisões/documentos locais, com credenciais novas no destino. Não sincroniza bancos entre computadores nem implementa proteção independente contínua. Linux/WSL não validado.

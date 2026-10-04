@@ -1,4 +1,5 @@
 """Inicializa somente identidades/portfólios sintéticos no banco local."""
+import argparse
 import hashlib
 import json
 import os
@@ -13,7 +14,7 @@ import ambiente
 from nucleo import CONFIG
 
 
-def main():
+def preparar(identidades_restauradas=None):
     if not ambiente.running(): raise RuntimeError('Inicie e migre o ambiente local primeiro.')
     CONFIG.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
     os.chmod(CONFIG.parent,0o700)
@@ -28,16 +29,25 @@ def main():
             conn.execute('GRANT INSERT ON escritorio.validacoes TO escritorio_api_local')
         print('Configuração sintética existente; privilégios de artefatos/reuniões/dependências conferidos, credenciais preservadas.')
         return
-    actors={name:str(uuid.uuid4()) for name in ('gestor','executor','consulta','outro')}
+    profiles=('gestor','executor','consulta','outro')
+    actors=identidades_restauradas or {name:str(uuid.uuid4()) for name in profiles}
+    if set(actors)!=set(profiles): raise RuntimeError('Identidades de restauração incompletas.')
+    actors={name:str(uuid.UUID(id_)) for name,id_ in actors.items()}
     tokens={name:secrets.token_urlsafe(40) for name in actors}
     password=secrets.token_urlsafe(40)
     env=ambiente.connection()
     with psycopg.connect(host=env['PGHOST'],port=env['PGPORT'],dbname=env['PGDATABASE'],user=env['PGUSER'],password=env['PGPASSWORD']) as conn:
         conn.execute("SELECT pg_advisory_xact_lock(20261003,2)")
-        conn.execute("INSERT INTO escritorio.portfolios(id,nome) VALUES ('demo_escritorio','Demonstração sintética'),('demo_outro','Outro domínio sintético')")
-        for name,id_ in actors.items():
-            conn.execute('INSERT INTO escritorio.pessoas(id,nome) VALUES(%s,%s)',(id_,'Pessoa sintética '+name))
-            conn.execute('INSERT INTO escritorio.membros(portfolio,pessoa,papel) VALUES(%s,%s,%s)',('demo_outro' if name=='outro' else 'demo_escritorio',id_,'gestor' if name=='outro' else name))
+        if identidades_restauradas:
+            for name,id_ in actors.items():
+                row=conn.execute('SELECT papel FROM escritorio.membros WHERE portfolio=%s AND pessoa=%s',('demo_outro' if name=='outro' else 'demo_escritorio',id_)).fetchone()
+                if not row or row[0]!=('gestor' if name=='outro' else name):
+                    raise RuntimeError('Identidade restaurada diverge da associação original.')
+        else:
+            conn.execute("INSERT INTO escritorio.portfolios(id,nome) VALUES ('demo_escritorio','Demonstração sintética'),('demo_outro','Outro domínio sintético')")
+            for name,id_ in actors.items():
+                conn.execute('INSERT INTO escritorio.pessoas(id,nome) VALUES(%s,%s)',(id_,'Pessoa sintética '+name))
+                conn.execute('INSERT INTO escritorio.membros(portfolio,pessoa,papel) VALUES(%s,%s,%s)',('demo_outro' if name=='outro' else 'demo_escritorio',id_,'gestor' if name=='outro' else name))
         conn.execute(sql.SQL('CREATE ROLE escritorio_api_local LOGIN PASSWORD {} NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT').format(sql.Literal(password)))
         conn.execute('GRANT CONNECT ON DATABASE escritorio_test TO escritorio_api_local')
         conn.execute('GRANT USAGE ON SCHEMA escritorio TO escritorio_api_local')
@@ -55,6 +65,13 @@ def main():
         with os.fdopen(fd,'w') as file: json.dump(value,file,indent=2)
     print('Demonstração preparada: demo_escritorio e demo_outro, com quatro identidades sintéticas.')
     print('Usuário SQL restrito; credenciais locais ignoradas pelo Git. Nenhum dado real foi importado.')
+
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--identidades-restauradas',type=Path,help='Mapeamento de IDs, sem tokens, produzido pela restauração local')
+    args=parser.parse_args()
+    preparar(json.loads(args.identidades_restauradas.read_text()) if args.identidades_restauradas else None)
 
 
 if __name__=='__main__': main()

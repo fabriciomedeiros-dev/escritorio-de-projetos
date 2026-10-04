@@ -95,7 +95,7 @@ def main():
         next_page=call(p+'/registros?'+urlencode({'limite':1,'cursor':page['proximo_cursor']}))[1]
         assert next_page['itens'][0]['id']!=page['itens'][0]['id']
         assert call(p+'/registros?'+urlencode({'limite':1,'assunto':'alterado','cursor':page['proximo_cursor']}))[0]==400
-        assert len(call(p+'/registros',profile='executor')[1]['itens'])==1
+        assert len(call(p+'/registros?'+urlencode({'id':id_}),profile='executor')[1]['itens'])==1
         hidden=post('criar_registro',{'tipo':'tarefa','titulo':'Privada'})[0][1]['registros'][0]['id']
         assert post('registrar_relato',{'registro_id':hidden,'versao_esperada':1,'entregue':'Invasão'},profile='executor')[0][0]==404
         # Consolidar complemento sem criar outro registro ou perder o original.

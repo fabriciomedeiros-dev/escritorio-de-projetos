@@ -21,6 +21,11 @@ DATABASE = 'escritorio_test'
 PORT = '55432'
 
 
+def socket_root():
+    # macOS resolve /tmp para /private/tmp; Linux/WSL usa o temporário do sistema.
+    return Path('/tmp').resolve()
+
+
 def binary(name):
     init = shutil.which('initdb')
     if not init:
@@ -57,7 +62,7 @@ def connection():
     owned()
     state = json.loads(STATE.read_text())
     socket = Path(state['socket'])
-    if socket.parent != Path('/private/tmp') or not socket.name.startswith('ep-v2-'):
+    if socket.parent.resolve() != socket_root() or not socket.name.startswith('ep-v2-'):
         raise RuntimeError('Socket fora do espaço local permitido.')
     return {'PGHOST': str(socket), 'PGPORT': PORT, 'PGUSER': USER,
             'PGPASSWORD': PASSWORD.read_text().strip(), 'PGDATABASE': DATABASE}
@@ -95,7 +100,7 @@ def start():
     if running():
         print('Cluster local já em execução.')
         return
-    socket = Path(tempfile.mkdtemp(prefix='ep-v2-', dir='/private/tmp'))
+    socket = Path(tempfile.mkdtemp(prefix='ep-v2-', dir=str(socket_root())))
     os.chmod(socket, 0o700)
     try:
         execute([binary('pg_ctl'), '-D', str(DATA), '-l', str(RUNTIME / 'postgres.log'),
@@ -171,7 +176,7 @@ def stop():
     execute([binary('pg_ctl'), '-D', str(DATA), '-m', 'fast', '-w', 'stop'])
     # Só remover o diretório de socket criado por este ambiente, depois do shutdown.
     socket = Path(json.loads(STATE.read_text())['socket'])
-    if socket.parent == Path('/private/tmp') and socket.name.startswith('ep-v2-'):
+    if socket.parent.resolve() == socket_root() and socket.name.startswith('ep-v2-'):
         socket.rmdir()
     print('Cluster local parado; banco e senha local preservados fora do Git.')
 

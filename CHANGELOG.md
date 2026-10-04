@@ -2,6 +2,8 @@
 
 ## 2.0.0 — 2026-10-03
 
+- Em 04/10, prepara instalação reproduzível e transferência lógica local de banco/objetos/documentos, com checksum, credenciais novas, recusa de destino ocupado e teste em clusters separados. Sincronização central e proteção contínua permanecem pendentes.
+
 - Implementa dependências/bloqueios, acompanhamento, resolução com evidência e retomada; adiciona migração local 002 e aceite humano de tarefas, com impedimento de conclusão parcial, ciclos e conflitos. Planejamento, proteção e implantação continuam pendentes.
 
 - Em 04/10, implementa reuniões no piloto local: original manual/resposta MCP, ata agrupada, revisões e decisões imutáveis, consulta e efetivação transacional sem duplicação; mantém autenticação real, proteção independente e implantação pendentes.
