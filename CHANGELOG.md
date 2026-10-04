@@ -2,6 +2,8 @@
 
 ## 2.0.0 — 2026-10-03
 
+- Adiciona roteiro Windows com WSL 2/Ubuntu 22.04 para replicação local; execução nesse sistema ainda pendente.
+
 - Em 04/10, prepara instalação reproduzível e transferência lógica local de banco/objetos/documentos, com checksum, credenciais novas, recusa de destino ocupado e teste em clusters separados. Sincronização central e proteção contínua permanecem pendentes.
 
 - Implementa dependências/bloqueios, acompanhamento, resolução com evidência e retomada; adiciona migração local 002 e aceite humano de tarefas, com impedimento de conclusão parcial, ciclos e conflitos. Planejamento, proteção e implantação continuam pendentes.

@@ -6,6 +6,43 @@ Preparado em 04/10/2026. Instalação e restauração verificadas em macOS, Pyth
 
 Copie os três arquivos de `.runtime/transferencias/`: código `.bundle`, dados `.zip` e checksum `.zip.sha256`. São privados; não versionar nem publicar o pacote de dados. O bundle contém código e documentação versionada. O ZIP contém o banco demonstrativo, objetos originais, revisões locais de reuniões e documentos de negócio ainda não commitados. Não inclui senhas, tokens, venv nem o diretório físico do PostgreSQL.
 
+## Na outra máquina (Windows com WSL 2)
+
+Roteiro preparado, ainda sem execução em Windows. Escolhemos Ubuntu 22.04 para usar Python 3.10 e PostgreSQL 14 disponíveis nessa distribuição. Requer Windows compatível com WSL 2 e permissão para instalar seus componentes. Se já houver outra distribuição, não remova nem substitua seus dados.
+
+No PowerShell como administrador:
+
+```powershell
+wsl --install -d Ubuntu-22.04
+```
+
+Reinicie se solicitado, abra Ubuntu 22.04 e crie seu usuário Linux. Confira `wsl -l -v` no PowerShell; a distribuição deve usar versão 2. Referências: [Microsoft — instalar WSL](https://learn.microsoft.com/en-us/windows/wsl/install), [Ubuntu no WSL](https://ubuntu.com/wsl/docs/latest/howto/install-ubuntu-wsl2/), [PostgreSQL 14 no Ubuntu 22.04](https://packages.ubuntu.com/jammy-updates/postgresql-14).
+
+Dentro do terminal Ubuntu:
+
+```bash
+sudo apt update
+sudo apt install -y python3 python3-venv python3-pip git postgresql-14 postgresql-client-14
+mkdir -p ~/Projetos/transferencia-escritorio
+cd ~/Projetos/transferencia-escritorio
+explorer.exe .
+```
+
+A janela do Explorer mostra essa pasta Linux. Copie para ela os três arquivos `.bundle`, `.zip` e `.zip.sha256`. Mantenha o projeto no diretório Linux, para conservar permissões dos arquivos privados. Volte ao Ubuntu:
+
+```bash
+git clone escritorio-v2-codigo-2026-10-04.bundle escritorio-de-projetos
+cd escritorio-de-projetos
+python3 desenvolvimento/local/replicar.py diagnosticar
+python3 desenvolvimento/local/replicar.py preparar --pacote ../escritorio-v2-dados-2026-10-04.zip
+python3 desenvolvimento/local/replicar.py verificar
+python3 desenvolvimento/local/replicar.py servir
+```
+
+Execute os scripts como usuário comum. O PostgreSQL criado pelo piloto é separado do cluster padrão instalado pelo Ubuntu. O serviço permanece aberto no terminal. Em outro terminal Ubuntu, use o agente para trabalhar nessa pasta; ele precisa executar comandos no WSL, inclusive para acessar o socket do banco. Não execute esses scripts com Python nativo do Windows. A integração específica do cliente Codex no Windows deverá ser conferida na máquina; o roteiro de banco/serviço não comprova essa integração.
+
+Se alguma etapa falhar, guarde a saída e não avance às seguintes. `verificar` só confirma a instalação quando todos os testes terminarem com sucesso. Não use `preparar` sem pacote antes da restauração.
+
 ## Na outra máquina (macOS)
 
 Instale os pré-requisitos se estiverem ausentes:
