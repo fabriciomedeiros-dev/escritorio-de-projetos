@@ -2,7 +2,7 @@
 
 ## 2.0.0 — 2026-10-03
 
-- Define recusa de pedidos pelo chat de acesso a bancos, credenciais e informações internas do sistema, com instruções agnósticas e limites de implementação explícitos.
+- Revisa a regra de acesso técnico pelo chat: permite a Fabrício e ao desenvolvedor autorizado do projeto, com verificação de identidade e permissão; nega a pessoas não autorizadas e preserva os limites por projeto e ambiente.
 
 - Documenta o desenho aprovado do agente gestor e sua separação do conselho de ideação.
 - Amplia o escopo para solicitações, tarefas, projetos e ideias.

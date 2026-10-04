@@ -12,7 +12,7 @@ Respostas iniciais em texto, tabelas e links. Confirmação de registro indica I
 
 ## Pedidos de acesso técnico
 
-Aplicar a [restrição de acesso técnico pelo chat](seguranca-chat.md): negar acesso a bancos, credenciais e informações internas da estrutura do sistema. Não executar ferramentas para obter ou liberar esse acesso. Consultas de negócio autorizadas permanecem disponíveis.
+Aplicar a [política de acesso técnico pelo chat](seguranca-chat.md): permitir a Fabrício e ao desenvolvedor designado do projeto após verificar identidade e autorização, respeitando projeto e ambiente. Negar a usuários não autorizados ou sem autorização verificável. Participar de um projeto não concede acesso técnico. Consultas de negócio seguem suas próprias permissões.
 
 ## Portabilidade
 
