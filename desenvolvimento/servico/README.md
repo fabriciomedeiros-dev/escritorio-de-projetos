@@ -18,7 +18,9 @@ Aplicar a [política de segurança do chat](../../arquitetura/v2/seguranca-chat.
 
 A ficha inclui os textos das entradas originais e complementares vinculadas, permitindo recuperar definições sem conhecer o chat de origem. A resposta contém versão, histórico de origem, fontes, dependências, últimas 25 atualizações e lacunas. Relato não conclui tarefa nem aceita prazo automaticamente. O nome informado do autor do relato é separado do remetente autenticado. ID de registro usa prefixo do portfólio/tipo e UUID; título não é identificador.
 
-Indisponível: conclusão, aprovação/extração de reuniões, promoção a projeto, dependências via API, cronograma, backup independente e interface web/menu do gestor. Comandos correspondentes são rejeitados explicitamente; não confirme seus efeitos em chat.
+Reuniões: recebimento de fonte manual/resposta MCP, ata e tópicos propostos pelo agente, revisão/aprovação por versão e efetivação transacional estão implementados localmente. Consulte [fluxo e comandos de reuniões](REUNIOES.md).
+
+Indisponível: conclusão, promoção a projeto, dependências via API, cronograma, backup independente e interface web/menu do gestor. Comandos correspondentes são rejeitados explicitamente; não confirme seus efeitos em chat.
 
 ## Preparação e execução
 
@@ -86,7 +88,7 @@ O ensaio usa pg_dump/restauração em base temporária e preserva conexões exis
 
 `http.server` é um servidor de desenvolvimento local, sem TLS, hardening ou adequação produtiva. Escolher runtime de produção, autenticação SuperSync, papéis SQL/isolamento, pool, limites/monitoramento e deploy somente na etapa de integração. A biblioteca padrão documenta esse limite. [HTTP local](https://docs.python.org/3/library/http.server.html).
 
-Originais e vínculos de evidências estão implementados localmente. As próximas entregas funcionais são revisão/aprovação de reuniões e conclusão por evidência. Não migrar dados reais antes de proteger/restaurar banco e arquivos e declarar o corte de autoridade.
+Originais e vínculos de evidências estão implementados localmente. Revisão/aprovação de reuniões está implementada no piloto; a próxima entrega funcional é conclusão por evidência. Não migrar dados reais antes de proteger/restaurar banco e arquivos e declarar o corte de autoridade.
 
 Referências técnicas: [parâmetros psycopg](https://www.psycopg.org/psycopg3/docs/basic/params.html), [JSON Schema](https://python-jsonschema.readthedocs.io/en/stable/validate/), [contrato](../contratos/README.md).
 
@@ -117,3 +119,7 @@ Em `baixar`, `--id` é o UUID do artefato e `--arquivo` é o destino local, que 
 Não há nova migração de tabelas. Execute novamente `preparar_demo.py` para conferir os grants mínimos de INSERT em artefatos/fontes e UPDATE em artefatos, preservando as credenciais existentes. Reinicie apenas o serviço HTTP para carregar esta implementação. O usuário do serviço continua sem DELETE, superuser, criação de banco ou schema.
 
 Testes com arquivos sintéticos incluem checksum/tamanho, reenvio, falha entre arquivo e commit, corrupção, symlink, download sem permissão, isolamento, cliente portável e evidência de entrega parcial. Evidência registrada não conclui a tarefa. Restauração conjunta de arquivos e banco, proteção independente, quotas totais, retenção, varredura de conteúdo e armazenamento central são pendências para produção.
+
+## Incremento de reuniões — 04/10/2026
+
+Recebimento, ata agrupada, revisões, decisões e aplicação transacional implementados em [REUNIOES.md](REUNIOES.md), com consultas e cliente portável. Executar `preparar_demo.py` confere os privilégios mínimos de INSERT nas tabelas existentes de reuniões/vínculos sem trocar credenciais. Nenhuma migração SQL nova; reiniciar somente o HTTP para carregar o código. Identidades reais, proteção independente e uso central continuam pendentes.

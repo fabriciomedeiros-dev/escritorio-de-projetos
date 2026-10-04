@@ -22,7 +22,7 @@ class Handler(BaseHTTPRequestHandler):
     def dispatch(self):
         try:
             url=urlsplit(self.path)
-            match=re.fullmatch(r'/v1/portfolios/([a-z][a-z0-9_-]*)/(operacoes|registros|artefatos)(?:/([0-9a-fA-F-]+))?',url.path)
+            match=re.fullmatch(r'/v1/portfolios/([a-z][a-z0-9_-]*)/(operacoes|registros|artefatos|reunioes)(?:/([0-9a-fA-F-]+))?',url.path)
             if not match: raise Falha(404,'NAO_ENCONTRADO','Rota não disponível.')
             auth=self.headers.get('Authorization','')
             if not auth.startswith('Bearer '): raise Falha(401,'NAO_AUTENTICADO','Bearer token obrigatório.')
@@ -65,6 +65,10 @@ class Handler(BaseHTTPRequestHandler):
                 query=parse_qs(url.query,keep_blank_values=True)
                 if any(len(values)!=1 for values in query.values()): raise Falha(400,'PEDIDO_INVALIDO','Filtro repetido.')
                 result=self.service.query(p,actor,{key:value[0] for key,value in query.items()})
+            elif self.command=='GET' and resource=='reunioes':
+                query=parse_qs(url.query,keep_blank_values=True)
+                if any(len(values)!=1 for values in query.values()): raise Falha(400,'PEDIDO_INVALIDO','Filtro repetido.')
+                result=self.service.query_meetings(p,actor,id_,{key:value[0] for key,value in query.items()})
             else: raise Falha(404,'NAO_ENCONTRADO','Rota não disponível.')
             self.reply(200,result)
         except Falha as error:
@@ -89,7 +93,7 @@ def server(service=None,port=8765):
 
 if __name__=='__main__':
     http=server()
-    print('Piloto local em http://127.0.0.1:8765 — captura, criação, atualização de conteúdo, relatos e consultas; proteção pendente.')
+    print('Piloto local em http://127.0.0.1:8765 — captura, criação, relatos, consultas e reuniões com revisão/aplicação; proteção pendente.')
     try: http.serve_forever()
     except KeyboardInterrupt: pass
     finally: http.server_close()

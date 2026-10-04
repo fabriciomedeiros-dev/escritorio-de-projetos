@@ -7,7 +7,7 @@
 | 1 | Especificação, arquitetura e interação aprovadas funcionalmente | Documentadas nesta versão |
 | 2 | Modelo lógico, entidades, estados e invariantes | Documentado; esquema físico 001 aplicado e testado localmente |
 | 3 | Avaliação e escolha de armazenamento | PostgreSQL central escolhido; comparação e ensaios sintéticos concluídos; comparação de hospedagem concluída, decisão pendente |
-| 4 | Fluxo mínimo pelo Codex | Piloto HTTP/cliente local implementados para texto, criação, relato, atualização de conteúdo com originais vinculados e consulta; anexos/evidências verificados implementados; reuniões e integração SuperSync pendentes |
+| 4 | Fluxo mínimo pelo Codex | Piloto HTTP/cliente local implementados para texto, criação, relato, atualização de conteúdo com originais vinculados e consulta; anexos/evidências verificados implementados; reuniões com recebimento, revisão e aplicação transacional implementadas localmente; integração SuperSync pendente |
 | 5 | Piloto com casos reais e recuperação | Pendente |
 | 6 | Planejamento semanal, capacidade e alertas | Pendente |
 | 7 | Interface individual para dois integrantes | Posterior à validação do uso individual |
@@ -62,6 +62,10 @@ Implementada atualização de conteúdo de ideias/solicitações abertas, com v�
 
 Implementados preparação, envio, revalidação, download autenticado, captura de anexo e vínculos por versão/finalidade. Arquivos imutáveis locais com tamanho e checksum; recuperação de envio interrompido entre filesystem e banco testada. Cliente portável permite envio e download. Limite inicial 512 KiB por arquivo; somente identidades sintéticas. Conclusão, reuniões e proteção independente continuam pendentes. Não houve alteração no SuperSync ou migração de dados reais.
 
-## Próxima entrega — reuniões com duas formas de entrada
+## Entrega de reuniões — especificação inicial e resultado
 
-Implementar o [fluxo comum de reuniões](reunioes.md) para texto manual com tópicos e conteúdo importado por MCP de um serviço de transcrição. Validar inicialmente texto e resposta MCP sintética, preservando fonte, revisões e aprovação integral. Integração real depende da escolha do serviço e conexão autorizada; não bloqueia o fluxo manual. Nenhuma ação operacional antes da aprovação das revisões exatas.
+O [fluxo comum de reuniões](reunioes.md) para texto manual com tópicos e resposta MCP foi implementado no incremento abaixo. Texto e resposta MCP sintética foram validados preservando fonte, revisões e aprovação integral. Integração real usa o conector autorizado do cliente; não há importação automática. Nenhuma ação operacional antes da aprovação das revisões exatas.
+
+## Incremento local — reuniões (2026-10-04)
+
+Validação funcional pelo ensaio documental concluída. Implementado fluxo comum para original manual e resposta MCP: recebimento recuperável, ata/tópicos propostos pelo agente, decisões imutáveis por versão, revisão integral e efetivação atômica de ações suportadas. Consulta de versões e reenvio sem duplicação; nenhuma criação de projeto ou conclusão habilitada por esse incremento. Cenários HTTP em base temporária incluem correção sem herança de aprovação, isolamento, origem íntegra, rollback e confirmação perdida após commit. Ver [entrega e limites](../../desenvolvimento/servico/REUNIOES.md). Proteção independente, autenticação real, centralização e migração conciliada continuam pendentes.

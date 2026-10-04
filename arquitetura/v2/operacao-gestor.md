@@ -24,7 +24,7 @@ Um conflito de versão exige nova consulta e avaliação da mudança antes de pr
 
 Mostrar resumo salvo, identificador, situação, lacunas e pendência de proteção. Uma ideia pode estar capturada sem responsável, prazo ou esforço; lacunas não equivalem a atraso. Relatos de tarefas não concluem entregas nem aceitam prazos automaticamente.
 
-Não anunciar reuniões, promoção, conclusão, planejamento ou proteção independente como disponíveis. Atualizar cadastro de usuário, meta, prioridade, responsável e estados continua fora desta entrega. A política de acesso técnico segue `seguranca-chat.md`; identidade sintética de demonstração não comprova autorização administrativa.
+Reuniões estão disponíveis somente no piloto local, conforme limites abaixo. Não anunciar promoção, conclusão, planejamento ou proteção independente como disponíveis. Atualizar cadastro de usuário, meta, prioridade, responsável e estados continua fora desta entrega. A política de acesso técnico segue `seguranca-chat.md`; identidade sintética de demonstração não comprova autorização administrativa.
 
 ## Anexos e evidências
 
@@ -32,6 +32,10 @@ No piloto, use `cliente.py anexar` para arquivo local de até 512 KiB, com UUID 
 
 A ficha apresenta ID, nome, checksum e integridade de suas fontes; use download autenticado para recuperar o original. Nome do arquivo não é identificador. Não apresentar evidência como conclusão nem tratar upload de reunião como aprovação de seus tópicos. Em original ausente ou divergente, explicitar a falha de integridade e não confirmar recuperação completa. A proteção independente continua pendente.
 
-## Reuniões — próxima entrega
+## Reuniões — piloto implementado
 
-A [especificação de reuniões](reunioes.md) prevê MCP de IA de transcrição e envio de texto com tópicos. Preservar o recebido como fonte e não exigir transcrição integral quando houver somente tópicos. Ambos exigem revisão de todos os tópicos por Fabrício antes de efeitos operacionais. Importação MCP e aprovação ainda não disponíveis no piloto; não anunciar integração já conectada.
+Seguir [fluxo de reuniões](../../desenvolvimento/servico/REUNIOES.md). Importar original manual ou resposta de MCP autorizado com `cliente.py importar-reuniao`; consultar por `cliente.py reunioes`. Síntese e identificação de tópicos são propostas produzidas pelo agente cliente, a partir das fontes, sem modelo embutido no servidor.
+
+Apresentar primeiro a ata resumida agrupando apresentações e discussões; depois revisar os encaminhamentos por grupos, com contador e opções. Registrar a aprovação explícita da ata e de todos os tópicos nas revisões exatas; nenhuma aprovação deve ser inferida do original. Decisões parciais são recuperáveis e não aplicam ações. Correções criam nova revisão e não herdam aprovações.
+
+Somente após revisão integral, enviar `efetivar_topicos_reuniao` com versão esperada. A API aplica ações suportadas sem duplicação e preserva fontes/histórico. Não confirmar responsáveis/prazos aceitos, criação de projeto ou conclusão como efeito desse fluxo. Dados reais dos ensaios documentais permanecem fora do banco sintético; autenticação real e proteção continuam pendentes.

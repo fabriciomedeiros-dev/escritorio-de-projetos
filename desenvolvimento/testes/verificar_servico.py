@@ -250,6 +250,8 @@ def main():
         with ThreadPoolExecutor(max_workers=2) as pool:
             results=list(pool.map(lambda _:call(p+'/operacoes',body=concurrent,key=concurrent['operacao_id']),range(2)))
         assert results[0]==results[1] and results[0][0]==200
+        from cenarios_reunioes import run as verificar_reunioes
+        verificar_reunioes(call,post,p,service,clients,validator,client,http.server_port,Path(objects.name))
         with psycopg.connect(host=env['PGHOST'],port=env['PGPORT'],dbname=database,user='escritorio_api_local',password=config['senha_banco']) as conn:
             row=conn.execute('SELECT rolsuper,rolcreatedb FROM pg_roles WHERE rolname=current_user').fetchone()
             assert row==(False,False)

@@ -1,6 +1,6 @@
 # Escritório de Projetos IA — versão 2
 
-Data: 2026-10-03. Situação: desenho funcional aprovado por Fabrício nesta sessão; especificação documentada, implementação pendente.
+Data: 2026-10-03. Situação: desenho funcional aprovado por Fabrício nesta sessão; especificação documentada; piloto local com captura, originais, consultas e reuniões implementado; operação central pendente.
 
 A versão 2 amplia a gestão para ideias, solicitações pontuais, projetos e tarefas. Um agente gestor acompanha o trabalho; o conselho existente prepara ideias antes da promoção humana a projeto. Os papéis do conselho não são agentes operacionais de gestão.
 

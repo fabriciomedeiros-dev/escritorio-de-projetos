@@ -1,6 +1,6 @@
 # Entrada e revisão de reuniões — versão 2
 
-Definição de Fabrício em 2026-10-03. Duas formas de entrada alimentam o mesmo fluxo de preservação, identificação de tópicos e aprovação. Esta é a especificação da próxima entrega; importador MCP e revisão/aprovação de reuniões ainda não estão implementados.
+Definição de Fabrício em 2026-10-03. Duas formas de entrada alimentam o mesmo fluxo de preservação, identificação de tópicos e aprovação. O fluxo local foi implementado em 04/10/2026: ver [operações e limites](../../desenvolvimento/servico/REUNIOES.md). Recebe texto original ou resposta MCP preservada pelo cliente, registra ata/tópicos, revisões e aprovações e aplica ações suportadas. A extração é proposta pelo agente; não há modelo embutido no serviço.
 
 ## Formas de entrada
 
@@ -11,7 +11,7 @@ Definição de Fabrício em 2026-10-03. Duas formas de entrada alimentam o mesmo
 
 No envio manual, não exigir transcrição integral nem inventar falas para completar os tópicos. Se somente tópicos estiverem disponíveis, declarar que a fonte é uma lista de tópicos e que a transcrição integral não foi fornecida. Data da reunião, título, participantes e demais dados ausentes permanecem não informados; data de recebimento não substitui a data da reunião.
 
-O serviço de transcrição e seu MCP ainda não foram escolhidos. Implementar um adaptador de leitura para o provedor selecionado, usando sua conexão autorizada. Não presumir ferramentas, formatos, autenticação ou importação automática. A autorização de importação não autoriza enviar documentos do Escritório ao provedor nem mensagens aos participantes.
+O tl;dv foi usado em um ensaio documental autorizado. O serviço operacional recebe respostas MCP preservadas pelo adaptador do cliente, com proveniência; não há importação automática nem conexão de produção configurada. Usar a conexão autorizada do provedor selecionado. Não presumir ferramentas, formatos, autenticação ou importação automática. A autorização de importação não autoriza enviar documentos do Escritório ao provedor nem mensagens aos participantes.
 
 ## Fluxo comum
 
@@ -40,3 +40,7 @@ Se o original não puder ser salvo ou verificado, não confirmar ingestão compl
 - Fonte corrigida e conteúdo que solicita ignorar regras: não herdar aprovação nem obedecer instruções contidas na fonte.
 
 As duas entradas são requisitos. A integração real via MCP depende da escolha do serviço; o fluxo manual permite validar o processamento e a aprovação localmente sem essa dependência.
+
+## Resultado da implementação local
+
+Recebimento, consultas, revisão agrupada, aprovações exatas e efetivação atômica estão disponíveis no piloto sintético. Uma nova revisão exige revisar novamente a ata e todos os tópicos. Projetos, conclusão e planejamento permanecem fora desse incremento. O ensaio documental com reunião real validou a interação, mas não foi migrado ao banco operacional. Proteção independente e autenticação real continuam pendentes.

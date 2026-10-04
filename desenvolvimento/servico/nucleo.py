@@ -14,6 +14,7 @@ from psycopg.types.json import Jsonb
 from psycopg import sql
 from jsonschema import Draft202012Validator, FormatChecker
 from objetos import Objetos, MAX_BYTES
+import reunioes
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'local'))
 import ambiente
@@ -22,6 +23,7 @@ CONFIG = ROOT / '.runtime' / 'servico' / 'config.local.json'
 API = json.loads((ROOT / 'desenvolvimento/contratos/openapi.json').read_text())
 VALIDATOR = Draft202012Validator({'components': API['components'], 'allOf': [API['components']['schemas']['Pedido']]}, format_checker=FormatChecker())
 IMPLEMENTADOS = {'capturar_entrada', 'criar_registro', 'registrar_relato', 'atualizar_registro', 'preparar_artefato', 'enviar_artefato', 'verificar_artefato', 'vincular_artefato'}
+IMPLEMENTADOS |= reunioes.COMANDOS
 
 
 def canonical(value):
@@ -121,6 +123,7 @@ class Servico:
                 source['integridade']='verificada' if artifact['estado']=='verificado' else 'pendente'
             except Falha: source['integridade']='indisponivel_ou_divergente'
         r['dependencias'] = [x['item'] for x in conn.execute('SELECT to_jsonb(d) AS item FROM dependencias d WHERE portfolio=%s AND entrega=%s', (portfolio, id_))]
+        r['vinculos'] = [x['item'] for x in conn.execute('SELECT to_jsonb(v) AS item FROM vinculos_registros v WHERE portfolio=%s AND (origem=%s OR destino=%s)', (portfolio,id_,id_))]
         r['atualizacoes'] = [x['item'] for x in conn.execute('SELECT to_jsonb(a) AS item FROM atualizacoes a WHERE portfolio=%s AND registro=%s ORDER BY criada_em DESC,id DESC LIMIT 25', (portfolio, id_))]
         r['lacunas'] = [label for field, label in [('responsavel_total','Responsável não definido'), ('prazo_aceito','Prazo não aceito'), ('esforco_restante','Esforço restante não informado')] if r[field] is None]
         return r
@@ -152,6 +155,8 @@ class Servico:
 
     def apply(self, conn, p, actor, role, op, command, d):
         result = {'operacao_id':op,'portfolio':p,'estado':'persistida','protecao':'pendente','registros':[], 'lacunas':[],'fontes':[],'verificada_em':None,'resultado':{}}
+        if command in reunioes.COMANDOS:
+            return reunioes.apply(self,conn,p,actor,role,op,command,d,result)
         if command=='preparar_artefato':
             id_=str(uuid.uuid4())
             conn.execute('INSERT INTO artefatos(portfolio,id,nome,tipo_midia,chave_objeto,sha256,bytes,origem,remetente) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)',(p,id_,d['nome'],d['tipo_midia'],id_,d['sha256_esperado'],d['bytes_esperados'],Jsonb(d['origem']),actor))
@@ -283,8 +288,10 @@ class Servico:
                     current=self.artifact(conn,p,artifact['id'],actor,role)
                     if row['comando'] in ('enviar_artefato','verificar_artefato'):
                         self.check_object(p,current)
+                reunioes.verify(self,conn,p,actor,role,result)
                 for ref in result['registros']:
-                    for source in result['resultado']['registro'].get('fontes',[]):
+                    saved=self.snapshot(conn,p,ref['id'],actor,role)
+                    for source in saved.get('fontes',[]):
                         self.artifact(conn,p,source['artefato'],actor,role,verified=True)
                 captured=result['resultado'].get('entrada',{}).get('artefato_id')
                 if captured: self.artifact(conn,p,captured,actor,role,verified=True)
@@ -349,3 +356,23 @@ class Servico:
                 raw=base64.urlsafe_b64encode(canonical({'portfolio':p,'ator':actor,'filtro':fingerprint,'ultimo':items[-1]['id']}).encode()).decode()
                 cursor=raw+'.'+hmac.new(self.config['cursor_secret'].encode(),raw.encode(),'sha256').hexdigest()
             return {'itens':items,'proximo_cursor':cursor}
+
+    def query_meetings(self,p,actor,id_,filters):
+        allowed={'versao'} if id_ else {'assunto','limite','apos'}
+        if set(filters)-allowed:
+            raise Falha(400,'PEDIDO_INVALIDO','Filtro de reunião desconhecido.')
+        try:
+            if id_: id_=str(uuid.UUID(id_))
+            version=int(filters['versao']) if 'versao' in filters else None
+            limit=int(filters.get('limite',25))
+            assert 1<=limit<=100 and (version is None or version>0)
+            if filters.get('apos'): uuid.UUID(filters['apos'])
+        except (ValueError,TypeError,AssertionError):
+            raise Falha(400,'PEDIDO_INVALIDO','ID, versão ou limite inválido.')
+        with self.connect() as conn:
+            role=self.member(conn,p,actor)
+            if role!='gestor': raise Falha(403,'SEM_PERMISSAO','Reuniões reservadas ao gestor no piloto.')
+            if id_: return reunioes.snapshot(self,conn,p,actor,role,id_,version)
+            rows=conn.execute("SELECT DISTINCT ON (lote) lote,conteudo FROM propostas WHERE portfolio=%s AND tipo='ata_resumida' ORDER BY lote,versao DESC",(p,)).fetchall()
+            rows=[r for r in rows if (not filters.get('apos') or str(r['lote'])>filters['apos']) and filters.get('assunto','').casefold() in (r['conteudo']['titulo'] or '').casefold()]
+            return {'itens':[reunioes.snapshot(self,conn,p,actor,role,str(r['lote'])) for r in rows[:limit]],'proximo_apos':str(rows[limit-1]['lote']) if len(rows)>limit else None}

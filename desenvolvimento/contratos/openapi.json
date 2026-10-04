@@ -499,6 +499,273 @@
           }
         }
       }
+    },
+    "/v1/portfolios/{portfolio}/reunioes": {
+      "parameters": [
+        {
+          "name": "portfolio",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "consultarReunioes",
+        "parameters": [
+          {
+            "name": "assunto",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "apos",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Página com fontes e lacunas; cursor opaco",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "itens": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "proximo_apos": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "format": "uuid"
+                    }
+                  },
+                  "required": [
+                    "itens",
+                    "proximo_apos"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pedido inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identidade ausente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Operação não autorizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ausente ou fora do escopo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflito de versão ou repetição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Pré-condição de negócio não satisfeita",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Serviço indisponível; consultar operação antes de reenviar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Listar reuniões do gestor e recuperar ata, fontes, revisão e decisões"
+      }
+    },
+    "/v1/portfolios/{portfolio}/reunioes/{lote_id}": {
+      "parameters": [
+        {
+          "name": "portfolio",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          }
+        },
+        {
+          "name": "lote_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "consultarReuniao",
+        "parameters": [
+          {
+            "name": "versao",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Página com fontes e lacunas; cursor opaco",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pedido inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identidade ausente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Operação não autorizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ausente ou fora do escopo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflito de versão ou repetição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Pré-condição de negócio não satisfeita",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Serviço indisponível; consultar operação antes de reenviar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Listar reuniões do gestor e recuperar ata, fontes, revisão e decisões"
+      }
     }
   },
   "components": {
@@ -961,7 +1228,8 @@
         "properties": {
           "operacao_id": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
           },
           "comando": {
             "const": "propor_topicos_reuniao"
@@ -969,38 +1237,311 @@
           "dados": {
             "type": "object",
             "properties": {
-              "original_id": {
+              "lote_id": {
                 "type": "string",
-                "format": "uuid"
+                "format": "uuid",
+                "pattern": "^[0-9a-f-]{36}$"
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "ata_resumida": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "metadados": {
+                "type": "object",
+                "properties": {
+                  "titulo": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "data_reuniao": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date"
+                  },
+                  "local": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1
+                  }
+                },
+                "required": [],
+                "additionalProperties": false
               },
               "topicos": {
                 "type": "array",
                 "minItems": 1,
+                "maxItems": 100,
                 "items": {
                   "type": "object",
                   "properties": {
                     "proposta_id": {
                       "type": "string",
-                      "format": "uuid"
-                    },
-                    "versao": {
-                      "type": "integer",
-                      "minimum": 1
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f-]{36}$"
                     },
                     "tipo": {
-                      "type": "string",
-                      "minLength": 1
+                      "enum": [
+                        "apresentacao",
+                        "discussao",
+                        "encaminhamento"
+                      ]
                     },
                     "conteudo": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "titulo": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        },
+                        "resumo": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        },
+                        "acao": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "comando": {
+                                  "const": "sem_acao"
+                                }
+                              },
+                              "required": [
+                                "comando"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "comando": {
+                                  "const": "criar_registro"
+                                },
+                                "dados": {
+                                  "type": "object",
+                                  "properties": {
+                                    "tipo": {
+                                      "type": "string",
+                                      "enum": [
+                                        "ideia",
+                                        "solicitacao",
+                                        "tarefa"
+                                      ]
+                                    },
+                                    "titulo": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "resultado_esperado": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "criterio_conclusao": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "responsavel_total": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "prazo_proposto": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "format": "date"
+                                    },
+                                    "meta": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "format": "date"
+                                    }
+                                  },
+                                  "required": [
+                                    "tipo",
+                                    "titulo"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              },
+                              "required": [
+                                "comando",
+                                "dados"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "comando": {
+                                  "const": "atualizar_registro"
+                                },
+                                "dados": {
+                                  "type": "object",
+                                  "properties": {
+                                    "registro_id": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "versao_esperada": {
+                                      "type": "integer",
+                                      "minimum": 1
+                                    },
+                                    "motivo": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "entrada_id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "alteracoes": {
+                                      "type": "object",
+                                      "properties": {
+                                        "titulo": {
+                                          "type": "string",
+                                          "minLength": 1,
+                                          "pattern": "\\S"
+                                        },
+                                        "resultado_esperado": {
+                                          "type": "string",
+                                          "minLength": 1,
+                                          "pattern": "\\S"
+                                        },
+                                        "criterio_conclusao": {
+                                          "type": "string",
+                                          "minLength": 1,
+                                          "pattern": "\\S"
+                                        }
+                                      },
+                                      "minProperties": 1,
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "required": [
+                                    "registro_id",
+                                    "versao_esperada",
+                                    "motivo"
+                                  ],
+                                  "anyOf": [
+                                    {
+                                      "required": [
+                                        "alteracoes"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "entrada_id"
+                                      ]
+                                    }
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              },
+                              "required": [
+                                "comando",
+                                "dados"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "comando": {
+                                  "const": "vincular_artefato"
+                                },
+                                "dados": {
+                                  "type": "object",
+                                  "properties": {
+                                    "artefato_id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "registro_id": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "versao_esperada": {
+                                      "type": "integer",
+                                      "minimum": 1
+                                    },
+                                    "finalidade": {
+                                      "enum": [
+                                        "documentacao",
+                                        "evidencia",
+                                        "origem"
+                                      ]
+                                    },
+                                    "motivo": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    }
+                                  },
+                                  "required": [
+                                    "artefato_id",
+                                    "registro_id",
+                                    "versao_esperada",
+                                    "finalidade",
+                                    "motivo"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              },
+                              "required": [
+                                "comando",
+                                "dados"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ]
+                        },
+                        "destino_id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        }
+                      },
+                      "required": [
+                        "titulo",
+                        "resumo",
+                        "acao"
+                      ],
+                      "additionalProperties": false
                     },
                     "localizacao_fonte": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "trecho": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        },
+                        "ponteiro_json": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trecho"
+                      ],
+                      "additionalProperties": false
                     }
                   },
                   "required": [
                     "proposta_id",
-                    "versao",
                     "tipo",
                     "conteudo",
                     "localizacao_fonte"
@@ -1010,7 +1551,9 @@
               }
             },
             "required": [
-              "original_id",
+              "lote_id",
+              "versao_esperada",
+              "ata_resumida",
               "topicos"
             ],
             "additionalProperties": false
@@ -1022,14 +1565,15 @@
           "dados"
         ],
         "additionalProperties": false,
-        "x-implementado-piloto": false
+        "x-implementado-piloto": true
       },
       "aprovar_topicos_reuniao": {
         "type": "object",
         "properties": {
           "operacao_id": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
           },
           "comando": {
             "const": "aprovar_topicos_reuniao"
@@ -1039,17 +1583,24 @@
             "properties": {
               "lote_id": {
                 "type": "string",
-                "format": "uuid"
+                "format": "uuid",
+                "pattern": "^[0-9a-f-]{36}$"
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
               },
               "itens": {
                 "type": "array",
                 "minItems": 1,
+                "maxItems": 101,
                 "items": {
                   "type": "object",
                   "properties": {
                     "proposta_id": {
                       "type": "string",
-                      "format": "uuid"
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f-]{36}$"
                     },
                     "versao": {
                       "type": "integer",
@@ -1063,7 +1614,8 @@
                     },
                     "justificativa": {
                       "type": "string",
-                      "minLength": 1
+                      "minLength": 1,
+                      "pattern": "\\S"
                     }
                   },
                   "required": [
@@ -1077,6 +1629,7 @@
             },
             "required": [
               "lote_id",
+              "versao_esperada",
               "itens"
             ],
             "additionalProperties": false
@@ -1088,7 +1641,7 @@
           "dados"
         ],
         "additionalProperties": false,
-        "x-implementado-piloto": false
+        "x-implementado-piloto": true
       },
       "propor_prazo": {
         "type": "object",
@@ -1282,6 +1835,12 @@
           },
           {
             "$ref": "#/components/schemas/vincular_artefato"
+          },
+          {
+            "$ref": "#/components/schemas/receber_reuniao"
+          },
+          {
+            "$ref": "#/components/schemas/efetivar_topicos_reuniao"
           }
         ],
         "discriminator": {
@@ -1301,7 +1860,9 @@
             "exportar_portfolio": "#/components/schemas/exportar_portfolio",
             "atualizar_registro": "#/components/schemas/atualizar_registro",
             "enviar_artefato": "#/components/schemas/enviar_artefato",
-            "vincular_artefato": "#/components/schemas/vincular_artefato"
+            "vincular_artefato": "#/components/schemas/vincular_artefato",
+            "receber_reuniao": "#/components/schemas/receber_reuniao",
+            "efetivar_topicos_reuniao": "#/components/schemas/efetivar_topicos_reuniao"
           }
         }
       },
@@ -1587,6 +2148,177 @@
               "versao_esperada",
               "finalidade",
               "motivo"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false,
+        "x-implementado-piloto": true
+      },
+      "receber_reuniao": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "comando": {
+            "const": "receber_reuniao"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "original_id": {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^[0-9a-f-]{36}$"
+              },
+              "origem_reuniao": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "canal": {
+                        "const": "manual"
+                      },
+                      "fonte_id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      },
+                      "tipo_conteudo": {
+                        "enum": [
+                          "topicos",
+                          "resumo",
+                          "transcricao"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "canal",
+                      "fonte_id",
+                      "tipo_conteudo"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "canal": {
+                        "const": "mcp"
+                      },
+                      "provedor": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      },
+                      "conexao_id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      },
+                      "reuniao_externa_id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      },
+                      "revisao_externa": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      },
+                      "url_fonte": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "tipo_conteudo": {
+                        "enum": [
+                          "topicos",
+                          "resumo",
+                          "transcricao",
+                          "resposta_completa"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "canal",
+                      "provedor",
+                      "conexao_id",
+                      "reuniao_externa_id",
+                      "tipo_conteudo"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "titulo": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "data_reuniao": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "local": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1
+              }
+            },
+            "required": [
+              "original_id",
+              "origem_reuniao"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false,
+        "x-implementado-piloto": true
+      },
+      "efetivar_topicos_reuniao": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "comando": {
+            "const": "efetivar_topicos_reuniao"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "lote_id": {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^[0-9a-f-]{36}$"
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "lote_id",
+              "versao_esperada"
             ],
             "additionalProperties": false
           }

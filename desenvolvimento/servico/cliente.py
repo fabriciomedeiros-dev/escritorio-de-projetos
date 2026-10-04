@@ -13,7 +13,7 @@ from objetos import MAX_BYTES
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser()
-parser.add_argument('acao',choices=['consultar','operacao','executar','anexar','baixar'])
+parser.add_argument('acao',choices=['consultar','operacao','executar','anexar','baixar','importar-reuniao','reunioes'])
 parser.add_argument('--perfil',choices=['gestor','executor','consulta','outro'],default='gestor')
 parser.add_argument('--portfolio',default='demo_escritorio')
 parser.add_argument('--pedido',type=Path)
@@ -24,6 +24,11 @@ parser.add_argument('--tipo',choices=['ideia','solicitacao','projeto','tarefa'])
 parser.add_argument('--estado')
 parser.add_argument('--limite',type=int)
 parser.add_argument('--cursor')
+parser.add_argument('--apos',help='Último lote da página anterior de reuniões')
+parser.add_argument('--origem',type=Path,help='JSON de proveniência da reunião (manual ou MCP)')
+parser.add_argument('--titulo')
+parser.add_argument('--data-reuniao')
+parser.add_argument('--local')
 parser.add_argument('--arquivo',type=Path)
 parser.add_argument('--registro')
 parser.add_argument('--versao',type=int)
@@ -35,8 +40,15 @@ if not 1<=args.porta<=65535: parser.error('Porta inválida')
 url='http://127.0.0.1:'+str(args.porta)+'/v1/portfolios/'+args.portfolio
 headers={'Authorization':'Bearer '+credentials['token']}
 body=None
-if args.acao in ('anexar','baixar'):
-    if not args.id or not args.arquivo: parser.error('anexar/baixar exige --id UUID e --arquivo')
+if args.acao in ('anexar','baixar','importar-reuniao'):
+    if not args.id or not args.arquivo: parser.error('Envio/download exige --id UUID e --arquivo')
+    origin={'canal':'cliente de referência'}
+    meeting_origin=None
+    if args.acao=='importar-reuniao':
+        if not args.origem: parser.error('importar-reuniao exige --origem JSON de proveniência')
+        meeting_origin=json.loads(args.origem.read_text())
+        origin={'canal':'importação de reunião','origem_reuniao':meeting_origin}
+        if args.registro: parser.error('Importar fonte não vincula nem aplica encaminhamentos')
     try: master=uuid.UUID(args.id)
     except ValueError: parser.error('--id deve ser UUID')
     if args.acao=='baixar':
@@ -62,12 +74,18 @@ if args.acao in ('anexar','baixar'):
                 return json.loads(response.read())
         except HTTPError as error:
             print(error.read().decode());raise SystemExit(1)
-    prepared=step('preparar_artefato',{'nome':args.arquivo.name,'tipo_midia':mimetypes.guess_type(args.arquivo.name)[0] or 'application/octet-stream','bytes_esperados':len(data),'sha256_esperado':hashlib.sha256(data).hexdigest(),'origem':{'canal':'cliente de referência'}})
+    prepared=step('preparar_artefato',{'nome':args.arquivo.name,'tipo_midia':mimetypes.guess_type(args.arquivo.name)[0] or 'application/octet-stream','bytes_esperados':len(data),'sha256_esperado':hashlib.sha256(data).hexdigest(),'origem':origin})
     artifact_id=prepared['resultado']['artefato']['id']
     # Mostra o ID antes das próximas etapas, permitindo recuperação de falha parcial.
     print(json.dumps({'artefato_id':artifact_id,'preparacao':'verificada','envio':'pendente'},ensure_ascii=False),flush=True)
     uploaded=step('enviar_artefato',{'artefato_id':artifact_id,'conteudo_base64':base64.b64encode(data).decode()})
     print(json.dumps(uploaded,ensure_ascii=False,indent=2),flush=True)
+    if args.acao=='importar-reuniao':
+        payload={'original_id':artifact_id,'origem_reuniao':meeting_origin}
+        for name,value in [('titulo',args.titulo),('data_reuniao',args.data_reuniao),('local',args.local)]:
+            if value is not None: payload[name]=value
+        received=step('receber_reuniao',payload)
+        print(json.dumps(received,ensure_ascii=False,indent=2))
     if args.registro:
         linked=step('vincular_artefato',{'artefato_id':artifact_id,'registro_id':args.registro,'versao_esperada':args.versao,'finalidade':args.finalidade,'motivo':'Vínculo solicitado explicitamente pelo cliente'})
         print(json.dumps(linked,ensure_ascii=False,indent=2))
@@ -79,6 +97,14 @@ if args.acao=='executar':
 elif args.acao=='operacao':
     if not args.id: parser.error('operacao exige --id')
     uuid.UUID(args.id);url+='/operacoes/'+args.id
+elif args.acao=='reunioes':
+    url+='/reunioes'
+    if args.id:
+        uuid.UUID(args.id);url+='/'+args.id
+        filters={'versao':args.versao} if args.versao else {}
+    else:
+        filters={name:getattr(args,name) for name in ('assunto','limite','apos') if getattr(args,name) is not None}
+    if filters:url+='?'+urlencode(filters)
 else:
     url+='/registros'
     filters={name:getattr(args,name) for name in ('id','assunto','tipo','estado','limite','cursor') if getattr(args,name) is not None}

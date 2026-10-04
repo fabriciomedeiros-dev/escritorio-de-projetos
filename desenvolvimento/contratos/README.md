@@ -1,6 +1,6 @@
 # Contrato de operações — Escritório v2
 
-Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato, atualização de conteúdo, anexos verificados e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
+Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato, atualização de conteúdo, anexos verificados, reuniões (fonte, ata, revisões, decisões e efetivação) e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
 
 ## Identidade, isolamento e repetição
 
@@ -59,3 +59,7 @@ Documentação de referência: [OpenAPI 3.1](https://spec.openapis.org/oas/v3.1.
 `preparar_artefato` exige tamanho e checksum previstos; prepara metadados com envio pendente. `enviar_artefato` salva bytes e verifica em nova leitura, com repetição reconciliável. `verificar_artefato` revalida o objeto, sem aceitar confirmação declarada pelo cliente. `GET /v1/portfolios/{portfolio}/artefatos/{artefato_id}` devolve o original como download binário autenticado, conferindo integridade. O ID é referência; caminhos internos não integram a resposta. A captura pode conter anexo verificado, e seu vínculo a registro inclui fonte de origem.
 
 Fichas de registros incluem metadados e estado de integridade das fontes. Relatos aceitam IDs de evidências acessíveis, preservam fontes por relato e não mudam conclusão. Arquivos e banco não têm transação conjunta: um arquivo persistido antes de rollback é reconciliado por repetição, sem sobrescrita; coleta de órfãos e backup/restauração conjunta continuam pendentes.
+
+## Reuniões no piloto local — 04/10/2026
+
+`receber_reuniao`, `propor_topicos_reuniao`, `aprovar_topicos_reuniao` e `efetivar_topicos_reuniao` implementados; [semântica e comandos](../servico/REUNIOES.md). Os schemas antes propostos para reuniões foram detalhados antes de uso produtivo: lote/versão esperada, ata, referências verificáveis e ações limitadas. Uma aprovação de ata usa o ID do lote como proposta; todos os tópicos da revisão devem ser decididos antes da aplicação. GET de reuniões permite consulta atual, histórica e lista paginada. Autenticação humana real, aprovação de projeto e proteção permanecem pendentes.
