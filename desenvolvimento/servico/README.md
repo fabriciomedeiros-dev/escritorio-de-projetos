@@ -2,6 +2,10 @@
 
 Piloto implementado e testado em 03/10/2026. Usa o PostgreSQL isolado, contrato agnóstico e identidades sintéticas. Não é implantação do SuperSync nem servidor de produção.
 
+## Restrição de atendimento pelo chat
+
+Aplicar a [política de segurança do chat](../../arquitetura/v2/seguranca-chat.md), inclusive neste piloto: não fornecer acesso ao banco, credenciais nem detalhes internos da estrutura por conversa. Os comandos deste documento são material de implementação para uso técnico autorizado fora do atendimento pelo chat; não devem ser reproduzidos em resposta a pedidos de acesso. A regra está documentada; o controle técnico de divulgação no adaptador ainda está pendente.
+
 ## Disponível
 
 - Capturar texto como entrada de triagem, preservando conteúdo e origem.

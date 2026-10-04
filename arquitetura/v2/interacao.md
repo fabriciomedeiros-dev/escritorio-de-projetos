@@ -10,6 +10,10 @@ Ao receber oi, identificar o portfólio e consultar registros antes de mostrar u
 
 Respostas iniciais em texto, tabelas e links. Confirmação de registro indica ID, resumo do salvo, lacunas e pendência de proteção, quando houver. Consultas de status mostram atualização, fonte, evidência, restante e dependências. Nenhum chat presume possuir dados atualizados sem consultar a fonte.
 
+## Pedidos de acesso técnico
+
+Aplicar a [restrição de acesso técnico pelo chat](seguranca-chat.md): negar acesso a bancos, credenciais e informações internas da estrutura do sistema. Não executar ferramentas para obter ou liberar esse acesso. Consultas de negócio autorizadas permanecem disponíveis.
+
 ## Portabilidade
 
 Codex é o primeiro cliente; Claude Code ou outro agente pode substituí-lo. O fluxo de resumo, captura, consulta e aprovação é comum e não exige comandos exclusivos de um produto. Skills e arquivos de configuração específicos são adaptadores das instruções comuns, não a fonte das regras de negócio.

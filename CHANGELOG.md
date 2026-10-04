@@ -2,6 +2,8 @@
 
 ## 2.0.0 — 2026-10-03
 
+- Define recusa de pedidos pelo chat de acesso a bancos, credenciais e informações internas do sistema, com instruções agnósticas e limites de implementação explícitos.
+
 - Documenta o desenho aprovado do agente gestor e sua separação do conselho de ideação.
 - Amplia o escopo para solicitações, tarefas, projetos e ideias.
 - Define modelo lógico, aprovação integral de tópicos de reuniões, conclusão por evidência e planejamento semanal por capacidade.
