@@ -7,7 +7,7 @@
 | 1 | Especificação, arquitetura e interação aprovadas funcionalmente | Documentadas nesta versão |
 | 2 | Modelo lógico, entidades, estados e invariantes | Documentado; esquema físico 001 aplicado e testado localmente |
 | 3 | Avaliação e escolha de armazenamento | PostgreSQL central escolhido; comparação e ensaios sintéticos concluídos; comparação de hospedagem concluída, decisão pendente |
-| 4 | Fluxo mínimo pelo Codex | Piloto HTTP/cliente local implementados para texto, criação, relato e consulta; evidências/reuniões e integração SuperSync pendentes |
+| 4 | Fluxo mínimo pelo Codex | Piloto HTTP/cliente local implementados para texto, criação, relato, atualização de conteúdo com originais vinculados e consulta; evidências/reuniões e integração SuperSync pendentes |
 | 5 | Piloto com casos reais e recuperação | Pendente |
 | 6 | Planejamento semanal, capacidade e alertas | Pendente |
 | 7 | Interface individual para dois integrantes | Posterior à validação do uso individual |
@@ -53,3 +53,7 @@ Usar exemplos sintéticos nos primeiros ensaios; validar os três casos reais se
 Planejamento: calcular carga a partir de esforço restante e capacidade informada, considerar dias úteis/dependências, distinguir meta e previsão e testar conflito de recursos. Mudança de sprint exige decisão gerencial. Configurar revisão semanal e limiar de prazo próximo com Fabrício; não há automação agendada nesta etapa.
 
 Equipe: autenticação individual, permissões operacionais e autoria; formulário/lista de tarefas com chat opcional. Conselho permanece separado; avaliar sua execução quando o fluxo de ideação for retomado.
+
+## Incremento local — complementos recuperáveis (2026-10-03)
+
+Implementada atualização de conteúdo de ideias/solicitações abertas, com vínculo dos textos originais, histórico e versão. Consultas recuperam os complementos sem depender do chat anterior. Instruções comuns do gestor documentadas; anexos e reuniões continuam como próxima entrega funcional. Testes HTTP em cópia temporária via backup/restauração, sem encerrar sessões do banco de demonstração.

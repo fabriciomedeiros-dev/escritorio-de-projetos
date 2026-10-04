@@ -1,6 +1,6 @@
 # Contrato de operações — Escritório v2
 
-Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
+Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato, atualização de conteúdo e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
 
 ## Identidade, isolamento e repetição
 
@@ -16,6 +16,7 @@ Atualizações de registros exigem `versao_esperada`; executar comparação atô
 |---|---|
 | capturar_entrada | Preservar origem e anexos; classificação sugerida é proposta; lacunas não bloqueiam captura |
 | criar_registro | Criar no estado inicial, nunca concluído; projeto exige decisão explícita de promoção verificada; gerar ID estável sem colisão |
+| atualizar_registro | Gestor atualiza título, resultado esperado ou critério de ideia/solicitação aberta; pode vincular entrada original, com motivo, versão e histórico; não altera tipo, estado, prazos ou responsável |
 | registrar_relato | Separar remetente autenticado de autor informado; preservar relato e fontes; não concluir nem mudar meta implicitamente |
 | registrar_dependencia | Verificar entrega e provedor, impedir ciclos; motivo, próxima ação, responsável e acompanhamento obrigatórios |
 | resolver_dependencia | Conferir critério e evidência; liberar conclusão apenas quando todas as pendências necessárias estiverem resolvidas |

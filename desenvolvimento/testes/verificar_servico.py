@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import sys
 import threading
+import tempfile
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from urllib.error import HTTPError
@@ -25,7 +26,17 @@ def main():
     env=ambiente.connection()
     database='ep_test_'+uuid.uuid4().hex[:12]
     admin=psycopg.connect(host=env['PGHOST'],port=env['PGPORT'],dbname='postgres',user=env['PGUSER'],password=env['PGPASSWORD'],autocommit=True)
-    admin.execute(sql.SQL('CREATE DATABASE {} TEMPLATE escritorio_test').format(sql.Identifier(database)))
+    # pg_dump fornece snapshot consistente mesmo com DBeaver conectado à demo.
+    with tempfile.TemporaryDirectory(prefix='ep-servico-test-') as directory:
+        dump=str(Path(directory)/'demo.dump')
+        ambiente.execute([ambiente.binary('pg_dump'),'-Fc','-f',dump],env)
+        admin.execute(sql.SQL('CREATE DATABASE {}').format(sql.Identifier(database)))
+        try:
+            ambiente.execute([ambiente.binary('pg_restore'),'--exit-on-error','-d',database,dump],env)
+        except Exception:
+            admin.execute(sql.SQL('DROP DATABASE {}').format(sql.Identifier(database)))
+            admin.close()
+            raise
     service=Servico(config,database)
     http=server(service,0)
     thread=threading.Thread(target=http.serve_forever,daemon=True);thread.start()
@@ -81,6 +92,67 @@ def main():
         assert len(call(p+'/registros',profile='executor')[1]['itens'])==1
         hidden=post('criar_registro',{'tipo':'tarefa','titulo':'Privada'})[0][1]['registros'][0]['id']
         assert post('registrar_relato',{'registro_id':hidden,'versao_esperada':1,'entregue':'Invasão'},profile='executor')[0][0]==404
+        # Consolidar complemento sem criar outro registro ou perder o original.
+        (status,idea),_=post('criar_registro',{'tipo':'ideia','titulo':'Ideia sintética de intranet','resultado_esperado':'App de demandas'})
+        assert status==200
+        idea_id=idea['registros'][0]['id']
+        (status,source),_=post('capturar_entrada',{'texto':'Será evolução do SuperSync','origem':{'canal':'teste','registro_id':idea_id}})
+        assert status==200
+        source_id=source['resultado']['entrada_id']
+        data={'registro_id':idea_id,'versao_esperada':1,'motivo':'Definição do proponente','entrada_id':source_id,'alteracoes':{'resultado_esperado':'App de demandas como evolução do SuperSync'}}
+        (status,changed),change_request=post('atualizar_registro',data)
+        assert status==200;validator.validate(changed)
+        assert changed['registros'][0]['versao']==2
+        assert changed['resultado']['registro']['entradas'][0]['conteudo']=='Será evolução do SuperSync'
+        assert changed['resultado']['registro']['entradas'][0]['estado']=='vinculada'
+        assert changed['resultado']['registro']['estado']=='capturada'
+        assert changed['resultado']['registro']['responsavel_total'] is None
+        assert call(p+'/operacoes',body=change_request,key=change_request['operacao_id'])==(status,changed)
+        assert post('atualizar_registro',data)[0][0]==409
+        fresh={**data,'versao_esperada':2}
+        assert post('atualizar_registro',fresh,profile='executor')[0][0]==403
+        assert post('atualizar_registro',fresh,profile='consulta')[0][0]==403
+        assert post('atualizar_registro',{**fresh,'alteracoes':{'estado':'promovida'}})[0][0]==400
+        assert post('atualizar_registro',{**fresh,'alteracoes':{}})[0][0]==400
+        assert post('atualizar_registro',{**fresh,'alteracoes':{'titulo':'   '}})[0][0]==400
+        other_id=post('criar_registro',{'tipo':'ideia','titulo':'Outra ideia'})[0][1]['registros'][0]['id']
+        assert post('atualizar_registro',{**data,'registro_id':other_id})[0][0]==409
+        assert post('criar_registro',{'tipo':'ideia','titulo':'Duplicação da entrada','origem_entrada_id':source_id})[0][0]==409
+        wrong=post('capturar_entrada',{'texto':'Outro assunto','origem':{'registro_id':other_id}})[0][1]['resultado']['entrada_id']
+        assert post('atualizar_registro',{**fresh,'entrada_id':wrong})[0][0]==409
+        foreign_path='/v1/portfolios/demo_outro/operacoes'
+        foreign_request={'operacao_id':str(uuid.uuid4()),'comando':'capturar_entrada','dados':{'texto':'Outro portfólio','origem':{}}}
+        foreign=call(foreign_path,profile='outro',body=foreign_request,key=foreign_request['operacao_id'])
+        assert foreign[0]==200
+        assert post('atualizar_registro',{**fresh,'entrada_id':foreign[1]['resultado']['entrada_id']})[0][0]==404
+        assert post('atualizar_registro',{'registro_id':id_,'versao_esperada':2,'motivo':'Tipo não disponível','alteracoes':{'titulo':'Tarefa'}})[0][0]==422
+        found=call(p+'/registros?'+urlencode({'assunto':'SuperSync'}))[1]['itens']
+        recovered=next(x for x in found if x['id']==idea_id)
+        assert recovered['versao']==2 and recovered['entradas'][0]['id']==source_id
+        # Falha antes do histórico reverte texto, vínculo e operação juntos.
+        rollback_source=post('capturar_entrada',{'texto':'Complemento que deve permanecer pendente','origem':{}})[0][1]['resultado']['entrada_id']
+        rollback_request={'operacao_id':str(uuid.uuid4()),'comando':'atualizar_registro','dados':{'registro_id':idea_id,'versao_esperada':2,'motivo':'Falha sintética','entrada_id':rollback_source,'alteracoes':{'titulo':'Não persistir'}}}
+        original_snapshot=service.snapshot
+        def fail_after_update(conn,portfolio,record_id,actor,role):
+            result=original_snapshot(conn,portfolio,record_id,actor,role)
+            if record_id==idea_id and result['versao']==3:
+                raise Falha(503,'SERVICO_INDISPONIVEL','Falha sintética pré-commit')
+            return result
+        with patch.object(service,'snapshot',side_effect=fail_after_update):
+            assert call(p+'/operacoes',body=rollback_request,key=rollback_request['operacao_id'])[0]==503
+        assert call(p+'/registros?'+urlencode({'id':idea_id}))[1]['itens'][0]['versao']==2
+        with service.connect() as conn:
+            assert conn.execute('SELECT estado FROM entradas WHERE portfolio=%s AND id=%s',('demo_escritorio',rollback_source)).fetchone()['estado']=='triagem_pendente'
+            histories=conn.execute('SELECT antes,depois,motivo FROM historico WHERE portfolio=%s AND registro=%s AND acao=%s',('demo_escritorio',idea_id,'atualizar_registro')).fetchall()
+            assert len(histories)==1 and histories[0]['antes']['versao']==1 and histories[0]['depois']['versao']==2
+            assert histories[0]['motivo']=='Definição do proponente'
+        # Dois pedidos diferentes na mesma versão não sobrescrevem um ao outro.
+        competing=[{'operacao_id':str(uuid.uuid4()),'comando':'atualizar_registro','dados':{'registro_id':idea_id,'versao_esperada':2,'motivo':'Concorrência de conteúdo','alteracoes':{'titulo':f'Proposta concorrente {i}'}}} for i in range(2)]
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            outcomes=list(pool.map(lambda request:call(p+'/operacoes',body=request,key=request['operacao_id']),competing))
+        assert sorted(status for status,_ in outcomes)==[200,409]
+        request_id=post('criar_registro',{'tipo':'solicitacao','titulo':'Relatório pontual'})[0][1]['registros'][0]['id']
+        assert post('atualizar_registro',{'registro_id':request_id,'versao_esperada':1,'motivo':'Detalhamento explícito','alteracoes':{'resultado_esperado':'Relatório trimestral recuperável'}})[0][0]==200
         # Simular perda da confirmação após commit: retomar por ID sem repetir efeitos.
         recovery={'operacao_id':str(uuid.uuid4()),'comando':'criar_registro','dados':{'tipo':'tarefa','titulo':'Recuperação após commit'}}
         with patch.object(service,'get_operation',side_effect=Falha(503,'SERVICO_INDISPONIVEL','Falha simulada após commit')):
@@ -103,6 +175,7 @@ def main():
         print('PASSOU: tokens, perfis, portfólios, executor atribuído, conflito de versão, SQL parametrizado,')
         print('repetição concorrente, paginação assinada, rejeição de anexos/promoção indisponíveis e histórico.')
         print('PASSOU: recuperação por ID após falha simulada de confirmação pós-commit, sem duplicação.')
+        print('PASSOU: atualização de ideias, vínculo de originais, busca pelo conteúdo, isolamento, histórico e rollback atômico.')
         print('Respostas validadas contra JSON Schema; testes em base temporária, sem dados reais.')
     finally:
         http.shutdown();http.server_close();thread.join(timeout=5)

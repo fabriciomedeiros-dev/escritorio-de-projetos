@@ -20,5 +20,17 @@
       "restante": "Integração com API",
       "autor_informado": "Executor do exemplo"
     }
+  },
+  {
+    "operacao_id": "00000000-0000-0000-0000-000000000012",
+    "comando": "atualizar_registro",
+    "dados": {
+      "registro_id": "DEMO_ESCRITORIO-IDE-EXEMPLO",
+      "versao_esperada": 1,
+      "motivo": "Definição explícita do proponente",
+      "alteracoes": {
+        "resultado_esperado": "Aplicativo de demandas como evolução do sistema existente"
+      }
+    }
   }
 ]

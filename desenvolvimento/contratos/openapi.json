@@ -3,7 +3,7 @@
   "info": {
     "title": "Operações do Escritório de Projetos",
     "version": "2.0.0",
-    "description": "Contrato v2; piloto HTTP local implementa captura de texto, criação de tarefa/solicitação/ideia, relatos e consultas. Demais comandos indisponíveis; não há endpoint produtivo."
+    "description": "Contrato v2; piloto HTTP local implementa captura de texto, criação de tarefa/solicitação/ideia, relatos, atualização de conteúdo com originais vinculados e consultas. Demais comandos indisponíveis; não há endpoint produtivo."
   },
   "security": [
     {
@@ -1221,6 +1221,9 @@
           },
           {
             "$ref": "#/components/schemas/exportar_portfolio"
+          },
+          {
+            "$ref": "#/components/schemas/atualizar_registro"
           }
         ],
         "discriminator": {
@@ -1237,7 +1240,8 @@
             "aprovar_topicos_reuniao": "#/components/schemas/aprovar_topicos_reuniao",
             "propor_prazo": "#/components/schemas/propor_prazo",
             "validar_conclusao": "#/components/schemas/validar_conclusao",
-            "exportar_portfolio": "#/components/schemas/exportar_portfolio"
+            "exportar_portfolio": "#/components/schemas/exportar_portfolio",
+            "atualizar_registro": "#/components/schemas/atualizar_registro"
           }
         }
       },
@@ -1361,6 +1365,87 @@
           "detalhes"
         ],
         "additionalProperties": false
+      },
+      "atualizar_registro": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "atualizar_registro"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "registro_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "motivo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "entrada_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "alteracoes": {
+                "type": "object",
+                "properties": {
+                  "titulo": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "resultado_esperado": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "criterio_conclusao": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  }
+                },
+                "minProperties": 1,
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "registro_id",
+              "versao_esperada",
+              "motivo"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "alteracoes"
+                ]
+              },
+              {
+                "required": [
+                  "entrada_id"
+                ]
+              }
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false,
+        "x-implementado-piloto": true,
+        "description": "Gestor atualiza conteúdo de ideia ou solicitação aberta, ou vincula entrada existente; preserva tipo, estado, responsável e prazos. Exige motivo e versão."
       }
     }
   }

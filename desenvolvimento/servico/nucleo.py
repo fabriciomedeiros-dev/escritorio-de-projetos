@@ -11,6 +11,7 @@ from datetime import date
 import psycopg
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
+from psycopg import sql
 from jsonschema import Draft202012Validator, FormatChecker
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'local'))
@@ -19,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CONFIG = ROOT / '.runtime' / 'servico' / 'config.local.json'
 API = json.loads((ROOT / 'desenvolvimento/contratos/openapi.json').read_text())
 VALIDATOR = Draft202012Validator({'components': API['components'], 'allOf': [API['components']['schemas']['Pedido']]}, format_checker=FormatChecker())
-IMPLEMENTADOS = {'capturar_entrada', 'criar_registro', 'registrar_relato'}
+IMPLEMENTADOS = {'capturar_entrada', 'criar_registro', 'registrar_relato', 'atualizar_registro'}
 
 
 def canonical(value):
@@ -70,6 +71,13 @@ class Servico:
 
     def snapshot(self, conn, portfolio, id_, actor, role):
         r = self.record(conn, portfolio, id_, actor, role)
+        # Referências validadas pelo serviço; o vínculo não depende do histórico do chat.
+        ids = [r['origem'].get('entrada_id'), *r['origem'].get('entradas_complementares', [])]
+        r['entradas'] = []
+        for entrada_id in dict.fromkeys(x for x in ids if x):
+            entry = conn.execute('SELECT to_jsonb(e) AS item FROM entradas e WHERE portfolio=%s AND id=%s', (portfolio, entrada_id)).fetchone()
+            if entry:
+                r['entradas'].append(entry['item'])
         r['fontes'] = [x['item'] for x in conn.execute('SELECT to_jsonb(f) AS item FROM fontes f WHERE portfolio=%s AND registro=%s', (portfolio, id_))]
         r['dependencias'] = [x['item'] for x in conn.execute('SELECT to_jsonb(d) AS item FROM dependencias d WHERE portfolio=%s AND entrega=%s', (portfolio, id_))]
         r['atualizacoes'] = [x['item'] for x in conn.execute('SELECT to_jsonb(a) AS item FROM atualizacoes a WHERE portfolio=%s AND registro=%s ORDER BY criada_em DESC,id DESC LIMIT 25', (portfolio, id_))]
@@ -114,8 +122,12 @@ class Servico:
         if command=='criar_registro':
             if d['tipo']=='projeto' or 'decisao_promocao_id' in d:
                 raise Falha(422,'APROVACAO_PENDENTE','Promoção a projeto não implementada no piloto.')
-            if 'origem_entrada_id' in d and not conn.execute('SELECT 1 FROM entradas WHERE portfolio=%s AND id=%s', (p,d['origem_entrada_id'])).fetchone():
-                raise Falha(404,'NAO_ENCONTRADO','Entrada não encontrada no escopo.')
+            if 'origem_entrada_id' in d:
+                entry=conn.execute('SELECT estado,origem FROM entradas WHERE portfolio=%s AND id=%s', (p,d['origem_entrada_id'])).fetchone()
+                if not entry:
+                    raise Falha(404,'NAO_ENCONTRADO','Entrada não encontrada no escopo.')
+                if entry['estado']=='vinculada' or entry['origem'].get('registro_id'):
+                    raise Falha(409,'ENTRADA_JA_VINCULADA','Entrada vinculada ou destinada a registro existente; não criar outro registro.')
             if d.get('responsavel_total') and not conn.execute('SELECT 1 FROM membros WHERE portfolio=%s AND pessoa=%s AND ativo', (p,d['responsavel_total'])).fetchone():
                 raise Falha(422,'PEDIDO_INVALIDO','Responsável não é membro ativo do portfólio.')
             prefix={'tarefa':'TAR','solicitacao':'SOL','ideia':'IDE'}[d['tipo']]
@@ -124,6 +136,35 @@ class Servico:
             if 'origem_entrada_id' in d:
                 conn.execute("UPDATE entradas SET estado='vinculada',classificacao_confirmada=%s WHERE portfolio=%s AND id=%s", (d['tipo'],p,d['origem_entrada_id']))
             before=None
+            after=self.snapshot(conn,p,id_,actor,role)
+        elif command=='atualizar_registro':
+            id_=d['registro_id']
+            before=self.snapshot(conn,p,id_,actor,role)
+            if before['tipo'] not in ('ideia','solicitacao') or before['estado'] in ('promovida','arquivada','concluida','cancelada'):
+                raise Falha(422,'PEDIDO_INVALIDO','Atualização de conteúdo exige ideia ou solicitação aberta.')
+            if before['versao']!=d['versao_esperada']:
+                raise Falha(409,'VERSAO_DIVERGENTE','Registro mudou; consultar antes de atualizar.')
+            changes=dict(d.get('alteracoes',{}))
+            if 'entrada_id' in d:
+                entry=conn.execute('SELECT * FROM entradas WHERE portfolio=%s AND id=%s',(p,d['entrada_id'])).fetchone()
+                if not entry:
+                    raise Falha(404,'NAO_ENCONTRADO','Entrada não encontrada no escopo.')
+                # Uma entrada já classificada não pode ser reatribuída silenciosamente.
+                linked=[before['origem'].get('entrada_id'),*before['origem'].get('entradas_complementares',[])]
+                if entry['estado']=='vinculada' and d['entrada_id'] not in linked:
+                    raise Falha(409,'ENTRADA_JA_VINCULADA','Entrada já vinculada; não é possível reatribuir pelo piloto.')
+                reference=entry['origem'].get('registro_id')
+                if reference and reference!=id_:
+                    raise Falha(409,'ENTRADA_DIVERGENTE','Entrada referencia outro registro.')
+                origin=dict(before['origem'])
+                complements=list(origin.get('entradas_complementares',[]))
+                if d['entrada_id'] not in linked: complements.append(d['entrada_id'])
+                origin['entradas_complementares']=complements
+                changes['origem']=Jsonb(origin)
+                conn.execute("UPDATE entradas SET estado='vinculada',classificacao_confirmada=%s WHERE portfolio=%s AND id=%s",(before['tipo'],p,d['entrada_id']))
+            assignments=[sql.SQL('{}=%s').format(sql.Identifier(field)) for field in changes]
+            query=sql.SQL('UPDATE registros SET {},versao=versao+1 WHERE portfolio=%s AND id=%s AND versao=%s').format(sql.SQL(',').join(assignments))
+            conn.execute(query,(*changes.values(),p,id_,d['versao_esperada']))
             after=self.snapshot(conn,p,id_,actor,role)
         else:
             id_=d['registro_id']
@@ -138,7 +179,7 @@ class Servico:
             # Informação do executor é proposta. Não aceita prazo nem altera estado implicitamente.
             conn.execute('UPDATE registros SET versao=versao+1,esforco_restante=CASE WHEN %s THEN %s ELSE esforco_restante END,prazo_proposto=CASE WHEN %s THEN %s ELSE prazo_proposto END WHERE portfolio=%s AND id=%s AND versao=%s', ('esforco_restante' in d,d.get('esforco_restante'),'prazo_proposto' in d,d.get('prazo_proposto'),p,id_,d['versao_esperada']))
             after=self.snapshot(conn,p,id_,actor,role)
-        conn.execute('INSERT INTO historico(portfolio,registro,operacao,ator,acao,antes,depois,motivo,fonte) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)', (p,id_,op,actor,command,Jsonb(before),Jsonb(after),'Pedido explícito autorizado',Jsonb({'operacao_id':op})))
+        conn.execute('INSERT INTO historico(portfolio,registro,operacao,ator,acao,antes,depois,motivo,fonte) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)', (p,id_,op,actor,command,Jsonb(before),Jsonb(after),d.get('motivo','Pedido explícito autorizado'),Jsonb({'operacao_id':op,'entrada_id':d.get('entrada_id')})))
         result['registros']=[{'id':id_,'versao':after['versao']}]
         result['lacunas']=after['lacunas']
         result['resultado']={'registro':after}
@@ -200,7 +241,12 @@ class Servico:
             for name,column in [('id','id'),('tipo','tipo'),('estado','estado')]:
                 if name in filters: clauses.append('r.'+column+'=%s');params.append(filters[name])
             for name,column in [('assunto','titulo'),('origem','origem::text')]:
-                if name in filters: clauses.append('r.'+column+' ILIKE %s');params.append('%'+filters[name]+'%')
+                if name in filters:
+                    if name=='assunto':
+                        clauses.append('(r.titulo ILIKE %s OR r.resultado_esperado ILIKE %s)')
+                        params.extend(['%'+filters[name]+'%']*2)
+                    else:
+                        clauses.append('r.'+column+' ILIKE %s');params.append('%'+filters[name]+'%')
             for name,operator in [('desde','>='),('ate','<=')]:
                 if name in filters: clauses.append("(r.criado_em AT TIME ZONE 'America/Sao_Paulo')::date"+operator+'%s');params.append(filters[name])
             rows=conn.execute('SELECT r.id FROM registros r WHERE '+' AND '.join(clauses)+' ORDER BY r.id LIMIT %s',(*params,limit+1)).fetchall()

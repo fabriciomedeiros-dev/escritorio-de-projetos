@@ -10,11 +10,12 @@ Aplicar a [política de segurança do chat](../../arquitetura/v2/seguranca-chat.
 
 - Capturar texto como entrada de triagem, preservando conteúdo e origem.
 - Criar tarefa, solicitação ou ideia em estado inicial, com lacunas explícitas.
+- Atualizar título, resultado esperado ou critério de ideia/solicitação aberta e vincular complementos originais, com motivo, versão e histórico; somente gestor.
 - Registrar relato em tarefa aberta, com entregue, restante, dificuldade, esforço e prazo proposto.
 - Consultar registros por ID, tipo, situação, assunto, origem e período, com paginação assinada.
 - Consultar operação por UUID e reconciliar confirmação perdida após commit.
 
-A resposta contém versão, histórico de origem, fontes, dependências, últimas 25 atualizações e lacunas. Relato não conclui tarefa nem aceita prazo automaticamente. O nome informado do autor do relato é separado do remetente autenticado. ID de registro usa prefixo do portfólio/tipo e UUID; título não é identificador.
+A ficha inclui os textos das entradas originais e complementares vinculadas, permitindo recuperar definições sem conhecer o chat de origem. A resposta contém versão, histórico de origem, fontes, dependências, últimas 25 atualizações e lacunas. Relato não conclui tarefa nem aceita prazo automaticamente. O nome informado do autor do relato é separado do remetente autenticado. ID de registro usa prefixo do portfólio/tipo e UUID; título não é identificador.
 
 Indisponível: persistência de anexos, conclusão, aprovação/extração de reuniões, promoção a projeto, dependências via API, cronograma, backup independente e interface web/menu do gestor. Comandos correspondentes são rejeitados explicitamente; não confirme seus efeitos em chat.
 
@@ -76,9 +77,9 @@ Com PostgreSQL iniciado e demo preparada:
 .runtime/servico-venv/bin/python desenvolvimento/testes/verificar_contrato.py
 ```
 
-O teste HTTP clona a base local em banco temporário, usa porta de loopback alocada dinamicamente e remove somente o banco de teste ao terminar. Verifica fluxo HTTP → banco, autorização/perfis/domínios, executor atribuído, estados e prazos preservados, histórico, conflito de versão, repetição simultânea, recuperação após falha simulada pós-commit, filtros com texto adverso, paginação, validação de respostas e rejeição de funções indisponíveis.
+O teste HTTP restaura uma cópia da base local em banco temporário, usa porta de loopback alocada dinamicamente e remove somente o banco de teste ao terminar. Verifica fluxo HTTP → banco, autorização/perfis/domínios, executor atribuído, estados e prazos preservados, histórico, conflito de versão, repetição simultânea, recuperação após falha simulada pós-commit, filtros com texto adverso, paginação, validação de respostas e rejeição de funções indisponíveis.
 
-O clone inclui a demonstração local; não usar este runner para dados reais. O script não aponta para servidor externo e não depende de conexão do SuperSync. A validade estrutural das partes JSON Schema foi testada; validação integral da especificação OpenAPI por ferramenta especializada continua pendente.
+O ensaio usa pg_dump/restauração em base temporária e preserva conexões existentes, inclusive do DBeaver. A cópia inclui a demonstração local; não usar este runner para dados reais. O script não aponta para servidor externo e não depende de conexão do SuperSync. A validade estrutural das partes JSON Schema foi testada; validação integral da especificação OpenAPI por ferramenta especializada continua pendente.
 
 ## Limites para passagem ao implementador
 
@@ -87,3 +88,13 @@ O clone inclui a demonstração local; não usar este runner para dados reais. O
 A próxima entrega funcional é armazenamento/verificação de originais e vínculos de evidências, seguido por reuniões e conclusão. Não migrar dados reais antes de proteger/restaurar banco e arquivos e declarar o corte de autoridade.
 
 Referências técnicas: [parâmetros psycopg](https://www.psycopg.org/psycopg3/docs/basic/params.html), [JSON Schema](https://python-jsonschema.readthedocs.io/en/stable/validate/), [contrato](../contratos/README.md).
+
+## Complementos e consultas de ideias
+
+Siga as [instruções portáveis do gestor](../../arquitetura/v2/operacao-gestor.md). `atualizar_registro` permite conteúdo e vínculo de entrada em ideia/solicitação aberta, com histórico e conflito de versão. A busca por assunto cobre título e resultado esperado. Exemplo de consulta:
+
+```bash
+.runtime/servico-venv/bin/python desenvolvimento/servico/cliente.py consultar --tipo ideia --assunto intranet
+```
+
+Os testes exercitam reatribuição indevida de entrada, isolamento, campo não permitido, original preservado, rollback de falha pré-commit e recuperação independente do chat. Nenhuma migração SQL é necessária nesta entrega: referências de entradas usam o campo `origem`, validadas pelo serviço.

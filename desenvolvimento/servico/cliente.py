@@ -15,6 +15,11 @@ parser.add_argument('--portfolio',default='demo_escritorio')
 parser.add_argument('--pedido',type=Path)
 parser.add_argument('--chave',help='Chave estável de repetição; obrigatória em executar')
 parser.add_argument('--id')
+parser.add_argument('--assunto')
+parser.add_argument('--tipo',choices=['ideia','solicitacao','projeto','tarefa'])
+parser.add_argument('--estado')
+parser.add_argument('--limite',type=int)
+parser.add_argument('--cursor')
 args=parser.parse_args()
 credentials=json.loads((ROOT/'.runtime/servico/clientes.local.json').read_text())['identidades'][args.perfil]
 url='http://127.0.0.1:8765/v1/portfolios/'+args.portfolio
@@ -29,7 +34,8 @@ elif args.acao=='operacao':
     uuid.UUID(args.id);url+='/operacoes/'+args.id
 else:
     url+='/registros'
-    if args.id:url+='?'+urlencode({'id':args.id})
+    filters={name:getattr(args,name) for name in ('id','assunto','tipo','estado','limite','cursor') if getattr(args,name) is not None}
+    if filters:url+='?'+urlencode(filters)
 try:
     with urlopen(Request(url,data=body,headers=headers),timeout=15) as response:
         result=json.loads(response.read())
