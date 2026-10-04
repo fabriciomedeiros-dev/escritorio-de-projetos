@@ -3,7 +3,7 @@
   "info": {
     "title": "Operações do Escritório de Projetos",
     "version": "2.0.0",
-    "description": "Contrato v2; piloto HTTP local implementa captura de texto, criação de tarefa/solicitação/ideia, relatos, atualização de conteúdo com originais vinculados e consultas. Demais comandos indisponíveis; não há endpoint produtivo."
+    "description": "Contrato v2; piloto HTTP local implementa captura de texto, criação de tarefa/solicitação/ideia, relatos, atualização de conteúdo com originais vinculados, anexos verificados e consultas. Demais comandos indisponíveis; não há endpoint produtivo."
   },
   "security": [
     {
@@ -451,6 +451,54 @@
           }
         }
       }
+    },
+    "/v1/portfolios/{portfolio}/artefatos/{artefato_id}": {
+      "get": {
+        "operationId": "baixarArtefato",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "portfolio",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "artefato_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Original verificado, somente download autenticado",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ausente ou fora do escopo"
+          },
+          "422": {
+            "description": "Original não verificado ou divergente"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -838,7 +886,8 @@
             "properties": {
               "nome": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "maxLength": 255
               },
               "tipo_midia": {
                 "type": "string",
@@ -846,7 +895,8 @@
               },
               "bytes_esperados": {
                 "type": "integer",
-                "minimum": 0
+                "minimum": 0,
+                "maximum": 524288
               },
               "sha256_esperado": {
                 "type": "string",
@@ -859,7 +909,9 @@
             "required": [
               "nome",
               "tipo_midia",
-              "origem"
+              "origem",
+              "bytes_esperados",
+              "sha256_esperado"
             ],
             "additionalProperties": false
           }
@@ -870,7 +922,7 @@
           "dados"
         ],
         "additionalProperties": false,
-        "x-implementado-piloto": false
+        "x-implementado-piloto": true
       },
       "verificar_artefato": {
         "type": "object",
@@ -902,7 +954,7 @@
           "dados"
         ],
         "additionalProperties": false,
-        "x-implementado-piloto": false
+        "x-implementado-piloto": true
       },
       "propor_topicos_reuniao": {
         "type": "object",
@@ -1224,6 +1276,12 @@
           },
           {
             "$ref": "#/components/schemas/atualizar_registro"
+          },
+          {
+            "$ref": "#/components/schemas/enviar_artefato"
+          },
+          {
+            "$ref": "#/components/schemas/vincular_artefato"
           }
         ],
         "discriminator": {
@@ -1241,7 +1299,9 @@
             "propor_prazo": "#/components/schemas/propor_prazo",
             "validar_conclusao": "#/components/schemas/validar_conclusao",
             "exportar_portfolio": "#/components/schemas/exportar_portfolio",
-            "atualizar_registro": "#/components/schemas/atualizar_registro"
+            "atualizar_registro": "#/components/schemas/atualizar_registro",
+            "enviar_artefato": "#/components/schemas/enviar_artefato",
+            "vincular_artefato": "#/components/schemas/vincular_artefato"
           }
         }
       },
@@ -1446,6 +1506,98 @@
         "additionalProperties": false,
         "x-implementado-piloto": true,
         "description": "Gestor atualiza conteúdo de ideia ou solicitação aberta, ou vincula entrada existente; preserva tipo, estado, responsável e prazos. Exige motivo e versão."
+      },
+      "enviar_artefato": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "enviar_artefato"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "artefato_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "conteudo_base64": {
+                "type": "string",
+                "maxLength": 699052
+              }
+            },
+            "required": [
+              "artefato_id",
+              "conteudo_base64"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false,
+        "x-implementado-piloto": true
+      },
+      "vincular_artefato": {
+        "type": "object",
+        "properties": {
+          "operacao_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comando": {
+            "const": "vincular_artefato"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "artefato_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "registro_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "versao_esperada": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "finalidade": {
+                "enum": [
+                  "documentacao",
+                  "evidencia",
+                  "origem"
+                ]
+              },
+              "motivo": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "artefato_id",
+              "registro_id",
+              "versao_esperada",
+              "finalidade",
+              "motivo"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "operacao_id",
+          "comando",
+          "dados"
+        ],
+        "additionalProperties": false,
+        "x-implementado-piloto": true
       }
     }
   }

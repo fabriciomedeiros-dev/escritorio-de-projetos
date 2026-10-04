@@ -13,6 +13,7 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 from psycopg import sql
 from jsonschema import Draft202012Validator, FormatChecker
+from objetos import Objetos, MAX_BYTES
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'local'))
 import ambiente
@@ -20,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CONFIG = ROOT / '.runtime' / 'servico' / 'config.local.json'
 API = json.loads((ROOT / 'desenvolvimento/contratos/openapi.json').read_text())
 VALIDATOR = Draft202012Validator({'components': API['components'], 'allOf': [API['components']['schemas']['Pedido']]}, format_checker=FormatChecker())
-IMPLEMENTADOS = {'capturar_entrada', 'criar_registro', 'registrar_relato', 'atualizar_registro'}
+IMPLEMENTADOS = {'capturar_entrada', 'criar_registro', 'registrar_relato', 'atualizar_registro', 'preparar_artefato', 'enviar_artefato', 'verificar_artefato', 'vincular_artefato'}
 
 
 def canonical(value):
@@ -34,9 +35,42 @@ class Falha(Exception):
 
 
 class Servico:
-    def __init__(self, config=None, database=None):
+    def __init__(self, config=None, database=None, objetos=None):
         self.config = config or json.loads(CONFIG.read_text())
         self.database = database
+        self.objetos = Objetos(objetos or ROOT / '.runtime/servico/objetos')
+
+    def artifact(self,conn,p,id_,actor,role,verified=False):
+        row=conn.execute('SELECT * FROM artefatos WHERE portfolio=%s AND id=%s',(p,id_)).fetchone()
+        if not row:
+            raise Falha(404,'NAO_ENCONTRADO','Artefato não encontrado no escopo.')
+        if role!='gestor' and str(row['remetente'])!=actor:
+            sources=conn.execute('SELECT registro FROM fontes WHERE portfolio=%s AND artefato=%s',(p,id_)).fetchall()
+            accessible=False
+            for source in sources:
+                try: self.record(conn,p,source['registro'],actor,role);accessible=True;break
+                except Falha: pass
+            if not accessible: raise Falha(404,'NAO_ENCONTRADO','Artefato não encontrado no escopo.')
+        if verified:
+            if row['estado']!='verificado': raise Falha(422,'FONTE_NAO_VERIFICADA','Original ainda não verificado.')
+            self.check_object(p,row)
+        return row
+
+    def check_object(self,p,row):
+        try: data=self.objetos.read(p,str(row['id']))
+        except (OSError,ValueError): raise Falha(422,'FONTE_NAO_VERIFICADA','Original ausente ou indisponível; não confirmar integridade.')
+        if len(data)!=row['bytes'] or hashlib.sha256(data).hexdigest()!=row['sha256']:
+            raise Falha(422,'FONTE_NAO_VERIFICADA','Original diverge do tamanho ou checksum registrado.')
+        return data
+
+    def artifact_metadata(self,row):
+        return {k:(v.isoformat() if hasattr(v,'isoformat') else str(v) if isinstance(v,uuid.UUID) else v) for k,v in row.items() if k!='chave_objeto'}
+
+    def download(self,p,actor,id_):
+        with self.connect() as conn:
+            role=self.member(conn,p,actor)
+            row=self.artifact(conn,p,id_,actor,role,verified=True)
+            return self.check_object(p,row)
 
     def connect(self):
         env = ambiente.connection()
@@ -79,6 +113,13 @@ class Servico:
             if entry:
                 r['entradas'].append(entry['item'])
         r['fontes'] = [x['item'] for x in conn.execute('SELECT to_jsonb(f) AS item FROM fontes f WHERE portfolio=%s AND registro=%s', (portfolio, id_))]
+        for source in r['fontes']:
+            artifact=self.artifact(conn,portfolio,source['artefato'],actor,role)
+            source['artefato_detalhes']=self.artifact_metadata(artifact)
+            try:
+                self.check_object(portfolio,artifact)
+                source['integridade']='verificada' if artifact['estado']=='verificado' else 'pendente'
+            except Falha: source['integridade']='indisponivel_ou_divergente'
         r['dependencias'] = [x['item'] for x in conn.execute('SELECT to_jsonb(d) AS item FROM dependencias d WHERE portfolio=%s AND entrega=%s', (portfolio, id_))]
         r['atualizacoes'] = [x['item'] for x in conn.execute('SELECT to_jsonb(a) AS item FROM atualizacoes a WHERE portfolio=%s AND registro=%s ORDER BY criada_em DESC,id DESC LIMIT 25', (portfolio, id_))]
         r['lacunas'] = [label for field, label in [('responsavel_total','Responsável não definido'), ('prazo_aceito','Prazo não aceito'), ('esforco_restante','Esforço restante não informado')] if r[field] is None]
@@ -111,19 +152,39 @@ class Servico:
 
     def apply(self, conn, p, actor, role, op, command, d):
         result = {'operacao_id':op,'portfolio':p,'estado':'persistida','protecao':'pendente','registros':[], 'lacunas':[],'fontes':[],'verificada_em':None,'resultado':{}}
+        if command=='preparar_artefato':
+            id_=str(uuid.uuid4())
+            conn.execute('INSERT INTO artefatos(portfolio,id,nome,tipo_midia,chave_objeto,sha256,bytes,origem,remetente) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)',(p,id_,d['nome'],d['tipo_midia'],id_,d['sha256_esperado'],d['bytes_esperados'],Jsonb(d['origem']),actor))
+            row=self.artifact(conn,p,id_,actor,role)
+            result['resultado']={'artefato':self.artifact_metadata(row)}
+            result['lacunas']=['Arquivo preparado; envio e verificação do original pendentes']
+            return result
+        if command in ('enviar_artefato','verificar_artefato'):
+            row=self.artifact(conn,p,d['artefato_id'],actor,role)
+            if command=='enviar_artefato':
+                try: data=base64.b64decode(d['conteudo_base64'],validate=True)
+                except ValueError: raise Falha(400,'PEDIDO_INVALIDO','Conteúdo base64 inválido.')
+                if len(data)>MAX_BYTES or len(data)!=row['bytes'] or hashlib.sha256(data).hexdigest()!=row['sha256']:
+                    raise Falha(422,'FONTE_NAO_VERIFICADA','Arquivo enviado diverge do tamanho ou checksum esperado.')
+                try: self.objetos.save(p,str(row['id']),data)
+                except ValueError: raise Falha(422,'FONTE_NAO_VERIFICADA','Objeto existente diverge; não sobrescrever original.')
+            self.check_object(p,row)
+            conn.execute("UPDATE artefatos SET estado='verificado',verificado_em=clock_timestamp() WHERE portfolio=%s AND id=%s",(p,row['id']))
+            result['resultado']={'artefato':self.artifact_metadata(self.artifact(conn,p,str(row['id']),actor,role))}
+            return result
         if command=='capturar_entrada':
             if 'artefato_id' in d:
-                raise Falha(422,'FONTE_NAO_VERIFICADA','Captura de anexos ainda não implementada; original não foi registrado.')
+                self.artifact(conn,p,d['artefato_id'],actor,role,verified=True)
             id_ = str(uuid.uuid4())
-            conn.execute("INSERT INTO entradas(portfolio,id,operacao,conteudo,origem,classificacao_proposta,estado) VALUES(%s,%s,%s,%s,%s,%s,'triagem_pendente')", (p,id_,op,d['texto'],Jsonb(d['origem']),d.get('classificacao_sugerida')))
-            result['resultado']={'entrada_id':id_,'classificacao_confirmada':None,'entrada':{'id':id_,'texto':d['texto'],'origem':d['origem'],'classificacao_sugerida':d.get('classificacao_sugerida')}}
+            conn.execute("INSERT INTO entradas(portfolio,id,operacao,conteudo,artefato,origem,classificacao_proposta,estado) VALUES(%s,%s,%s,%s,%s,%s,%s,'triagem_pendente')", (p,id_,op,d.get('texto'),d.get('artefato_id'),Jsonb(d['origem']),d.get('classificacao_sugerida')))
+            result['resultado']={'entrada_id':id_,'classificacao_confirmada':None,'entrada':{'id':id_,'texto':d.get('texto'),'artefato_id':d.get('artefato_id'),'origem':d['origem'],'classificacao_sugerida':d.get('classificacao_sugerida')}}
             result['lacunas']=['Classificação pendente; entrada ainda não vinculada a registro']
             return result
         if command=='criar_registro':
             if d['tipo']=='projeto' or 'decisao_promocao_id' in d:
                 raise Falha(422,'APROVACAO_PENDENTE','Promoção a projeto não implementada no piloto.')
             if 'origem_entrada_id' in d:
-                entry=conn.execute('SELECT estado,origem FROM entradas WHERE portfolio=%s AND id=%s', (p,d['origem_entrada_id'])).fetchone()
+                entry=conn.execute('SELECT estado,origem,artefato FROM entradas WHERE portfolio=%s AND id=%s', (p,d['origem_entrada_id'])).fetchone()
                 if not entry:
                     raise Falha(404,'NAO_ENCONTRADO','Entrada não encontrada no escopo.')
                 if entry['estado']=='vinculada' or entry['origem'].get('registro_id'):
@@ -134,8 +195,22 @@ class Servico:
             id_ = p.upper()+'-'+prefix+'-'+str(uuid.uuid4())
             conn.execute("INSERT INTO registros(portfolio,id,tipo,titulo,estado,responsavel_total,resultado_esperado,criterio_conclusao,prazo_proposto,meta,origem,criado_por) VALUES(%s,%s,%s,%s,'capturada',%s,%s,%s,%s,%s,%s,%s)", (p,id_,d['tipo'],d['titulo'],d.get('responsavel_total'),d.get('resultado_esperado'),d.get('criterio_conclusao'),d.get('prazo_proposto'),d.get('meta'),Jsonb({'entrada_id':d.get('origem_entrada_id')}),actor))
             if 'origem_entrada_id' in d:
+                if entry['artefato']:
+                    self.artifact(conn,p,str(entry['artefato']),actor,role,verified=True)
+                    conn.execute("INSERT INTO fontes(portfolio,registro,artefato,finalidade) VALUES(%s,%s,%s,'origem')",(p,id_,entry['artefato']))
                 conn.execute("UPDATE entradas SET estado='vinculada',classificacao_confirmada=%s WHERE portfolio=%s AND id=%s", (d['tipo'],p,d['origem_entrada_id']))
             before=None
+            after=self.snapshot(conn,p,id_,actor,role)
+        elif command=='vincular_artefato':
+            id_=d['registro_id']
+            before=self.snapshot(conn,p,id_,actor,role)
+            if before['estado'] in ('concluida','cancelada','encerrado','promovida','arquivada'):
+                raise Falha(422,'PEDIDO_INVALIDO','Vínculo exige registro aberto.')
+            if before['versao']!=d['versao_esperada']:
+                raise Falha(409,'VERSAO_DIVERGENTE','Registro mudou; consultar antes de vincular.')
+            row=self.artifact(conn,p,d['artefato_id'],actor,role,verified=True)
+            conn.execute('INSERT INTO fontes(portfolio,registro,artefato,finalidade) VALUES(%s,%s,%s,%s) ON CONFLICT DO NOTHING',(p,id_,row['id'],d['finalidade']))
+            conn.execute('UPDATE registros SET versao=versao+1 WHERE portfolio=%s AND id=%s AND versao=%s',(p,id_,d['versao_esperada']))
             after=self.snapshot(conn,p,id_,actor,role)
         elif command=='atualizar_registro':
             id_=d['registro_id']
@@ -161,6 +236,9 @@ class Servico:
                 if d['entrada_id'] not in linked: complements.append(d['entrada_id'])
                 origin['entradas_complementares']=complements
                 changes['origem']=Jsonb(origin)
+                if entry['artefato']:
+                    self.artifact(conn,p,str(entry['artefato']),actor,role,verified=True)
+                    conn.execute("INSERT INTO fontes(portfolio,registro,artefato,finalidade) VALUES(%s,%s,%s,'origem') ON CONFLICT DO NOTHING",(p,id_,entry['artefato']))
                 conn.execute("UPDATE entradas SET estado='vinculada',classificacao_confirmada=%s WHERE portfolio=%s AND id=%s",(before['tipo'],p,d['entrada_id']))
             assignments=[sql.SQL('{}=%s').format(sql.Identifier(field)) for field in changes]
             query=sql.SQL('UPDATE registros SET {},versao=versao+1 WHERE portfolio=%s AND id=%s AND versao=%s').format(sql.SQL(',').join(assignments))
@@ -174,10 +252,14 @@ class Servico:
             if before['versao']!=d['versao_esperada']:
                 raise Falha(409,'VERSAO_DIVERGENTE','Registro mudou; consultar antes de atualizar.')
             if d.get('artefatos'):
-                raise Falha(422,'FONTE_NAO_VERIFICADA','Vínculo de evidências ainda não implementado; relato não foi salvo.')
-            conn.execute('INSERT INTO atualizacoes(portfolio,registro,operacao,remetente,autor_informado,entregue,restante,dificuldade,esforco_restante,prazo_proposto) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (p,id_,op,actor,d.get('autor_informado'),d.get('entregue'),d.get('restante'),d.get('dificuldade'),d.get('esforco_restante'),d.get('prazo_proposto')))
+                for artifact_id in d['artefatos']:
+                    self.artifact(conn,p,artifact_id,actor,role,verified=True)
+            conn.execute('INSERT INTO atualizacoes(portfolio,registro,operacao,remetente,autor_informado,entregue,restante,dificuldade,esforco_restante,prazo_proposto,fontes) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (p,id_,op,actor,d.get('autor_informado'),d.get('entregue'),d.get('restante'),d.get('dificuldade'),d.get('esforco_restante'),d.get('prazo_proposto'),Jsonb(d.get('artefatos',[]))))
             # Informação do executor é proposta. Não aceita prazo nem altera estado implicitamente.
             conn.execute('UPDATE registros SET versao=versao+1,esforco_restante=CASE WHEN %s THEN %s ELSE esforco_restante END,prazo_proposto=CASE WHEN %s THEN %s ELSE prazo_proposto END WHERE portfolio=%s AND id=%s AND versao=%s', ('esforco_restante' in d,d.get('esforco_restante'),'prazo_proposto' in d,d.get('prazo_proposto'),p,id_,d['versao_esperada']))
+            if d.get('artefatos'):
+                for artifact_id in d['artefatos']:
+                    conn.execute("INSERT INTO fontes(portfolio,registro,artefato,finalidade) VALUES(%s,%s,%s,'evidencia') ON CONFLICT DO NOTHING",(p,id_,artifact_id))
             after=self.snapshot(conn,p,id_,actor,role)
         conn.execute('INSERT INTO historico(portfolio,registro,operacao,ator,acao,antes,depois,motivo,fonte) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)', (p,id_,op,actor,command,Jsonb(before),Jsonb(after),d.get('motivo','Pedido explícito autorizado'),Jsonb({'operacao_id':op,'entrada_id':d.get('entrada_id')})))
         result['registros']=[{'id':id_,'versao':after['versao']}]
@@ -195,6 +277,17 @@ class Servico:
             if not row or (str(row['ator'])!=actor and role!='gestor'):
                 raise Falha(404,'NAO_ENCONTRADO','Operação não encontrada no escopo.')
             result=row['resultado']
+            if result:
+                artifact=result['resultado'].get('artefato')
+                if artifact:
+                    current=self.artifact(conn,p,artifact['id'],actor,role)
+                    if row['comando'] in ('enviar_artefato','verificar_artefato'):
+                        self.check_object(p,current)
+                for ref in result['registros']:
+                    for source in result['resultado']['registro'].get('fontes',[]):
+                        self.artifact(conn,p,source['artefato'],actor,role,verified=True)
+                captured=result['resultado'].get('entrada',{}).get('artefato_id')
+                if captured: self.artifact(conn,p,captured,actor,role,verified=True)
             if result and role=='executor':
                 for ref in result['registros']: self.record(conn,p,ref['id'],actor,role)
             if row['persistencia']=='persistida':

@@ -1,10 +1,13 @@
 """Teste HTTP → serviço → PostgreSQL com identidades sintéticas em base temporária."""
 import copy
+import base64
+import hashlib
 import json
 from pathlib import Path
 import sys
 import threading
 import tempfile
+import subprocess
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from urllib.error import HTTPError
@@ -37,7 +40,8 @@ def main():
             admin.execute(sql.SQL('DROP DATABASE {}').format(sql.Identifier(database)))
             admin.close()
             raise
-    service=Servico(config,database)
+    objects=tempfile.TemporaryDirectory(prefix='ep-objetos-test-')
+    service=Servico(config,database,objetos=objects.name)
     http=server(service,0)
     thread=threading.Thread(target=http.serve_forever,daemon=True);thread.start()
     base='http://127.0.0.1:'+str(http.server_port)
@@ -49,7 +53,9 @@ def main():
         if key: headers['Idempotency-Key']=key
         request=Request(base+path,data=None if body is None else json.dumps(body).encode(),headers=headers)
         try:
-            with urlopen(request,timeout=10) as response:return response.status,json.loads(response.read())
+            with urlopen(request,timeout=10) as response:
+                raw=response.read()
+                return response.status,raw if response.headers.get_content_type()=='application/octet-stream' else json.loads(raw)
         except HTTPError as error:return error.code,json.loads(error.read())
     def post(command,data,profile='gestor',id_=None,key=None):
         pedido={'operacao_id':id_ or str(uuid.uuid4()),'comando':command,'dados':data}
@@ -77,9 +83,9 @@ def main():
         assert update['registros'][0]['versao']==2
         assert post('registrar_relato',{'registro_id':id_,'versao_esperada':1,'entregue':'Reenvio obsoleto'},profile='executor')[0][0]==409
         assert post('registrar_relato',{'registro_id':id_,'versao_esperada':2,'entregue':'Sem autorização'},profile='consulta')[0][0]==403
-        assert post('registrar_relato',{'registro_id':id_,'versao_esperada':2,'entregue':'Sem anexo persistido','artefatos':[str(uuid.uuid4())]})[0][0]==422
+        assert post('registrar_relato',{'registro_id':id_,'versao_esperada':2,'entregue':'Sem anexo persistido','artefatos':[str(uuid.uuid4())]})[0][0]==404
         assert post('criar_registro',{'tipo':'projeto','titulo':'Promoção indevida'})[0][0]==422
-        assert post('capturar_entrada',{'artefato_id':str(uuid.uuid4()),'origem':{}})[0][0]==422
+        assert post('capturar_entrada',{'artefato_id':str(uuid.uuid4()),'origem':{}})[0][0]==404
         assert call(p+'/operacoes/'+update['operacao_id'],profile='executor')[0]==200
         assert call(p+'/registros?'+urlencode({'assunto':"' OR TRUE --"}))[1]['itens']==[]
         assert call(p+'/registros?limite=0')[0]==400
@@ -153,6 +159,85 @@ def main():
         assert sorted(status for status,_ in outcomes)==[200,409]
         request_id=post('criar_registro',{'tipo':'solicitacao','titulo':'Relatório pontual'})[0][1]['registros'][0]['id']
         assert post('atualizar_registro',{'registro_id':request_id,'versao_esperada':1,'motivo':'Detalhamento explícito','alteracoes':{'resultado_esperado':'Relatório trimestral recuperável'}})[0][0]==200
+        content=b'Relatorio sintetico\nEntrega parcial: API pendente.\n'
+        artifact_data={'nome':'relatorio.txt','tipo_midia':'text/plain','bytes_esperados':len(content),'sha256_esperado':hashlib.sha256(content).hexdigest(),'origem':{'canal':'ensaio'}}
+        assert post('preparar_artefato',artifact_data,profile='consulta')[0][0]==403
+        assert post('preparar_artefato',artifact_data,profile='executor')[0][0]==403
+        assert post('preparar_artefato',{**artifact_data,'bytes_esperados':524289})[0][0]==400
+        (status,prepared),prepare_request=post('preparar_artefato',artifact_data)
+        assert status==200;validator.validate(prepared)
+        artifact_id=prepared['resultado']['artefato']['id']
+        assert prepared['resultado']['artefato']['estado']=='preparado' and prepared['lacunas']
+        assert 'chave_objeto' not in prepared['resultado']['artefato']
+        assert call(p+'/operacoes',body=prepare_request,key=prepare_request['operacao_id'])[1]==prepared
+        assert call(p+'/artefatos/'+artifact_id)[0]==422
+        assert post('verificar_artefato',{'artefato_id':artifact_id})[0][0]==422
+        link={'registro_id':id_,'versao_esperada':2,'artefato_id':artifact_id,'finalidade':'evidencia','motivo':'Evidência de avanço parcial'}
+        assert post('vincular_artefato',link)[0][0]==422
+        assert post('enviar_artefato',{'artefato_id':artifact_id,'conteudo_base64':'invalido!'})[0][0]==400
+        assert post('enviar_artefato',{'artefato_id':artifact_id,'conteudo_base64':base64.b64encode(b'divergente').decode()})[0][0]==422
+        upload={'artefato_id':artifact_id,'conteudo_base64':base64.b64encode(content).decode()}
+        # Arquivo durável com falha pré-commit: retry reconcilia o mesmo objeto.
+        upload_request={'operacao_id':str(uuid.uuid4()),'comando':'enviar_artefato','dados':upload}
+        original_save=service.objetos.save
+        def interrupted_save(*args):
+            original_save(*args)
+            raise OSError('Falha sintética após persistir arquivo')
+        with patch.object(service.objetos,'save',side_effect=interrupted_save):
+            assert call(p+'/operacoes',body=upload_request,key=upload_request['operacao_id'])[0]==503
+        with service.connect() as conn:
+            assert conn.execute('SELECT estado FROM artefatos WHERE portfolio=%s AND id=%s',('demo_escritorio',artifact_id)).fetchone()['estado']=='preparado'
+        status,uploaded=call(p+'/operacoes',body=upload_request,key=upload_request['operacao_id'])
+        assert status==200 and uploaded['resultado']['artefato']['estado']=='verificado'
+        validator.validate(uploaded)
+        assert call(p+'/artefatos/'+artifact_id)==(200,content)
+        assert call(p+'/artefatos/'+artifact_id,profile='executor')[0]==404
+        assert call(p+'/artefatos/'+artifact_id,profile='consulta')[0]==404
+        assert call('/v1/portfolios/demo_outro/artefatos/'+artifact_id,profile='outro')[0]==404
+        assert post('verificar_artefato',{'artefato_id':artifact_id})[0][0]==200
+        # Nome do cliente é metadado; nunca vira caminho no servidor.
+        unsafe=post('preparar_artefato',{**artifact_data,'nome':'../../fora.txt'})[0][1]['resultado']['artefato']['id']
+        assert service.objetos.path('demo_escritorio',unsafe).parent==Path(objects.name)
+        (status,linked),link_request=post('vincular_artefato',link)
+        assert status==200 and linked['registros'][0]['versao']==3
+        assert linked['resultado']['registro']['fontes'][0]['integridade']=='verificada'
+        assert linked['resultado']['registro']['estado']=='capturada'
+        assert call(p+'/operacoes',body=link_request,key=link_request['operacao_id'])[1]==linked
+        assert post('vincular_artefato',link)[0][0]==409
+        assert call(p+'/artefatos/'+artifact_id,profile='executor')==(200,content)
+        assert call(p+'/artefatos/'+artifact_id,profile='consulta')==(200,content)
+        assert post('registrar_relato',{'registro_id':id_,'versao_esperada':3,'entregue':'Relatório parcial','artefatos':[artifact_id]},profile='executor')[0][0]==200
+        captured_artifact=post('capturar_entrada',{'artefato_id':artifact_id,'origem':{'canal':'reunião sintética'}})[0][1]['resultado']['entrada_id']
+        from_original=post('criar_registro',{'tipo':'solicitacao','titulo':'Demanda com original','origem_entrada_id':captured_artifact})[0][1]
+        assert from_original['resultado']['registro']['fontes'][0]['finalidade']=='origem'
+        # Cliente portável prepara/envia/vincula e retoma sem duplicar as etapas.
+        fixture=Path(objects.name)/'fixture.txt';fixture.write_bytes(b'Anexo pelo cliente de referencia')
+        cli_task=post('criar_registro',{'tipo':'tarefa','titulo':'Teste de cliente'})[0][1]['registros'][0]['id']
+        client=[sys.executable,str(Path(__file__).resolve().parents[1]/'servico/cliente.py')]
+        upload_cli=client+['anexar','--porta',str(http.server_port),'--id',str(uuid.uuid4()),'--chave','fixture-cli-'+uuid.uuid4().hex,'--arquivo',str(fixture),'--registro',cli_task,'--versao','1','--finalidade','evidencia']
+        first=subprocess.run(upload_cli,capture_output=True,text=True,check=True)
+        assert '"estado": "verificada"' in first.stdout
+        second=subprocess.run(upload_cli,capture_output=True,text=True,check=True)
+        assert first.stdout==second.stdout
+        cli_record=call(p+'/registros?'+urlencode({'id':cli_task}))[1]['itens'][0]
+        assert cli_record['versao']==2 and len(cli_record['fontes'])==1
+        downloaded=Path(objects.name)/'download.txt'
+        subprocess.run(client+['baixar','--porta',str(http.server_port),'--id',cli_record['fontes'][0]['artefato'],'--arquivo',str(downloaded)],capture_output=True,text=True,check=True)
+        assert downloaded.read_bytes()==fixture.read_bytes()
+        assert subprocess.run(client+['baixar','--porta',str(http.server_port),'--id',cli_record['fontes'][0]['artefato'],'--arquivo',str(downloaded)],capture_output=True,text=True).returncode!=0
+        # Corrupção externa é detectada na consulta, download e recuperação da operação.
+        path=service.objetos.path('demo_escritorio',artifact_id)
+        path.write_bytes(b'Corrompido')
+        assert call(p+'/artefatos/'+artifact_id)[0]==422
+        assert call(p+'/operacoes/'+uploaded['operacao_id'])[0]==422
+        assert call(p+'/registros?'+urlencode({'id':id_}))[1]['itens'][0]['fontes'][0]['integridade']=='indisponivel_ou_divergente'
+        assert post('verificar_artefato',{'artefato_id':artifact_id})[0][0]==422
+        assert post('enviar_artefato',upload)[0][0]==422
+        path.write_bytes(content)  # Restaurar fixture sintética, não rotina produtiva.
+        # Um objeto substituído por symlink não é seguido pelo servidor.
+        path.unlink();path.symlink_to(fixture)
+        assert call(p+'/artefatos/'+artifact_id)[0]==422
+        path.unlink();path.write_bytes(content)
         # Simular perda da confirmação após commit: retomar por ID sem repetir efeitos.
         recovery={'operacao_id':str(uuid.uuid4()),'comando':'criar_registro','dados':{'tipo':'tarefa','titulo':'Recuperação após commit'}}
         with patch.object(service,'get_operation',side_effect=Falha(503,'SERVICO_INDISPONIVEL','Falha simulada após commit')):
@@ -168,19 +253,21 @@ def main():
         with psycopg.connect(host=env['PGHOST'],port=env['PGPORT'],dbname=database,user='escritorio_api_local',password=config['senha_banco']) as conn:
             row=conn.execute('SELECT rolsuper,rolcreatedb FROM pg_roles WHERE rolname=current_user').fetchone()
             assert row==(False,False)
-            assert conn.execute('SELECT count(*) FROM escritorio.historico WHERE portfolio=%s AND registro=%s',('demo_escritorio',id_)).fetchone()[0]==2
+            assert conn.execute('SELECT count(*) FROM escritorio.historico WHERE portfolio=%s AND registro=%s',('demo_escritorio',id_)).fetchone()[0]==4
             assert conn.execute('SELECT count(*) FROM escritorio.operacoes WHERE id=%s',(concurrent['operacao_id'],)).fetchone()[0]==1
             assert conn.execute("SELECT has_schema_privilege(current_user,'escritorio','CREATE')").fetchone()[0] is False
         print('PASSOU: HTTP → serviço → PostgreSQL; captura, criação, relato e leitura após commit.')
         print('PASSOU: tokens, perfis, portfólios, executor atribuído, conflito de versão, SQL parametrizado,')
-        print('repetição concorrente, paginação assinada, rejeição de anexos/promoção indisponíveis e histórico.')
+        print('repetição concorrente, paginação assinada, rejeição de promoção indisponível e histórico.')
         print('PASSOU: recuperação por ID após falha simulada de confirmação pós-commit, sem duplicação.')
         print('PASSOU: atualização de ideias, vínculo de originais, busca pelo conteúdo, isolamento, histórico e rollback atômico.')
+        print('PASSOU: anexos imutáveis, checksum/tamanho, download autenticado, evidência parcial, corrupção e recuperação de envio interrompido.')
         print('Respostas validadas contra JSON Schema; testes em base temporária, sem dados reais.')
     finally:
         http.shutdown();http.server_close();thread.join(timeout=5)
         admin.execute(sql.SQL('DROP DATABASE {}').format(sql.Identifier(database)))
         admin.close()
+        objects.cleanup()
 
 
 if __name__=='__main__':main()

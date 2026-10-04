@@ -24,4 +24,10 @@ Um conflito de versão exige nova consulta e avaliação da mudança antes de pr
 
 Mostrar resumo salvo, identificador, situação, lacunas e pendência de proteção. Uma ideia pode estar capturada sem responsável, prazo ou esforço; lacunas não equivalem a atraso. Relatos de tarefas não concluem entregas nem aceitam prazos automaticamente.
 
-Não anunciar anexos, reuniões, promoção, conclusão, planejamento ou proteção independente como disponíveis. Atualizar cadastro de usuário, meta, prioridade, responsável e estados continua fora desta entrega. A política de acesso técnico segue `seguranca-chat.md`; identidade sintética de demonstração não comprova autorização administrativa.
+Não anunciar reuniões, promoção, conclusão, planejamento ou proteção independente como disponíveis. Atualizar cadastro de usuário, meta, prioridade, responsável e estados continua fora desta entrega. A política de acesso técnico segue `seguranca-chat.md`; identidade sintética de demonstração não comprova autorização administrativa.
+
+## Anexos e evidências
+
+No piloto, use `cliente.py anexar` para arquivo local de até 512 KiB, com UUID e chave estáveis. Preserve o original, confirme tamanho/checksum no serviço e só então vincule ao registro na finalidade solicitada. Não basta receber um arquivo no chat para confirmar que ele está registrado. Preparação, envio e vínculo têm confirmações separadas: comunicar a etapa pendente em caso de falha.
+
+A ficha apresenta ID, nome, checksum e integridade de suas fontes; use download autenticado para recuperar o original. Nome do arquivo não é identificador. Não apresentar evidência como conclusão nem tratar upload de reunião como aprovação de seus tópicos. Em original ausente ou divergente, explicitar a falha de integridade e não confirmar recuperação completa. A proteção independente continua pendente.

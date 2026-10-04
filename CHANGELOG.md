@@ -2,6 +2,8 @@
 
 ## 2.0.0 — 2026-10-03
 
+- Implementa originais locais imutáveis, checksum/tamanho, envio reconciliável, download autenticado e vínculo de documentação/evidência por versão; testa falhas, corrupção, isolamento e cliente portável.
+
 - Implementa atualização de conteúdo de ideias/solicitações com originais vinculados, histórico e versão; busca pelo resultado esperado e ensaio HTTP via backup/restauração que preserva conexões do DBeaver.
 
 - Revisa a regra de acesso técnico pelo chat: permite a Fabrício e ao desenvolvedor autorizado do projeto, com verificação de identidade e permissão; nega a pessoas não autorizadas e preserva os limites por projeto e ambiente.

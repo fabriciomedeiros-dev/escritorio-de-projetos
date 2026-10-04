@@ -19,7 +19,11 @@ def main():
     os.chmod(CONFIG.parent,0o700)
     client_file=CONFIG.parent/'clientes.local.json'
     if CONFIG.exists():
-        print('Configuração sintética já existe; credenciais preservadas.')
+        env=ambiente.connection()
+        with psycopg.connect(host=env['PGHOST'],port=env['PGPORT'],dbname=env['PGDATABASE'],user=env['PGUSER'],password=env['PGPASSWORD']) as conn:
+            conn.execute('GRANT INSERT ON escritorio.artefatos,escritorio.fontes TO escritorio_api_local')
+            conn.execute('GRANT UPDATE ON escritorio.artefatos TO escritorio_api_local')
+        print('Configuração sintética existente; privilégios de artefatos conferidos, credenciais preservadas.')
         return
     actors={name:str(uuid.uuid4()) for name in ('gestor','executor','consulta','outro')}
     tokens={name:secrets.token_urlsafe(40) for name in actors}
@@ -35,8 +39,8 @@ def main():
         conn.execute('GRANT CONNECT ON DATABASE escritorio_test TO escritorio_api_local')
         conn.execute('GRANT USAGE ON SCHEMA escritorio TO escritorio_api_local')
         conn.execute('GRANT SELECT ON ALL TABLES IN SCHEMA escritorio TO escritorio_api_local')
-        conn.execute('GRANT INSERT ON escritorio.operacoes,escritorio.entradas,escritorio.registros,escritorio.atualizacoes,escritorio.historico TO escritorio_api_local')
-        conn.execute('GRANT UPDATE ON escritorio.operacoes,escritorio.entradas,escritorio.registros TO escritorio_api_local')
+        conn.execute('GRANT INSERT ON escritorio.operacoes,escritorio.entradas,escritorio.registros,escritorio.atualizacoes,escritorio.historico,escritorio.artefatos,escritorio.fontes TO escritorio_api_local')
+        conn.execute('GRANT UPDATE ON escritorio.operacoes,escritorio.entradas,escritorio.registros,escritorio.artefatos TO escritorio_api_local')
         conn.execute('GRANT USAGE ON ALL SEQUENCES IN SCHEMA escritorio TO escritorio_api_local')
     config={'senha_banco':password,'cursor_secret':secrets.token_urlsafe(40),'tokens':[{'hash':hashlib.sha256(tokens[name].encode()).hexdigest(),'pessoa':id_} for name,id_ in actors.items()]}
     # Permissões restritas desde a criação, não apenas após escrever o segredo.

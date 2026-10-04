@@ -8,7 +8,8 @@ Aplicar a [política de segurança do chat](../../arquitetura/v2/seguranca-chat.
 
 ## Disponível
 
-- Capturar texto como entrada de triagem, preservando conteúdo e origem.
+- Capturar texto ou anexo verificado como entrada de triagem, preservando conteúdo e origem.
+- Preparar, enviar, verificar e baixar originais imutáveis; vincular documentação/evidência com histórico e versão.
 - Criar tarefa, solicitação ou ideia em estado inicial, com lacunas explícitas.
 - Atualizar título, resultado esperado ou critério de ideia/solicitação aberta e vincular complementos originais, com motivo, versão e histórico; somente gestor.
 - Registrar relato em tarefa aberta, com entregue, restante, dificuldade, esforço e prazo proposto.
@@ -17,7 +18,7 @@ Aplicar a [política de segurança do chat](../../arquitetura/v2/seguranca-chat.
 
 A ficha inclui os textos das entradas originais e complementares vinculadas, permitindo recuperar definições sem conhecer o chat de origem. A resposta contém versão, histórico de origem, fontes, dependências, últimas 25 atualizações e lacunas. Relato não conclui tarefa nem aceita prazo automaticamente. O nome informado do autor do relato é separado do remetente autenticado. ID de registro usa prefixo do portfólio/tipo e UUID; título não é identificador.
 
-Indisponível: persistência de anexos, conclusão, aprovação/extração de reuniões, promoção a projeto, dependências via API, cronograma, backup independente e interface web/menu do gestor. Comandos correspondentes são rejeitados explicitamente; não confirme seus efeitos em chat.
+Indisponível: conclusão, aprovação/extração de reuniões, promoção a projeto, dependências via API, cronograma, backup independente e interface web/menu do gestor. Comandos correspondentes são rejeitados explicitamente; não confirme seus efeitos em chat.
 
 ## Preparação e execução
 
@@ -56,7 +57,7 @@ Para atualização pelo executor, criar tarefa com `responsavel_total` correspon
 .runtime/servico-venv/bin/python desenvolvimento/local/ambiente.py stop
 ```
 
-Ao final desta implementação os serviços ficaram parados. Dados do ambiente e credenciais sintéticas persistem para uso posterior.
+O serviço pode permanecer ativo durante o teste interativo. Dados do ambiente e credenciais sintéticas persistem para uso posterior; encerrar o serviço não apaga os registros.
 
 ## Autorização e verificabilidade
 
@@ -85,7 +86,7 @@ O ensaio usa pg_dump/restauração em base temporária e preserva conexões exis
 
 `http.server` é um servidor de desenvolvimento local, sem TLS, hardening ou adequação produtiva. Escolher runtime de produção, autenticação SuperSync, papéis SQL/isolamento, pool, limites/monitoramento e deploy somente na etapa de integração. A biblioteca padrão documenta esse limite. [HTTP local](https://docs.python.org/3/library/http.server.html).
 
-A próxima entrega funcional é armazenamento/verificação de originais e vínculos de evidências, seguido por reuniões e conclusão. Não migrar dados reais antes de proteger/restaurar banco e arquivos e declarar o corte de autoridade.
+Originais e vínculos de evidências estão implementados localmente. As próximas entregas funcionais são revisão/aprovação de reuniões e conclusão por evidência. Não migrar dados reais antes de proteger/restaurar banco e arquivos e declarar o corte de autoridade.
 
 Referências técnicas: [parâmetros psycopg](https://www.psycopg.org/psycopg3/docs/basic/params.html), [JSON Schema](https://python-jsonschema.readthedocs.io/en/stable/validate/), [contrato](../contratos/README.md).
 
@@ -98,3 +99,21 @@ Siga as [instruções portáveis do gestor](../../arquitetura/v2/operacao-gestor
 ```
 
 Os testes exercitam reatribuição indevida de entrada, isolamento, campo não permitido, original preservado, rollback de falha pré-commit e recuperação independente do chat. Nenhuma migração SQL é necessária nesta entrega: referências de entradas usam o campo `origem`, validadas pelo serviço.
+
+## Originais e evidências — piloto local
+
+Limite de 512 KiB por arquivo. O cliente calcula tamanho e SHA-256, prepara metadados por operação, envia os bytes em base64 e o serviço relê o objeto salvo antes de confirmar. `verificar_artefato` revalida o objeto existente. Nome e tipo de mídia são metadados informados; não significam análise do conteúdo ou detecção automática de formato. O servidor gera a chave interna e não aceita caminho/URL remoto como original salvo.
+
+Objetos ficam em `.runtime/servico/objetos/`, fora do Git, com arquivos criados com permissão restrita. Não são anexos guardados apenas no chat. Upload usa arquivo temporário, fsync e publicação sem sobrescrita. Se o banco reverter após a gravação física, o original pode permanecer no armazenamento: repetir o mesmo pedido reconcilia seus bytes; não há coleta automática de órfãos. Essa persistência é local, sem cópia independente e sem acesso de outro computador.
+
+Preparação de metadados não confirma recebimento do arquivo: a resposta informa envio/verificação pendentes. Captura de entrada, vínculo ou relato só aceita artefato verificado e relido. Arquivo ausente, checksum divergente e symlink são recusados. Consultas de fichas sinalizam `integridade=indisponivel_ou_divergente` quando o arquivo original não está íntegro. A consulta de operação de envio revalida o arquivo antes de repetir uma confirmação antiga.
+
+Somente gestor prepara/envia/verifica/vincula no piloto. Executor pode referenciar evidência já acessível em relato da tarefa atribuída. Download exige membro ativo: gestor acessa o portfólio; demais perfis acessam originais próprios ou vinculados a registros que podem consultar. Perfil consulta segue a permissão de leitura do portfólio já existente; autenticação real e participação por projeto no SuperSync ainda precisam de implementação. Downloads são binários, como anexo, sem renderização de HTML/script no servidor e sem divulgar caminho interno.
+
+O cliente possui `anexar` e `baixar`. Para anexar, fornecer `--arquivo`, `--id` com UUID estável do envio e `--chave` estável. Para vincular na mesma sequência, fornecer também `--registro`, `--versao` e `--finalidade` (`documentacao`, `evidencia` ou `origem`). O cliente mostra o ID preparado antes de enviar e confirma envio e vínculo separadamente. Repetir a mesma chamada com o mesmo arquivo/UUID/chave reconcilia as etapas sem duplicar. Alterar conteúdo sob a mesma operação gera conflito.
+
+Em `baixar`, `--id` é o UUID do artefato e `--arquivo` é o destino local, que não será sobrescrito. `--porta` permite ensaio em outra porta, sempre em 127.0.0.1. Não utilizar esses comandos para anexar segredos a registros de negócio.
+
+Não há nova migração de tabelas. Execute novamente `preparar_demo.py` para conferir os grants mínimos de INSERT em artefatos/fontes e UPDATE em artefatos, preservando as credenciais existentes. Reinicie apenas o serviço HTTP para carregar esta implementação. O usuário do serviço continua sem DELETE, superuser, criação de banco ou schema.
+
+Testes com arquivos sintéticos incluem checksum/tamanho, reenvio, falha entre arquivo e commit, corrupção, symlink, download sem permissão, isolamento, cliente portável e evidência de entrega parcial. Evidência registrada não conclui a tarefa. Restauração conjunta de arquivos e banco, proteção independente, quotas totais, retenção, varredura de conteúdo e armazenamento central são pendências para produção.

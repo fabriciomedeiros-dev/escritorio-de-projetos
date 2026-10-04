@@ -1,6 +1,6 @@
 # Contrato de operações — Escritório v2
 
-Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato, atualização de conteúdo e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
+Versão 2.0.0, OpenAPI 3.1. [Contrato legível por máquina](openapi.json) e [pedidos ilustrativos](exemplos.json). O [piloto HTTP local](../servico/README.md) implementa captura de texto, criação de tarefa/solicitação/ideia, relato, atualização de conteúdo, anexos verificados e consultas. Demais comandos estão definidos para evolução e são rejeitados pelo piloto; `x-implementado-piloto` identifica o subconjunto. Nenhum endereço de produção foi presumido.
 
 ## Identidade, isolamento e repetição
 
@@ -21,6 +21,8 @@ Atualizações de registros exigem `versao_esperada`; executar comparação atô
 | registrar_dependencia | Verificar entrega e provedor, impedir ciclos; motivo, próxima ação, responsável e acompanhamento obrigatórios |
 | resolver_dependencia | Conferir critério e evidência; liberar conclusão apenas quando todas as pendências necessárias estiverem resolvidas |
 | preparar_artefato | Gerar chave interna; não aceitar URL remota/caminho arbitrário como arquivo já salvo; preparar upload persistente autorizado |
+| enviar_artefato | Conteúdo base64 de até 512 KiB, tamanho/checksum previstos obrigatórios; salvar sem sobrescrever, reler e verificar; somente gestor no piloto |
+| vincular_artefato | Gestor vincula original verificado a registro aberto por versão, com finalidade e motivo; histórico atômico; não conclui entrega |
 | verificar_artefato | Ler objeto salvo, calcular tamanho/checksum e comparar; cliente não pode declarar a verificação cumprida |
 | propor_topicos_reuniao | Original verificado; apresentar todos os tópicos; revisões imutáveis, sem alterar operação do projeto |
 | aprovar_topicos_reuniao | Gestor humano autenticado confirma cada revisão; correção cria revisão nova; itens rejeitados não são efetivados; lote explicitamente enviado é atômico |
@@ -51,3 +53,9 @@ Persistência e proteção são separadas: `estado=verificada` significa gravaç
 Rotas e nomes não dependem de Codex, Claude Code ou formato de chats. Adaptadores CLI/MCP e interface SuperSync usam o mesmo contrato. Mudanças incompatíveis precisam de versão de API nova; migrações SQL possuem numeração própria e checksum.
 
 Documentação de referência: [OpenAPI 3.1](https://spec.openapis.org/oas/v3.1.0.html). Foram conferidos JSON, referências locais, estrutura do contrato e validação JSON Schema dos pedidos/respostas do piloto, com testes HTTP end-to-end. Validação integral por ferramenta OpenAPI completa e implementação dos demais comandos permanecem pendentes.
+
+## Transferência de originais no piloto
+
+`preparar_artefato` exige tamanho e checksum previstos; prepara metadados com envio pendente. `enviar_artefato` salva bytes e verifica em nova leitura, com repetição reconciliável. `verificar_artefato` revalida o objeto, sem aceitar confirmação declarada pelo cliente. `GET /v1/portfolios/{portfolio}/artefatos/{artefato_id}` devolve o original como download binário autenticado, conferindo integridade. O ID é referência; caminhos internos não integram a resposta. A captura pode conter anexo verificado, e seu vínculo a registro inclui fonte de origem.
+
+Fichas de registros incluem metadados e estado de integridade das fontes. Relatos aceitam IDs de evidências acessíveis, preservam fontes por relato e não mudam conclusão. Arquivos e banco não têm transação conjunta: um arquivo persistido antes de rollback é reconciliado por repetição, sem sobrescrita; coleta de órfãos e backup/restauração conjunta continuam pendentes.

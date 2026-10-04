@@ -32,5 +32,26 @@
         "resultado_esperado": "Aplicativo de demandas como evolução do sistema existente"
       }
     }
+  },
+  {
+    "operacao_id": "00000000-0000-0000-0000-000000000013",
+    "comando": "preparar_artefato",
+    "dados": {
+      "nome": "evidencia.txt",
+      "tipo_midia": "text/plain",
+      "bytes_esperados": 20,
+      "sha256_esperado": "1425cb7808a0e63b73121168e2a70fa82040e5f1e3dee75ca17358bc517193ae",
+      "origem": {
+        "canal": "teste"
+      }
+    }
+  },
+  {
+    "operacao_id": "00000000-0000-0000-0000-000000000014",
+    "comando": "enviar_artefato",
+    "dados": {
+      "artefato_id": "00000000-0000-0000-0000-000000000099",
+      "conteudo_base64": "RXZpZGVuY2lhIHNpbnRldGljYQo="
+    }
   }
 ]

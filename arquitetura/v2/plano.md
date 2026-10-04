@@ -7,7 +7,7 @@
 | 1 | Especificação, arquitetura e interação aprovadas funcionalmente | Documentadas nesta versão |
 | 2 | Modelo lógico, entidades, estados e invariantes | Documentado; esquema físico 001 aplicado e testado localmente |
 | 3 | Avaliação e escolha de armazenamento | PostgreSQL central escolhido; comparação e ensaios sintéticos concluídos; comparação de hospedagem concluída, decisão pendente |
-| 4 | Fluxo mínimo pelo Codex | Piloto HTTP/cliente local implementados para texto, criação, relato, atualização de conteúdo com originais vinculados e consulta; evidências/reuniões e integração SuperSync pendentes |
+| 4 | Fluxo mínimo pelo Codex | Piloto HTTP/cliente local implementados para texto, criação, relato, atualização de conteúdo com originais vinculados e consulta; anexos/evidências verificados implementados; reuniões e integração SuperSync pendentes |
 | 5 | Piloto com casos reais e recuperação | Pendente |
 | 6 | Planejamento semanal, capacidade e alertas | Pendente |
 | 7 | Interface individual para dois integrantes | Posterior à validação do uso individual |
@@ -56,4 +56,8 @@ Equipe: autenticação individual, permissões operacionais e autoria; formulár
 
 ## Incremento local — complementos recuperáveis (2026-10-03)
 
-Implementada atualização de conteúdo de ideias/solicitações abertas, com vínculo dos textos originais, histórico e versão. Consultas recuperam os complementos sem depender do chat anterior. Instruções comuns do gestor documentadas; anexos e reuniões continuam como próxima entrega funcional. Testes HTTP em cópia temporária via backup/restauração, sem encerrar sessões do banco de demonstração.
+Implementada atualização de conteúdo de ideias/solicitações abertas, com vínculo dos textos originais, histórico e versão. Consultas recuperam os complementos sem depender do chat anterior. Instruções comuns do gestor documentadas; anexos/evidências implementados no incremento seguinte; reuniões continuam pendentes. Testes HTTP em cópia temporária via backup/restauração, sem encerrar sessões do banco de demonstração.
+
+## Incremento local — originais e evidências (2026-10-03)
+
+Implementados preparação, envio, revalidação, download autenticado, captura de anexo e vínculos por versão/finalidade. Arquivos imutáveis locais com tamanho e checksum; recuperação de envio interrompido entre filesystem e banco testada. Cliente portável permite envio e download. Limite inicial 512 KiB por arquivo; somente identidades sintéticas. Conclusão, reuniões e proteção independente continuam pendentes. Não houve alteração no SuperSync ou migração de dados reais.

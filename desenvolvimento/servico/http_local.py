@@ -22,12 +22,26 @@ class Handler(BaseHTTPRequestHandler):
     def dispatch(self):
         try:
             url=urlsplit(self.path)
-            match=re.fullmatch(r'/v1/portfolios/([a-z][a-z0-9_-]*)/(operacoes|registros)(?:/([0-9a-fA-F-]+))?',url.path)
+            match=re.fullmatch(r'/v1/portfolios/([a-z][a-z0-9_-]*)/(operacoes|registros|artefatos)(?:/([0-9a-fA-F-]+))?',url.path)
             if not match: raise Falha(404,'NAO_ENCONTRADO','Rota não disponível.')
             auth=self.headers.get('Authorization','')
             if not auth.startswith('Bearer '): raise Falha(401,'NAO_AUTENTICADO','Bearer token obrigatório.')
             actor=self.service.identity(auth[7:])
             p,resource,id_=match.groups()
+            if self.command=='GET' and resource=='artefatos' and id_:
+                if url.query: raise Falha(400,'PEDIDO_INVALIDO','Download não aceita filtros.')
+                import uuid
+                try: id_=str(uuid.UUID(id_))
+                except ValueError: raise Falha(400,'PEDIDO_INVALIDO','ID de artefato inválido.')
+                data=self.service.download(p,actor,id_)
+                self.send_response(200)
+                self.send_header('Content-Type','application/octet-stream')
+                self.send_header('Content-Disposition',f'attachment; filename="{id_}.bin"')
+                self.send_header('X-Content-Type-Options','nosniff')
+                self.send_header('Cache-Control','no-store')
+                self.send_header('Content-Length',str(len(data)))
+                self.end_headers();self.wfile.write(data)
+                return
             if self.command=='POST' and resource=='operacoes' and not id_:
                 if url.query: raise Falha(400,'PEDIDO_INVALIDO','POST não aceita filtros na URL.')
                 if self.headers.get('Content-Type','').split(';')[0]!='application/json': raise Falha(400,'PEDIDO_INVALIDO','Content-Type deve ser application/json.')
