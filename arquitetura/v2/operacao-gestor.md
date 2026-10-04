@@ -31,3 +31,7 @@ Não anunciar reuniões, promoção, conclusão, planejamento ou proteção inde
 No piloto, use `cliente.py anexar` para arquivo local de até 512 KiB, com UUID e chave estáveis. Preserve o original, confirme tamanho/checksum no serviço e só então vincule ao registro na finalidade solicitada. Não basta receber um arquivo no chat para confirmar que ele está registrado. Preparação, envio e vínculo têm confirmações separadas: comunicar a etapa pendente em caso de falha.
 
 A ficha apresenta ID, nome, checksum e integridade de suas fontes; use download autenticado para recuperar o original. Nome do arquivo não é identificador. Não apresentar evidência como conclusão nem tratar upload de reunião como aprovação de seus tópicos. Em original ausente ou divergente, explicitar a falha de integridade e não confirmar recuperação completa. A proteção independente continua pendente.
+
+## Reuniões — próxima entrega
+
+A [especificação de reuniões](reunioes.md) prevê MCP de IA de transcrição e envio de texto com tópicos. Preservar o recebido como fonte e não exigir transcrição integral quando houver somente tópicos. Ambos exigem revisão de todos os tópicos por Fabrício antes de efeitos operacionais. Importação MCP e aprovação ainda não disponíveis no piloto; não anunciar integração já conectada.

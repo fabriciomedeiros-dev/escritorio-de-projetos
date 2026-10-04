@@ -35,6 +35,7 @@ Trocar de agente não exige migrar os registros nem manter o histórico do chat 
 - Capturar primeiro em caixa de entrada do portfólio, mesmo com campos ausentes; usar lacunas explícitas.
 - Sugerir classificação no ato. Classificação inferida permanece proposta até confirmação; perguntar quando a ambiguidade afeta acompanhamento. Pendências continuam visíveis e entram na revisão semanal.
 - Registrar automaticamente informações e compromissos explícitos fornecidos pelo usuário dentro das autorizações vigentes. Inferências não se tornam fatos.
+- Aceitar reuniões por MCP de serviço de IA de transcrição ou por texto enviado com tópicos, sem exigir transcrição integral para a segunda forma. Seguir [entrada e revisão de reuniões](reunioes.md); provedor MCP e integração real ainda pendentes.
 - Preservar documentos e transcrições originais; extrair decisões, tarefas, requisitos e prazos com localização na fonte.
 - Todos os tópicos extraídos de reuniões precisam de revisão e aprovação de Fabrício, inclusive os que não exigem alteração. Permitir aprovação em lote com correções e rejeições individuais. Antes disso, somente o original e as propostas pendentes ficam registrados; não alterar a operação com o conteúdo proposto.
 - Um original pode ser vinculado a vários registros do mesmo portfólio, evitando cópias concorrentes. Original que misture portfólios exige definição de acesso e separação antes de exposição.

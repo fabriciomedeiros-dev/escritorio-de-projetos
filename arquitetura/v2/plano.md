@@ -61,3 +61,7 @@ Implementada atualização de conteúdo de ideias/solicitações abertas, com v�
 ## Incremento local — originais e evidências (2026-10-03)
 
 Implementados preparação, envio, revalidação, download autenticado, captura de anexo e vínculos por versão/finalidade. Arquivos imutáveis locais com tamanho e checksum; recuperação de envio interrompido entre filesystem e banco testada. Cliente portável permite envio e download. Limite inicial 512 KiB por arquivo; somente identidades sintéticas. Conclusão, reuniões e proteção independente continuam pendentes. Não houve alteração no SuperSync ou migração de dados reais.
+
+## Próxima entrega — reuniões com duas formas de entrada
+
+Implementar o [fluxo comum de reuniões](reunioes.md) para texto manual com tópicos e conteúdo importado por MCP de um serviço de transcrição. Validar inicialmente texto e resposta MCP sintética, preservando fonte, revisões e aprovação integral. Integração real depende da escolha do serviço e conexão autorizada; não bloqueia o fluxo manual. Nenhuma ação operacional antes da aprovação das revisões exatas.

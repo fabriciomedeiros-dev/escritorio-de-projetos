@@ -2,6 +2,8 @@
 
 ## 2.0.0 — 2026-10-03
 
+- Define duas entradas para reuniões (MCP de IA de transcrição ou texto manual com tópicos), convergindo para preservação da fonte e aprovação integral; implementação e escolha do provedor permanecem pendentes.
+
 - Implementa originais locais imutáveis, checksum/tamanho, envio reconciliável, download autenticado e vínculo de documentação/evidência por versão; testa falhas, corrupção, isolamento e cliente portável.
 
 - Implementa atualização de conteúdo de ideias/solicitações com originais vinculados, histórico e versão; busca pelo resultado esperado e ensaio HTTP via backup/restauração que preserva conexões do DBeaver.

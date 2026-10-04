@@ -26,7 +26,7 @@ O pedido avaliar ideia encaminha ao fluxo do conselho existente. Fabrício autor
 
 ## Entrada de reuniões
 
-Guardar e verificar o original; extrair tópicos; agrupar por projeto/solicitação; mostrar todos para revisão. Permitir aprovar lote, corrigir ou rejeitar itens. Pendências ficam recuperáveis. Depois da aprovação, aplicar operações autorizadas e confirmar seus IDs; falha parcial exige recuperação visível sem reaplicar itens concluídos.
+Receber por MCP de um serviço de IA de transcrição ou por texto enviado pelo usuário com tópicos, inclusive sem transcrição integral. Ambos seguem o [fluxo comum de reuniões](reunioes.md). Preservar proveniência e lacunas; tópicos externos também são propostas pendentes. Guardar e verificar o original; extrair tópicos; agrupar por projeto/solicitação; mostrar todos para revisão. Permitir aprovar lote, corrigir ou rejeitar itens. Pendências ficam recuperáveis. Depois da aprovação, aplicar operações autorizadas e confirmar seus IDs; falha parcial exige recuperação visível sem reaplicar itens concluídos.
 
 ## Participação da equipe
 
