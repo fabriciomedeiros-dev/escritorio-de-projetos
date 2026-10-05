@@ -2,7 +2,7 @@
 
 **Identificador:** `saerj`
 
-**Navegação:** [Início](../../README.md) · [Portfólios](../README.md) · [Projetos](projetos/README.md) · [Conselho](../../conselho/README.md) · [Modelos](../../modelos/README.md)
+**Navegação:** [Início](../../README.md) · [Portfólios](../README.md) · [Projetos](projetos/README.md) · [Reuniões do Comitê de TI](reunioes/README.md) · [Conselho](../../conselho/README.md) · [Modelos](../../modelos/README.md)
 
 ## Visão executiva
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conselho/protocolo.md",
+                "file": "portfolios/saerj/reunioes/2026-09-30-comite-de-ti-pauta.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "protocolo"
+              "title": "2026-09-30-comite-de-ti-pauta"
             }
           }
         ]
@@ -41,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Explorador de arquivos"
@@ -185,21 +187,51 @@
   },
   "active": "e7d8abcab6d6e8b1",
   "lastOpenFiles": [
-    "conselho/regras.md",
-    "conselho/papeis.md",
+    "desenvolvimento/servico/README.md",
+    "desenvolvimento/servico/exemplos/criar_tarefa.json",
+    "desenvolvimento/servico/exemplos",
+    "desenvolvimento/servico/__pycache__/http_local.cpython-314.pyc",
+    "desenvolvimento/servico/__pycache__/nucleo.cpython-314.pyc",
+    "desenvolvimento/servico/__pycache__",
+    "desenvolvimento/testes/verificar_servico.py",
+    "desenvolvimento/servico/cliente.py",
+    "desenvolvimento/servico/http_local.py",
+    "desenvolvimento/servico/preparar_demo.py",
+    "desenvolvimento/servico/nucleo.py",
+    "desenvolvimento/migrations/README.md",
+    "desenvolvimento/contratos/README.md",
+    "conselho/ideias/saerj/escritorio-projetos-ia-v2/01-ficha-ideia.md",
+    "arquitetura/v2/implementacao-supersync.md",
+    "desenvolvimento/local/README.md",
+    "arquitetura/v2/hospedagem.md",
+    "arquitetura/v2/armazenamento.md",
+    "CHANGELOG.md",
+    "arquitetura/v2/plano.md",
+    "arquitetura/v2/modelo-dados.md",
+    "arquitetura/v2/interacao.md",
+    "arquitetura/v2/especificacao.md",
+    "arquitetura/v2/README.md",
+    "atividades/video-estrategia-okr/slides/slide-08.svg",
+    "atividades/video-estrategia-okr/slides/slide-07.svg",
+    "atividades/video-estrategia-okr/slides/slide-06.svg",
+    "atividades/video-estrategia-okr/slides/slide-05.svg",
+    "atividades/video-estrategia-okr/slides/slide-05-step-4.svg",
+    "atividades/video-estrategia-okr/slides/slide-05-step-3.svg",
+    "atividades/video-estrategia-okr/slides/slide-05-step-2.svg",
+    "atividades/video-estrategia-okr/slides/slide-05-step-1.svg",
+    "atividades/video-estrategia-okr/slides/slide-05-step-0.svg",
+    "atividades/video-estrategia-okr/slides/slide-04.svg",
+    "atividades/video-estrategia-okr/roteiro.md",
+    "atividades/video-estrategia-okr/README.md",
+    "atividades/okr-e-valorizacao-ti.md",
+    "tarefas-escritorio.md",
+    "portfolios/saerj/reunioes/2026-09-30-comite-de-ti-pauta.md",
+    "portfolios/saerj/reunioes/README.md",
     "README.md",
-    "portfolios/saerj/projetos/sac-supermarket/comunicacao.md",
-    "portfolios/saerj/projetos/sac-supermarket/comunicacoes/2026-09-10-relatorio-atividade.md",
-    "modelos/validacao-sprint.md",
-    "modelos/tarefas.md",
-    "modelos/relatorio-status.md",
-    "modelos/projeto.md",
-    "modelos/historico.md",
-    "modelos/desenvolvimento.md",
-    "modelos/dependencias.md",
-    "modelos/decisoes.md",
-    "modelos/decisao-financeira.md",
-    "modelos/comunicacao.md",
-    "conselho/protocolo.md"
+    "CONTEXTO.md",
+    "atividades/mensuracao-ganhos-valor-ti.md",
+    "atividades/divulgacao-andamento-trello.md",
+    "atividades/avaliacao-contratacoes-ferramentas.md",
+    "atividades/contratacoes/anexos/CT-001-embasamento-aprovacao.md"
   ]
 }
