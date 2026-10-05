@@ -16,7 +16,7 @@
 **Fase:** Operação e evolução contínua  
 **Implantação original:** 2021  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 01/10/2026
+**Última atualização:** 02/10/2026
 
 ### Fontes canônicas relacionadas
 
@@ -91,7 +91,7 @@ CRM operando com integração de vendas confiável e monitorada, infraestrutura 
 | Escopo | 🟡 Atenção | Frentes principais identificadas, ainda sem requisitos e limites completos. | Refinar e priorizar cada frente. |
 | Qualidade | 🟡 Atenção | O PDV configurado no Torre já envia vendas ao CRM, mas o Preço 2 não foi validado. A documentação pública da TOTVS não cobre todo o caminho da regra entre ERP e PDV. O chamado `202578` continua exigindo reenvio e reconciliação das vendas afetadas. | Abrir o chamado técnico da demanda CRM-008, testar o Preço 2 conforme a orientação recebida, executar o reenvio e reconciliar os dados. |
 | Recursos | 🟡 Atenção | Responsáveis da Rede, Rock e Consinco não estão consolidados. | Montar matriz de responsabilidades. |
-| Impedimentos & Riscos | 🟡 Atenção | A URL de produção e o reenvio de vendas ainda precisam de resultado documentado. O cenário de Preço 2 depende da configuração e da carga da regra de incentivo no Consinco, sem procedimento completo disponível na documentação pública. | Confirmar o resultado das ações de 22/09 e acompanhar a TOTVS pela demanda CRM-008 até a homologação do Preço 2. |
+| Impedimentos & Riscos | 🟡 Atenção | A URL de produção e o reenvio de vendas ainda precisam de resultado documentado. O cenário de Preço 2 depende da configuração e da carga da regra de incentivo no Consinco, sem procedimento completo disponível na documentação pública. | Retestar o reenvio em 07/10 com o parceiro ID > 1000 criado, confirmar a URL de produção e acompanhar a TOTVS pela demanda CRM-008. |
 | Resultado | 🟡 Atenção | O CRM está implantado, mas não há indicadores consolidados das evoluções. | Definir indicadores por frente. |
 
 ## 6. Próximo marco

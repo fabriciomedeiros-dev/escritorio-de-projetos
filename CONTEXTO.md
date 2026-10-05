@@ -84,6 +84,10 @@ Ao receber uma solicitacao:
 5. Quando houver autorizacao, registre a alteracao no arquivo correto e indique o que foi atualizado.
 6. Termine com proximos passos claros e com a decisao requerida, se houver.
 
+## Guarda de arquivos e documentos
+
+Conforme preferência de Fabrício em 02/10/2026, perguntar se deseja guardar no repositório cada arquivo ou documento gerado, recebido ou enviado. Após aceite, criar uma pasta específica no Escritório para armazená-lo, preferencialmente em `documentos/<portfolio>/<atividade-ou-projeto>/`. Preservar a fonte original e não copiar nem reorganizar documentos anteriores sem autorização. Pedidos explícitos de armazenamento dispensam nova pergunta. Consulte `AGENTS.md` para as regras de aplicação.
+
 ## Retomada do trabalho
 
 Ao continuar este projeto em outro computador, leia este arquivo, `README.md`, `portfolios/README.md`, o `portfolio.md` do portfólio solicitado e os arquivos de `conselho/`. Antes de preparar status ou comunicação, confirme o portfólio a ser tratado. O Git e a referencia para sincronizar os arquivos entre computadores.

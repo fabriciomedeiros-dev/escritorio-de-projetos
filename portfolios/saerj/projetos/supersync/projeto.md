@@ -16,7 +16,7 @@
 **Fase:** Operação e evolução contínua  
 **Início:** A confirmar  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 29/09/2026
+**Última atualização:** 02/10/2026
 
 ### Fontes canônicas relacionadas
 
@@ -73,17 +73,17 @@ A confirmar durante a consolidação da linha de base gerencial, incluindo benef
 
 | Dimensão | Status | Resumo objetivo | Próxima ação |
 |---|---|---|---|
-| Prazo | 🟢 Adequado | Todas as funcionalidades planejadas foram concluídas e validadas antes do encerramento do cronograma consolidado. | Agendar a apresentação executiva e registrar a decisão. |
+| Prazo | 🟢 Adequado | Todas as funcionalidades planejadas foram concluídas e validadas antes do encerramento do cronograma consolidado. | Acompanhar as apresentações aos associados. |
 | Escopo | 🟢 Adequado | As seis frentes planejadas foram validadas e estão funcionando. Sugestões de melhoria serão tratadas em ciclo posterior. | Consolidar o backlog de melhorias sem reabrir o escopo validado. |
-| Qualidade | 🟢 Adequado | A validação funcional foi concluída com resultado satisfatório; a suíte da revisão `bba8f83` também executou 551 testes com sucesso. | Preservar as evidências e anexar o aceite executivo após a apresentação. |
+| Qualidade | 🟢 Adequado | A validação funcional foi concluída com resultado satisfatório; a suíte da revisão `bba8f83` também executou 551 testes com sucesso. | Preservar as evidências e o registro da aprovação da diretoria. |
 | Recursos | 🟡 Atenção | Papéis centrais foram definidos; capacidade e responsáveis por módulo ainda precisam ser confirmados. | Mapear donos funcionais e capacidade por módulo. |
 | Impedimentos & Riscos | 🟢 Adequado | Não há impedimento funcional registrado para a apresentação e aprovação. A credencial GCP foi desconsiderada como risco deste status por direcionamento gerencial. | Monitorar apenas novos impedimentos que afetem aprovação ou operação. |
-| Resultado | 🟡 Atenção | O escopo planejado está validado; falta a aprovação de Marcelo Rebelo para concluir o marco executivo. | Apresentar as implementações e formalizar aprovação ou condicionantes. |
+| Resultado | 🟢 Adequado | Central apresentada e aprovada na reunião de diretoria de 28/09/2026; visitas aos associados iniciadas. | Acompanhar visitas, pontos focais e melhorias identificadas. |
 
 ### Acordos Comerciais — alinhamento de 29/09/2026
 
 - crescimento de vendas permanece em análise por Filipe Fachetti, com prazo em 06/10/2026;
-- Filipe deve entregar o relatório de triangulação para evolução do processo e início da homologação; o prazo informado foi 01/09/2026 e precisa ser confirmado por ser anterior à reunião;
+- o relatório de triangulação foi enviado, conforme atualização de 02/10/2026, e aguarda análise; data de envio, responsável e prazo da análise a confirmar;
 - o processo de devolução de mercadorias pelo fornecedor permanece sem responsável e prazo definidos;
 - a análise gerencial dos dados da Apuração de Contratos foi indicada para novembro ou dezembro de 2026, ainda sem mês, responsável e critérios de aceite confirmados;
 - as necessidades de auditoria da DHS relacionadas ao Observador passam a ser tratadas no projeto independente [Desligamento do Observador](../desligamento-observador/projeto.md).
@@ -92,10 +92,10 @@ A confirmar durante a consolidação da linha de base gerencial, incluindo benef
 
 ## 5. Próximo marco
 
-**Marco:** Apresentar as implementações do Portal do Associado para aprovação de Marcelo Rebelo
-**Data:** A agendar
-**Condição de conclusão:** funcionalidades apresentadas, decisão executiva registrada e eventuais condicionantes encaminhados. Após a aprovação, apresentar o portal aos diretores e definir os responsáveis em cada associado; sugestões de melhoria seguem para o ciclo posterior.
+**Marco:** Realizar as próximas visitas de apresentação da Central aos associados
+**Data:** 07/10/2026 (Barra Oeste) e 08/10/2026 (Ramigos)
+**Condição de conclusão:** visitas realizadas, encaminhamentos registrados e responsáveis locais definidos. Visitas de 01/10 confirmadas. Aprovação da diretoria concluída em 28/09; ver atividades/visitas-central-associados.md.
 
 ## 6. Observação do Escritório de Projetos
 
-O Portal do Associado concluiu a implementação e a validação funcional do escopo planejado. A revisão `bba8f83` também passou em 551 testes automatizados. O status permanece em atenção até a aprovação de Marcelo Rebelo. Na sequência, o portal será apresentado aos diretores e serão definidos os responsáveis em cada associado; melhorias sugeridas serão tratadas em ciclo posterior.
+O Portal do Associado concluiu a implementação e a validação funcional do escopo planejado. A revisão `bba8f83` também passou em 551 testes automatizados. A Central foi apresentada e aprovada na reunião de diretoria de 28/09/2026, que originou a agenda de visitas aos associados. As visitas de 01/10 foram confirmadas. O status geral permanece em atenção pelas lacunas de recursos e acompanhamento dos demais módulos; a aprovação executiva da Central está concluída.

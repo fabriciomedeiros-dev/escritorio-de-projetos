@@ -67,3 +67,13 @@ As frentes permanecem como registros iniciais no portfólio. Responsável, objet
 - Confirmar com Marcelo as regras de trabalho do Observador e as necessidades da DHS para auditoria.
 - Definir responsáveis, prazos e entregas das quatro etapas do SAC.
 - Complementar este registro com o link, as notas e a transcrição do tl;dv quando o processamento estiver concluído.
+
+## Registro complementar — reunião com a UNILEVER
+
+**Fonte:** atualização fornecida por Fabrício Medeiros em 02/10/2026, referente a outra reunião realizada na terça-feira, 29/09/2026.
+
+- **29/09/2026:** realizada reunião com a UNILEVER para alinhamento do envio de dados de sellout. Foi acordado que a Rede Supermarket disponibilizaria uma API para consumo dos dados.
+- **30/09/2026 (quarta-feira):** entregue a documentação da API, conforme informado por Fabrício.
+- **Documentação:** [API de dados — documentação](https://intranet.redesupermarket.com.br/api/v1/dados/docs/).
+
+A entrega registrada corresponde à documentação; o início do consumo dos dados pela UNILEVER não foi informado.

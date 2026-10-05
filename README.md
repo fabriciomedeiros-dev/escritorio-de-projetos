@@ -51,6 +51,10 @@ Consulte o [Conselho](conselho/README.md), seus [papéis](conselho/papeis.md), [
 
 ## Comunicação de status
 
+O envio a Marcelo Rebelo do relatório do 3º trimestre de 2026 está registrado em [Relatório de participações dos associados](atividades/relatorio-participacoes-associados-3tri-2026.md).
+
+A agenda de apresentações da Central dos Associados na Intranet está em [Visitas aos associados](atividades/visitas-central-associados.md).
+
 Cada projeto pode manter uma `comunicacao.md` com sua matriz oficial de públicos, eventos, canais, frequência, responsáveis e aprovações. O modelo está em `modelos/comunicacao.md`.
 
 O Trello será utilizado como camada de divulgação do andamento do portfólio. Ele não substitui os registros canônicos: os cartões devem resumir informações confirmadas no Escritório e seguir o fluxo definido em [Divulgação do andamento dos projetos no Trello](atividades/divulgacao-andamento-trello.md).
