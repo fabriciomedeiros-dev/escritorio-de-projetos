@@ -1,12 +1,12 @@
 # Interação — versão 2
 
-Comportamento proposto; nenhuma skill, serviço ou interface nova está implantada por este documento.
+Desenho de interação e instruções para o agente no repositório. A entrada atual segue [menu do Gestor](menu-gestor.md); não há menu gráfico, comando global ou interface nova instalada por este documento. Capacidades operacionais dependem do serviço implementado ou do fluxo documental oficial.
 
 ## Conversas na interface inicial
 
 Um chat de rotina por portfólio recebe solicitações pontuais e atualizações. Chats dedicados servem aos projetos ativos, ideias e análises extensas. Uma solicitação não exige um novo chat; seu identificador é independente da conversa. Abrir um chat específico quando solicitado pelo usuário, sem depender dele para preservar memória.
 
-Ao receber oi, identificar o portfólio e consultar registros antes de mostrar um resumo curto: entregas vencidas, bloqueios, ausência de prazo, aprovações pendentes e riscos. Oferecer registrar demanda, consultar andamento, planejar semana, revisar reunião, gerar relatório e avaliar ideia. Não inventar contagens nem consultar outro domínio para preencher o resumo. Pedidos diretos dispensam menu.
+Ao receber oi, identificar o portfólio e consultar registros antes de mostrar um resumo curto: entregas vencidas, bloqueios, ausência de prazo, aprovações pendentes e riscos. Oferecer as opções implementadas descritas no menu do Gestor, conforme fonte e permissões. Planejamento e demais recursos futuros aparecem somente na ajuda como previstos. Não inventar contagens nem consultar outro domínio para preencher o resumo. Pedidos diretos dispensam menu.
 
 Respostas iniciais em texto, tabelas e links. Confirmação de registro indica ID, resumo do salvo, lacunas e pendência de proteção, quando houver. Consultas de status mostram atualização, fonte, evidência, restante e dependências. Nenhum chat presume possuir dados atualizados sem consultar a fonte.
 

@@ -2,6 +2,8 @@
 
 ## 2.0.0 — 2026-10-03
 
+- Em 05/10, define entrada Gestor do Escritório, termos de chamada, menu numerado e perguntas guiadas nas instruções comuns do agente; diferencia fonte oficial, demonstração e funcionalidades previstas.
+
 - Prepara instalação Windows nativa: venv Scripts, descoberta de binários .exe, PostgreSQL próprio em loopback e ACL do runtime. Validação em Windows real pendente.
 
 - Adiciona roteiro Windows com WSL 2/Ubuntu 22.04 para replicação local; execução nesse sistema ainda pendente.

@@ -2,9 +2,13 @@
 
 Instruções comuns para Codex, Claude Code ou outro cliente autorizado. O cliente de referência usa o contrato HTTP, não SQL administrativo. O portfólio `demo_escritorio` contém somente demonstrações; não importar dados reais enquanto proteção e corte de autoridade estiverem pendentes.
 
+## Entrada guiada
+
+Seguir [menu e termos de entrada](menu-gestor.md) para acolhimento, seleção de domínio/fonte, opções numeradas e questionamentos graduais. A navegação não substitui consulta nem concede autorização.
+
 ## Abertura e consulta
 
-Ao receber “oi” ou “consultar demandas”, consultar o serviço antes de responder. Mostrar portfólio, título, tipo, estado, responsável, prazo e lacunas, sem inventar avanço. Percorrer as páginas quando o pedido exigir todos os registros. O cliente aceita filtros `--id`, `--assunto`, `--tipo`, `--estado`, `--limite` e `--cursor`; a busca por assunto cobre título e resultado esperado.
+Ao receber “oi” em contexto de gestão ou “consultar demandas”, identificar portfólio e fonte antes de mostrar dados. No piloto demonstrativo, consultar o serviço; nos portfólios reais, consultar os documentos oficiais. Mostrar portfólio, título, tipo, estado, responsável, prazo e lacunas, sem inventar avanço. Percorrer as páginas quando o pedido exigir todos os registros. O cliente aceita filtros `--id`, `--assunto`, `--tipo`, `--estado`, `--limite` e `--cursor`; a busca por assunto cobre título e resultado esperado.
 
 Não depender de IDs lembrados do chat para recuperar complementos: cada ficha inclui `entradas`, com os textos originais vinculados, origem e data. Campos em `origem` são contexto informado, não prova de autenticação ou permissão. Distinguir relatos, decisões e autorizações.
 

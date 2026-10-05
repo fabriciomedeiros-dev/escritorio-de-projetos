@@ -8,6 +8,8 @@ Codex será o cliente inicial, mas a estrutura é agnóstica: Claude Code ou out
 
 ## Documentos
 
+- [Entrada, menu e perguntas guiadas do Gestor](menu-gestor.md)
+
 - [Entrada de reuniões por MCP ou texto e revisão de tópicos](reunioes.md)
 
 - [Operação portável do gestor no piloto](operacao-gestor.md)

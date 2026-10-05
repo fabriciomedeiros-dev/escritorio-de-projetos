@@ -97,3 +97,7 @@ Migração 002 local diferencia dependência necessária de impedimento de avan�
 Instalação e transferência lógica verificadas em ambientes separados no macOS. Guia: `desenvolvimento/local/REPLICACAO.md`. Pacote preserva dados demonstrativos, objetos e revisões/documentos locais, com credenciais novas no destino. Não sincroniza bancos entre computadores nem implementa proteção independente contínua. Linux/WSL não validado.
 
 Windows nativo: bootstrap preparado com venv Scripts/python.exe, binários .exe, cluster próprio TCP loopback e proteção ACL de .runtime. Guia em REPLICACAO.md; validação no Windows real pendente, sem alteração de serviços existentes.
+
+## Entrada guiada do Escritório
+
+Nome de apresentação: Gestor do Escritório. `abrir escritório` inicia a navegação; `menu` mostra opções. Seguir `arquitetura/v2/menu-gestor.md` e AGENTS.md para domínio/fonte, perguntas graduais e revisões numeradas. Instruções do agente no repositório, sem comando global ou interface gráfica. Capacidades futuras não entram como operações disponíveis.
