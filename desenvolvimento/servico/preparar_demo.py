@@ -15,6 +15,7 @@ from nucleo import CONFIG
 
 
 def preparar(identidades_restauradas=None):
+    ambiente.protect_runtime(ambiente.ROOT/'.runtime')
     if not ambiente.running(): raise RuntimeError('Inicie e migre o ambiente local primeiro.')
     CONFIG.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
     os.chmod(CONFIG.parent,0o700)

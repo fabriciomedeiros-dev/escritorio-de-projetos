@@ -39,7 +39,7 @@ def counts(conn):
 
 def code_manifest():
     files=[ROOT/'desenvolvimento/servico/requirements.txt',*(ROOT/'desenvolvimento/migrations').glob('*.sql')]
-    return {str(p.relative_to(ROOT)):sha(p.read_bytes()) for p in sorted(files)}
+    return {p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in sorted(files)}
 
 
 def git(*args):
@@ -83,7 +83,7 @@ def export_package(path, include_documents=True):
             if review_root.exists():
                 for file in sorted(review_root.rglob('*')):
                     if file.is_symlink():raise RuntimeError('Revisão contém symlink; não copiar fonte externa.')
-                    if file.is_file():members['documentos/'+str(file.relative_to(ROOT))]=file.read_bytes()
+                    if file.is_file():members['documentos/'+file.relative_to(ROOT).as_posix()]=file.read_bytes()
             changed=git('diff','HEAD','--name-only','-z').split(b'\0')
             untracked=git('ls-files','--others','--exclude-standard','-z','--','portfolios','conselho').split(b'\0')
             for raw in sorted(set(changed+untracked)):

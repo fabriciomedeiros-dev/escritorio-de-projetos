@@ -8,17 +8,15 @@ import shutil
 import subprocess
 import sys
 import venv
+from plataforma import venv_python, pg_directory, protect_runtime, WINDOWS
 
 ROOT=Path(__file__).resolve().parents[2]
 VENV=ROOT/'.runtime/servico-venv'
-PYTHON=VENV/'bin/python'
+PYTHON=venv_python(VENV)
 
 
 def pg_path():
-    if shutil.which('initdb'):return Path(shutil.which('initdb')).parent
-    for path in ('/opt/homebrew/opt/postgresql@14/bin','/usr/local/opt/postgresql@14/bin','/usr/lib/postgresql/14/bin'):
-        if (Path(path)/'initdb').exists():return Path(path)
-    raise RuntimeError('Instale PostgreSQL com initdb/pg_ctl/psql/pg_dump/pg_restore no PATH. Consulte REPLICACAO.md.')
+    return pg_directory()
 
 
 def environment():
@@ -32,13 +30,12 @@ def execute(args):
 
 
 def diagnose():
-    if os.name=='nt':raise RuntimeError('No Windows execute dentro do Linux/WSL; instalação nativa não suportada.')
     if sys.version_info<(3,10):raise RuntimeError('Python 3.10 ou posterior necessário; ambiente validado em 3.14.')
     if hasattr(os,'geteuid') and os.geteuid()==0:raise RuntimeError('Execute como usuário comum; initdb não pode executar como root.')
     tools=pg_path()
     versions={}
     for name in ('initdb','pg_ctl','psql','pg_dump','pg_restore'):
-        binary=tools/name
+        binary=tools/(name+'.exe' if WINDOWS else name)
         if not binary.is_file():raise RuntimeError(f'Ferramenta ausente: {name}')
         versions[name]=subprocess.check_output([str(binary),'--version'],text=True).strip()
     major={line.split()[-1].split('.')[0] for line in versions.values()}
@@ -48,6 +45,7 @@ def diagnose():
 
 def prepare(package=None):
     diagnose()
+    protect_runtime(ROOT/'.runtime')
     if not PYTHON.exists():
         VENV.parent.mkdir(parents=True,exist_ok=True)
         venv.EnvBuilder(with_pip=True).create(VENV)

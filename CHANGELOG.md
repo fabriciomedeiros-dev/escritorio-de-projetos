@@ -2,6 +2,8 @@
 
 ## 2.0.0 — 2026-10-03
 
+- Prepara instalação Windows nativa: venv Scripts, descoberta de binários .exe, PostgreSQL próprio em loopback e ACL do runtime. Validação em Windows real pendente.
+
 - Adiciona roteiro Windows com WSL 2/Ubuntu 22.04 para replicação local; execução nesse sistema ainda pendente.
 
 - Em 04/10, prepara instalação reproduzível e transferência lógica local de banco/objetos/documentos, com checksum, credenciais novas, recusa de destino ocupado e teste em clusters separados. Sincronização central e proteção contínua permanecem pendentes.

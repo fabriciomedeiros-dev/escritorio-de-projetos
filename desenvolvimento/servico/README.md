@@ -129,3 +129,7 @@ Recebimento, ata agrupada, revisões, decisões e aplicação transacional imple
 ## Incremento de bloqueios e aceite humano
 
 Aplicar a migração 002 com `ambiente.py migrate` e conferir privilégios locais com `preparar_demo.py`; reiniciar somente o HTTP para carregar o código. Registro, acompanhamento e resolução de dependências/bloqueios e aceite humano de tarefas implementados, conforme [BLOQUEIOS.md](BLOQUEIOS.md). Identidade real, planejamento e proteção continuam pendentes.
+
+## Windows nativo
+
+Use a preparação de `../local/REPLICACAO.md`. Nos exemplos acima, substitua `.runtime/servico-venv/bin/python` por `.runtime/servico-venv/Scripts/python.exe`. Defina `ESCRITORIO_PG_BIN` com o caminho dos binários locais. Execução em Windows real ainda pendente.

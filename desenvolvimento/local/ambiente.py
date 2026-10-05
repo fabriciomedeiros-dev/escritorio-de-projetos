@@ -10,6 +10,7 @@ import secrets
 import shutil
 import subprocess
 import tempfile
+from plataforma import WINDOWS, pg_directory, protect_runtime
 
 ROOT = Path(__file__).resolve().parents[2]
 RUNTIME = ROOT / '.runtime' / 'escritorio-v2'
@@ -27,11 +28,8 @@ def socket_root():
 
 
 def binary(name):
-    init = shutil.which('initdb')
-    if not init:
-        raise RuntimeError('Ferramentas PostgreSQL não encontradas no PATH; consulte o README local.')
-    candidate = Path(init).parent / name
-    if not candidate.exists():
+    candidate = pg_directory() / (name + '.exe' if WINDOWS else name)
+    if not candidate.is_file():
         raise RuntimeError(f'Binário compatível não encontrado: {name}')
     return str(candidate)
 
@@ -61,6 +59,11 @@ def running():
 def connection():
     owned()
     state = json.loads(STATE.read_text())
+    if WINDOWS:
+        if state.get('host') != '127.0.0.1' or str(state.get('port')) != PORT:
+            raise RuntimeError('Conexão fora do ambiente local permitido.')
+        return {'PGHOST':'127.0.0.1','PGPORT':PORT,'PGUSER':USER,
+                'PGPASSWORD':PASSWORD.read_text().strip(),'PGDATABASE':DATABASE}
     socket = Path(state['socket'])
     if socket.parent.resolve() != socket_root() or not socket.name.startswith('ep-v2-'):
         raise RuntimeError('Socket fora do espaço local permitido.')
@@ -75,6 +78,7 @@ def sql(statement, database=DATABASE):
 
 
 def initialize():
+    protect_runtime(ROOT / '.runtime')
     RUNTIME.mkdir(parents=True, exist_ok=True, mode=0o700)
     os.chmod(RUNTIME, 0o700)
     marker = RUNTIME / 'ambiente.json'
@@ -100,25 +104,28 @@ def start():
     if running():
         print('Cluster local já em execução.')
         return
-    socket = Path(tempfile.mkdtemp(prefix='ep-v2-', dir=str(socket_root())))
-    os.chmod(socket, 0o700)
+    socket = None if WINDOWS else Path(tempfile.mkdtemp(prefix='ep-v2-', dir=str(socket_root())))
+    if socket: os.chmod(socket, 0o700)
+    options = f'-p {PORT} -c listen_addresses=127.0.0.1 -c unix_socket_directories=' if WINDOWS else f'-p {PORT} -k "{socket}" -c listen_addresses='''
     try:
         execute([binary('pg_ctl'), '-D', str(DATA), '-l', str(RUNTIME / 'postgres.log'),
-                 '-o', f"-p {PORT} -k {socket} -c listen_addresses=''", '-w', 'start'])
+                 '-o', options, '-w', 'start'])
     except Exception:
-        socket.rmdir()
+        if socket: socket.rmdir()
         raise
-    STATE.write_text(json.dumps({'socket': str(socket), 'port': PORT}))
+    STATE.write_text(json.dumps({'host':'127.0.0.1','port':PORT} if WINDOWS else {'socket':str(socket),'port':PORT}))
     os.chmod(STATE, 0o600)
+    if Path(sql('SHOW data_directory;', 'postgres')).resolve() != DATA.resolve():
+        raise RuntimeError('Servidor não pertence ao cluster do Escritório; interrompido.')
     if sql(f"SELECT count(*) FROM pg_database WHERE datname='{DATABASE}';", 'postgres') == '0':
         sql(f'CREATE DATABASE {DATABASE};', 'postgres')
-    print('Banco escritorio_test pronto; conexão somente por socket local, sem TCP.')
+    print('Banco escritorio_test pronto; TCP restrito a 127.0.0.1:55432.' if WINDOWS else 'Banco escritorio_test pronto; conexão somente por socket local, sem TCP.')
 
 
 def smoke():
     if not running():
         raise RuntimeError('Inicie o ambiente antes de executar smoke.')
-    assert sql('SHOW listen_addresses;') == ''
+    assert sql('SHOW listen_addresses;') == ('127.0.0.1' if WINDOWS else '')
     result = sql('''BEGIN;
         CREATE TEMP TABLE probe_portfolios(id text PRIMARY KEY) ON COMMIT DROP;
         CREATE TEMP TABLE probe_tarefas(portfolio text REFERENCES probe_portfolios(id),
@@ -175,7 +182,11 @@ def stop():
         return
     execute([binary('pg_ctl'), '-D', str(DATA), '-m', 'fast', '-w', 'stop'])
     # Só remover o diretório de socket criado por este ambiente, depois do shutdown.
-    socket = Path(json.loads(STATE.read_text())['socket'])
+    socket_name = json.loads(STATE.read_text()).get('socket')
+    if not socket_name:
+        print('Cluster local parado; dados preservados.')
+        return
+    socket = Path(socket_name)
     if socket.parent.resolve() == socket_root() and socket.name.startswith('ep-v2-'):
         socket.rmdir()
     print('Cluster local parado; banco e senha local preservados fora do Git.')

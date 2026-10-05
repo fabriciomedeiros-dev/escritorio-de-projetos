@@ -35,7 +35,7 @@ def main():
             (root/'.runtime/servico-venv').symlink_to(Path(sys.prefix),target_is_directory=True)
         started=[]
         try:
-            run(source,'desenvolvimento/local/replicar.py','preparar');started.append(source)
+            started.append(source);run(source,'desenvolvimento/local/replicar.py','preparar')
             fixture=r'''
 import sys,uuid,hashlib,base64,json
 from pathlib import Path
@@ -63,7 +63,7 @@ op('criar_registro',{'tipo':'tarefa','titulo':'Entrega que será transportada','
                 assert not any('password.local' in x or 'config.local.json' in x or 'clientes.local.json' in x for x in z.namelist())
             subprocess.run(['git','clone','-q',str(source),str(target)],check=True)
             (target/'.runtime').mkdir();(target/'.runtime/servico-venv').symlink_to(Path(sys.prefix),target_is_directory=True)
-            run(target,'desenvolvimento/local/replicar.py','preparar','--pacote',package);started.append(target)
+            started.append(target);run(target,'desenvolvimento/local/replicar.py','preparar','--pacote',package)
             assert (target/'.runtime/revisoes-reunioes/ensaio/original.txt').read_text()=='Original documental sintético'
             assert (target/'portfolios/saerj/nota.md').read_text()=='Documento de trabalho não commitado'
             # IDs preservados e tokens/senhas diferentes; leitura e download com credenciais novas.
