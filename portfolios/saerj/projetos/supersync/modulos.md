@@ -6,7 +6,7 @@ Inventário gerencial resumido. Componentes técnicos podem estar separados no c
 
 | Módulo | Situação | Área / dono funcional | Responsabilidades e próximos pontos |
 |---|---|---|---|
-| Acordos Comerciais | Produção com evolução | Área de Contratos; Thamires (sobrenome a confirmar) | Reúne contratos, apuração e auditoria. Núcleo quase concluído; melhorias previstas para o próximo ciclo. |
+| Acordos Comerciais | Produção com evolução | Área de Contratos; Thamires (sobrenome a confirmar) | Reúne contratos, apuração e auditoria. Em 29/09 foram alinhados crescimento de vendas, triangulação para homologação, devolução de mercadorias e uma análise gerencial para novembro ou dezembro. Ver tarefas SS-016 a SS-019. |
 | Cadastro de Contratos | Descontinuado | Substituído por Acordos Comerciais | Manter apenas como legado técnico até decisão sobre retirada. |
 | Apuração de Grades | Produção estável | Comercial; Filipe Fachetti | Filipe responde pelos dados; Alexandro pelo desenvolvimento. Sem melhorias solicitadas. |
 | Pricing | Piloto parado | A confirmar | Código ativo como piloto/teste, sem evolução prevista. |

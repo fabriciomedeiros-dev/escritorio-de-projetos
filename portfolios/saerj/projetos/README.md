@@ -8,6 +8,7 @@
 - [SuperSync — Intranet Rede Supermarket](supersync/projeto.md)
 - [CRM Rock (antiga BNEX)](crm-rock/projeto.md)
 - [Integração com a 99Food](integracao-99food/projeto.md)
+- [Desligamento do Observador](desligamento-observador/projeto.md)
 
 Crie uma pasta por projeto usando um identificador claro, por exemplo `integracao-crm`.
 
