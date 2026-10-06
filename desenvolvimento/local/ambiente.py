@@ -38,7 +38,15 @@ def execute(args, env=None, allowed=(0,)):
     clean = {key: value for key, value in os.environ.items() if not key.startswith('PG')}
     if env:
         clean.update(env)
-    result = subprocess.run(args, env=clean, capture_output=True, text=True)
+    if WINDOWS and Path(args[0]).name.lower() == 'pg_ctl.exe' and args[-1] == 'start':
+        # Arquivos evitam pipes herdados pelo servidor persistente no Windows.
+        with tempfile.TemporaryFile() as out, tempfile.TemporaryFile() as err:
+            result = subprocess.run(args, env=clean, stdout=out, stderr=err, timeout=90)
+            out.seek(0); err.seek(0)
+            result.stdout = out.read().decode(errors='replace')
+            result.stderr = err.read().decode(errors='replace')
+    else:
+        result = subprocess.run(args, env=clean, capture_output=True, text=True)
     if result.returncode not in allowed:
         # Os comandos nunca incluem a senha; stderr pode conter somente diagnóstico local.
         raise RuntimeError(result.stderr.strip() or result.stdout.strip() or f'Falha em {Path(args[0]).name}')
@@ -103,6 +111,13 @@ def initialize():
 def start():
     if running():
         print('Cluster local já em execução.')
+        if not WINDOWS:
+            return
+        STATE.write_text(json.dumps({'host':'127.0.0.1','port':PORT}))
+        if Path(sql('SHOW data_directory;', 'postgres')).resolve() != DATA.resolve():
+            raise RuntimeError('Servidor não pertence ao cluster do Escritório; interrompido.')
+        if sql(f"SELECT count(*) FROM pg_database WHERE datname='{DATABASE}';", 'postgres') == '0':
+            sql(f'CREATE DATABASE {DATABASE};', 'postgres')
         return
     socket = None if WINDOWS else Path(tempfile.mkdtemp(prefix='ep-v2-', dir=str(socket_root())))
     if socket: os.chmod(socket, 0o700)
