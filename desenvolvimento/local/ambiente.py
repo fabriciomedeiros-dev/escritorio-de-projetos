@@ -34,10 +34,11 @@ def binary(name):
     return str(candidate)
 
 
-def execute(args, env=None, allowed=(0,)):
+def execute(args, env=None, allowed=(0,), input_data=None):
     clean = {key: value for key, value in os.environ.items() if not key.startswith('PG')}
     if env:
         clean.update(env)
+    clean['PGCLIENTENCODING'] = 'UTF8'
     if WINDOWS and Path(args[0]).name.lower() == 'pg_ctl.exe' and args[-1] == 'start':
         # Arquivos evitam pipes herdados pelo servidor persistente no Windows.
         with tempfile.TemporaryFile() as out, tempfile.TemporaryFile() as err:
@@ -46,7 +47,9 @@ def execute(args, env=None, allowed=(0,)):
             result.stdout = out.read().decode(errors='replace')
             result.stderr = err.read().decode(errors='replace')
     else:
-        result = subprocess.run(args, env=clean, capture_output=True, text=True)
+        result = subprocess.run(args, env=clean, capture_output=True, input=input_data)
+        result.stdout = result.stdout.decode('utf-8', errors='replace')
+        result.stderr = result.stderr.decode('utf-8', errors='replace')
     if result.returncode not in allowed:
         # Os comandos nunca incluem a senha; stderr pode conter somente diagnóstico local.
         raise RuntimeError(result.stderr.strip() or result.stdout.strip() or f'Falha em {Path(args[0]).name}')
@@ -82,7 +85,8 @@ def connection():
 def sql(statement, database=DATABASE):
     env = connection()
     env['PGDATABASE'] = database
-    return execute([binary('psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-At', '-c', statement], env).stdout.strip()
+    return execute([binary('psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-At', '-f', '-'],
+                   env, input_data=statement.encode('utf-8')).stdout.strip()
 
 
 def initialize():

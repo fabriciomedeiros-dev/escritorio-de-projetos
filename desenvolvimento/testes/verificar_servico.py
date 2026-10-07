@@ -235,9 +235,20 @@ def main():
         assert post('enviar_artefato',upload)[0][0]==422
         path.write_bytes(content)  # Restaurar fixture sintética, não rotina produtiva.
         # Um objeto substituído por symlink não é seguido pelo servidor.
-        path.unlink();path.symlink_to(fixture)
-        assert call(p+'/artefatos/'+artifact_id)[0]==422
-        path.unlink();path.write_bytes(content)
+        path.unlink()
+        try:
+            try:
+                path.symlink_to(fixture)
+            except OSError as exc:
+                if sys.platform != 'win32' or getattr(exc, 'winerror', None) != 1314:
+                    raise
+                print('NÃO VERIFICADO: rejeição de link simbólico real; Windows sem privilégio para criar links.')
+            else:
+                assert call(p+'/artefatos/'+artifact_id)[0]==422
+        finally:
+            if path.is_symlink() or path.exists():
+                path.unlink()
+            path.write_bytes(content)
         # Simular perda da confirmação após commit: retomar por ID sem repetir efeitos.
         recovery={'operacao_id':str(uuid.uuid4()),'comando':'criar_registro','dados':{'tipo':'tarefa','titulo':'Recuperação após commit'}}
         with patch.object(service,'get_operation',side_effect=Falha(503,'SERVICO_INDISPONIVEL','Falha simulada após commit')):
