@@ -27,6 +27,9 @@ Esta é uma atividade transversal do Escritório de Projetos. Uma solicitação 
 | ID | Solicitação | Solicitante | Responsável | Status | Decisor | Próxima ação | Prazo |
 |---|---|---|---|---|---|---|---|
 | CT-001 | [Ferramenta para transcrição de reuniões](contratacoes/CT-001-transcricao-reunioes.md) | Fabrício Medeiros | Fabrício Medeiros | Recomendação pronta | A confirmar | Confirmar condições comerciais e contratuais do tl;dv e submeter a recomendação à decisão | A confirmar |
+| CT-002 | [Locação de impressoras — SAERJ](contratacoes/CT-002-locacao-impressoras-saerj.md) | Fabrício Medeiros | A confirmar | Em qualificação | A confirmar | Solicitação preparada; definir responsável/prazo, obter propostas quando autorizado e comparar com parque próprio | A confirmar |
+
+A CT-002 está vinculada à [manutenção e renovação de equipamentos SAERJ](manutencao-renovacao-equipamentos-saerj.md). Registro em 13/10/2026, versão inicial 1; não houve envio a fornecedores, contratação ou registro de propostas de locação recebidas nesta operação.
 
 ## Critérios mínimos
 
@@ -51,4 +54,3 @@ Cada solicitação deve possuir um cartão próprio no quadro do Escritório de 
 O cartão deve apresentar somente: ID e nome da demanda, necessidade resumida, status, responsável, alternativas em avaliação, recomendação quando existente, decisão requerida, próxima ação e data de atualização. Informações comerciais restritas, credenciais e documentos contratuais não devem ser copiados para o Trello.
 
 O cartão deve ser atualizado depois do registro canônico e não substitui a aprovação formal.
-
