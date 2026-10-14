@@ -1,5 +1,9 @@
 # Contexto para continuidade em nuvem — Escritório de Projetos
 
+## Decisão vigente de integração — 14/10/2026
+
+Fabrício determinou reinício diretamente em `C:\Users\fabri\Projetos\supersync`, como app nativo com usuários, padrões e banco configurado do SuperSync. Após confirmação, servidor e banco da homologação foram encerrados e a cópia `tmp/supersync-escritorio-v2` removida com dados sintéticos. Relatos anteriores abaixo são históricos; a homologação não está mais disponível. Documentação preservada; nenhum código novo ou migration criado no checkout original nesta limpeza. Cada ação futura exige aprovação prévia. Ver [sprints](arquitetura/v2/sprints-desenvolvimento-supersync.md). Markdown permanece oficial; sem promoção a projeto ou mudança de produção.
+
 ## Versão 2 e continuidade
 
 Versão documental atual: `2.0.0` (`VERSION`). Ler [Arquitetura v2](arquitetura/v2/README.md) para o desenho aprovado e o plano. Codex é somente a interface inicial; regras, dados e operações devem ser portáveis para Claude Code ou outro agente. Um único agente gestor acompanhará solicitações, projetos e tarefas; o conselho existente prepara ideias. A fonte operacional escolhida é PostgreSQL central com serviço próprio e arquivos centrais; integração com infraestrutura existente e implantação estão pendentes; schema inicial e contrato estão preparados e testados localmente. Fabrício informou servidor SuperSync com PostgreSQL; priorizar sua avaliação, sem alterar produção. Ambiente local de banco está preparado em `desenvolvimento/local/`; serviço HTTP/cliente de piloto em `desenvolvimento/servico/` implementam texto, criação, relato, atualização de ideias/solicitações com entradas originais vinculadas, anexos/evidências verificados, reuniões com revisões/aprovações/efetivação transacional, dependências/bloqueios com acompanhamento e conclusão de tarefa por aceite humano e consulta, com identidades sintéticas e sem integração de produção. Iniciativa SAERJ-IDEIA-002 é candidata a projeto, não promovida. Consulte `arquitetura/v2/armazenamento.md` e `arquitetura/v2/implementacao-supersync.md`. Registros Markdown atuais continuam oficiais até migração conciliada e corte de autoridade explícito. Não apresentar rotinas propostas como recursos implementados. Seguir `arquitetura/v2/operacao-gestor.md` para consolidar complementos e recuperar registros independentemente do chat.
@@ -105,3 +109,19 @@ Windows nativo: bootstrap preparado com venv Scripts/python.exe, binários .exe,
 ## Entrada guiada do Escritório
 
 Nome de apresentação: Gestor do Escritório. `abrir escritório` inicia a navegação; `menu` mostra opções. Seguir `arquitetura/v2/menu-gestor.md` e AGENTS.md para domínio/fonte, perguntas graduais e revisões numeradas. Instruções do agente no repositório, sem comando global ou interface gráfica. Capacidades futuras não entram como operações disponíveis.
+
+## Início da integração SuperSync — 14/10/2026
+
+Fabrício autorizou o Escritório v2 como app nativo do SuperSync. Primeiro incremento `escritorio_projetos` implementado localmente na branch `codex/escritorio-projetos-v2`, commit `084241b`, com captura, classificação explícita, consulta, identidade SuperSync, acesso por portfólio, histórico e repetição. 21 testes sintéticos passaram em SQLite isolado. Migrations PostgreSQL, concorrência, API portável e demais funções do piloto ainda precisam de integração. Não houve publicação, migração real, promoção a projeto ou corte de autoridade; Markdown permanece oficial. Fonte: `arquitetura/v2/implementacao-supersync.md`, revisão 2. Checkout de desenvolvimento em `tmp/supersync-escritorio-v2/`, sem vínculo com dados operacionais.
+
+## Continuação da integração — 14/10/2026
+
+Segundo incremento SuperSync em `b272126`, branch local `codex/escritorio-projetos-v2`: subconjunto API v2 com autenticação por usuário/portfólio, credenciais com validade e revogação, captura, criação vinculada ao original, consultas e recuperação de operação; cliente portável implementado. 45 testes aprovados no PostgreSQL 17.10 Windows isolado, incluindo concorrência e dois clientes por HTTP. Sem credenciais reais, publicação, migração ou corte de autoridade. Próximos: atualização por versão, relatos e evidências; demais funções do piloto ainda precisam ser portadas. Fonte: `arquitetura/v2/implementacao-supersync.md`, revisão 3.
+
+## Complementos e evidências no app — 14/10/2026
+
+Terceiro incremento SuperSync em `d2f67f4`: atualização de ideias/solicitações por versão, complementos preservados, relatos de tarefas sem conclusão automática, acesso de executor a tarefas atribuídas, anexos/evidências com tamanho/checksum e download autenticado. Interface e cliente portável ampliados. 64 testes aprovados no PostgreSQL 17.10 isolado. Armazenamento privado Django ainda precisa de configuração/homologação no ambiente real; nenhuma infraestrutura ou permissão real alterada. Sem publicação, migração ou corte de autoridade. Próximos: reuniões, dependências/bloqueios e aceite humano. Fonte: `arquitetura/v2/implementacao-supersync.md`, revisão 4.
+
+## Homologação local criada — 14/10/2026
+
+SuperSync com ambiente próprio para visualizar o Escritório em `http://127.0.0.1:8876/escritorio/`, somente neste computador. Código `470cb67` na branch local `codex/escritorio-projetos-v2`. Todas as apps/migrations nativas carregadas em PostgreSQL exclusivo; originais privados e dados persistentes em `.runtime/homologacao/` do checkout isolado, com ACL e sem Git. Gestor, executor e consulta são sintéticos; nenhuma credencial de produção utilizada. Login, menu, captura pelo navegador e persistência verificados; 67 testes do app passaram em cluster separado. Integrações externas e demais módulos bloqueados na homologação. Servidor local deixado ativo. Para reiniciar/parar, seguir `escritorio_projetos/CLAUDE.md`. Sem publicação, migração ou corte de autoridade. Fonte: `arquitetura/v2/implementacao-supersync.md`, revisão 5.

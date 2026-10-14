@@ -16,14 +16,14 @@
 **Fase:** Operação e evolução contínua  
 **Início:** A confirmar  
 **Previsão de conclusão:** Evolução contínua  
-**Última atualização:** 02/10/2026
+**Última atualização:** 14/10/2026
 
 ### Fontes canônicas relacionadas
 
 **Repositório de documentação:** A confirmar  
 **Repositório de desenvolvimento:** https://github.com/Liencourt/supersync.git  
 **Caminho local observado:** `C:\Users\fabri\Projetos\supersync`  
-**Revisão observada:** branch `master`, commit `bba8f83`
+**Revisão observada:** remoto `origin/master`, commit `f7ddcb3` (14/10/2026); testes históricos em `bba8f83`
 
 ---
 
@@ -99,3 +99,7 @@ A confirmar durante a consolidação da linha de base gerencial, incluindo benef
 ## 6. Observação do Escritório de Projetos
 
 O Portal do Associado concluiu a implementação e a validação funcional do escopo planejado. A revisão `bba8f83` também passou em 551 testes automatizados. A Central foi apresentada e aprovada na reunião de diretoria de 28/09/2026, que originou a agenda de visitas aos associados. As visitas de 01/10 foram confirmadas. O status geral permanece em atenção pelas lacunas de recursos e acompanhamento dos demais módulos; a aprovação executiva da Central está concluída.
+
+### Complemento verificado — 14/10/2026 (versão 2)
+
+A inspeção do Git remoto confirmou 78 commits desde `bba8f83`, até `f7ddcb3`. Foram observadas evoluções de cobrança por produto, fechamento mensal e apuração em segundo plano, visão do gestor, grades, contratos, API de dados e relatórios. Detalhes e evidências em [Desenvolvimento](desenvolvimento.md). Implementação no código confirmada; testes da nova revisão, homologação e publicação não verificados. Os 551 testes permanecem evidência exclusiva de `bba8f83`. Aprovação de 28/09 e registros gerenciais anteriores preservados. Não há evidência nova de realização das visitas de 07 e 08/10 nem de conclusão das análises SS-016 a SS-019.

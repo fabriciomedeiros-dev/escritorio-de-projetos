@@ -24,3 +24,7 @@ Inventário gerencial resumido. Componentes técnicos podem estar separados no c
 - Lojas como módulo interno independente da visão exposta pela Central do Associado;
 - Análise de Promoções;
 - demais componentes que venham a ser reconhecidos como módulos gerenciais.
+
+## Complemento do inventário — 14/10/2026 (versão 2)
+
+Na revisão f7ddcb3 do Git remoto, Central do Associado possui evoluções de cobrança por produto, fechamento mensal, apuração em segundo plano e visão do gestor; Grades possui espelho, filtros e busca/paginação; Acordos possui distribuidor autorizado e ajustes de apuração; Envio de Dados possui API por chave e gestão de clientes; Relatórios possui compras e concentração por fornecedor, entre outros ajustes. Evidências em [Desenvolvimento](desenvolvimento.md). Preservados os estados de produção anteriormente informados: publicação e homologação destas evoluções não verificadas.
