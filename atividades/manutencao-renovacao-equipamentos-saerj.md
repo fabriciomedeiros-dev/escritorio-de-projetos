@@ -25,7 +25,7 @@ Em 02/10/2026, Fabrício informou apresentação do plano inicial a Marcelo para
 | Epson L1800, série UBGY013729 | Orçamento 261-2026 de 28/09/2026: R$ 1.680,00, troca de placa principal e MP/ajustes, cabeça de impressão excluída; aprovação não confirmada | Confirmar garantia, estado da cabeça e condições vigentes |
 | Epson L1300 | Mesmo sintoma e manutenção necessária informados; R$ 1.680,00 apenas estimados por analogia | Obter diagnóstico e orçamento próprios |
 | Brother MFC-L5902DW | Reclamação anterior de impressão borrada; diagnóstico e orçamento de reparo não confirmados | Avaliar reparo no comparativo com locação |
-| [CT-002 — locação de impressoras](contratacoes/CT-002-locacao-impressoras-saerj.md) | Em qualificação; solicitação preparada, sem envio ou propostas de locação recebidas | Definir responsáveis e prazo, obter propostas quando autorizado e preencher comparação |
+| [CT-002 — locação de impressoras](contratacoes/CT-002-locacao-impressoras-saerj.md) | Em qualificação; propostas Docprinter e Printcom recebidas em 15/10/2026 e vinculadas à CT-002 | Definir responsáveis e prazo, esclarecer condições A3 e contratuais e preencher comparação |
 
 ## Histórico
 

@@ -2,15 +2,15 @@
 
 **ID:** CT-002  
 **Portfólio:** `saerj`  
-**Versão:** 1  
-**Data:** 13/10/2026  
+**Versão:** 2  
+**Data:** 15/10/2026  
 **Solicitante:** Fabrício Medeiros  
 **Responsável pela avaliação:** A confirmar  
 **Decisor:** A confirmar  
 **Prazo:** A confirmar  
 **Status:** Em qualificação  
 **Envio a fornecedores:** Não realizado nesta operação  
-**Propostas de locação recebidas:** Nenhuma registrada  
+**Propostas de locação recebidas:** Docprinter (13/10/2026) e Printcom (14/10/2026), apresentadas pelo usuário em 15/10/2026; também recebida proposta Docprinter de manutenção do parque próprio  
 **Aprovação/contratação:** Não registradas
 
 **Vínculo:** [Manutenção e renovação SAERJ](../manutencao-renovacao-equipamentos-saerj.md). [Contexto e origem](../../documentos/saerj/manutencao-renovacao-equipamentos/2026-10-13-contexto-locacao-impressoras.md). [Solicitação final](../../documentos/saerj/manutencao-renovacao-equipamentos/2026-10-13-solicitacao-orcamento-locacao-impressoras.md).
@@ -78,10 +78,55 @@ Usar o mesmo horizonte de 12 ou 24 meses, com premissas identificadas. Enquanto 
 
 ## Encaminhamento e decisão
 
-Solicitação final preparada. Pendem definição de responsável/prazo, envio autorizado, propostas e custos efetivamente pagos. Ainda não há base para recomendar contratação ou quantificar economia. Aprovação, fornecedor, início e término contratual permanecem não definidos.
+Solicitação final preparada. Propostas recebidas em 15/10/2026, conforme complemento abaixo. Pendem definição de responsável/prazo, esclarecimentos das propostas e custos efetivamente pagos. Ainda não há base para recomendar contratação ou quantificar economia. Aprovação, fornecedor, início e término contratual permanecem não definidos.
 
 ## Histórico
 
 | Versão | Data | Evento |
 |---|---|---|
 | 1 | 13/10/2026 | Registro autorizado de demanda de cotação; consulta prévia sem registro duplicado; fontes/contexto vinculados; comparação preparada sem preços inventados, envio, contratação ou propostas recebidas. |
+
+
+## Propostas recebidas — 15/10/2026
+
+Fonte: usuário informou “tenho aqui algumas propostas” e apresentou três PDFs; autorizou guardar os três na pasta documental existente, preservando originais em Downloads. Cópias verificadas por SHA-256. Recebimento não constitui aprovação ou contratação. Status mantido em qualificação; campos do comparativo original permanecem pendentes de conciliação das condições abaixo.
+
+### Docprinter — locação Konica C368
+
+[Proposta original](../../documentos/saerj/manutencao-renovacao-equipamentos/Aluguel%20de%20impressoras%20SAERJ_docprinter_especificacao.pdf), de 13/10/2026, uma página.
+
+- Konica C368, laser colorida A3/A4, copiadora, scanner/rede; quantidade e condição novo/usado não explicitadas.
+- Franquia mono: 7.000 páginas, R$ 560/mês; excedente R$ 0,06/página.
+- Franquia colorida: 1.000 páginas, R$ 690/mês; excedente R$ 0,69/página.
+- Soma das parcelas: R$ 1.250/mês, cálculo interpretativo; confirmar que as parcelas são cumulativas e integram a mesma contratação.
+- Assistência técnica, toner e todas as peças. SLA até 8 horas; documento não especifica horas úteis nem prazo de solução.
+- Pendências: duração contratual, validade, reajuste, implantação, rescisão, regras A3/A4 e duplex, cobertura de cor, franquia acumulável/compartilhada, quantidade de equipamentos e teste com encarte.
+
+### Docprinter — manutenção das Brother próprias
+
+[Proposta original](../../documentos/saerj/manutencao-renovacao-equipamentos/Aluguel%20de%20impressoras%20SAERJ_docprinter.pdf), de 13/10/2026, uma página. É manutenção, não locação.
+
+- R$ 210/mês por equipamento; um toner mensal incluso, sob demanda e não acumulativo.
+- Assistência técnica e peças, exceto placas; SLA até 16 horas úteis.
+- O texto menciona Brothers próprias, mas identifica somente MFC-L6902DW. Confirmar cobertura da MFC-L5902DW; R$ 420/mês para duas máquinas é apenas hipótese condicionada ao aceite do fornecedor.
+- Confirmar rendimento/modelo do toner, preço de toner adicional, tratamento de defeitos anteriores, prazo contratual e exclusões. Epson e seus custos permanecem fora desta proposta.
+
+### Printcom — solução com quatro equipamentos
+
+[Proposta original](../../documentos/saerj/manutencao-renovacao-equipamentos/Aluguel%20de%20impressoras%20SAERJ.pdf), de 14/10/2026, seis páginas; condições comerciais nas páginas 5–6.
+
+- Duas Brother DCP-L5512 e duas Epson L15150 A3 coloridas.
+- Franquia global mensal não cumulativa: 8.000 páginas PB A4 + 1.000 coloridas A4, impressas ou copiadas.
+- Mensalidade total: R$ 2.400 em 24 meses; R$ 1.829 em 36 meses; R$ 1.485 em 48 meses.
+- Excedentes A4: PB R$ 0,04/página; cor R$ 0,29/página. Valores contemplam cobertura PB até 10% e cor até 40% (10% por cor), papel A4 sulfite 75 g; cartuchos de serviço.
+- SLA em horas úteis: remoto 4h; corretiva com interrupção 8h, sem interrupção 16h; consumíveis 24h; preventiva a cada 90 dias. Horário útil: segunda a sexta, 8h–17h; condições territoriais no original. Confirmar se os tempos de corretiva se referem a atendimento ou solução e disponibilidade de reserva.
+- Validade de 10 dias; início da implantação em 20 dias úteis após assinatura. Faturamento 30 dias após instalação, pagamento 15 dias após faturamento.
+- Pendências: regra de contagem e preço A3, duplex, encartes com cobertura superior à indicada, reajuste/rescisão, novos/usados, peças/exclusões e teste de qualidade. Não presumir A3 = duas A4.
+
+### Comparabilidade e próximo passo
+
+Não há base para declarar a opção mais econômica: a Docprinter oferece configuração diferente da Printcom e há regras A3 pendentes em ambas. Validar soma e condições da Konica, cobertura da segunda Brother na manutenção e simular os volumes A3 reais antes de atualizar os totais de viabilidade. Não combinar manutenção e locação Docprinter como pacote confirmado.
+
+| Versão | Data | Evento |
+|---|---|---|
+| 2 | 15/10/2026 | Recebidos três PDFs apresentados pelo usuário; guarda expressamente autorizada, originais preservados e cópias verificadas; condições e lacunas registradas, sem aprovação ou contratação. |
